@@ -1,0 +1,224 @@
+body {
+    background: url('../img/background.png');
+    background-attachment: fixed;
+}
+
+.divv{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    /* Новости */
+
+    margin-top: 0;
+    position: absolute;
+    width: 195px;
+    height: 48px;
+    left: 862.5px;
+    top: 165px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 133%;
+    /* identical to box height, or 48px */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.div2 {
+    /* Content */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+
+    position: absolute;
+    width: 1024px;
+    height: 415px;
+    left: 448px;
+    top: 260px;
+}
+
+.div2-1 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    width: 1024px;
+    height: 115px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div2-2 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    width: 1023px;
+    height: 115px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.div2-3 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    width: 1024px;
+    height: 145px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.div3{
+    /* Text & icon */
+
+
+    /* Auto layout */
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 26px 60px 26px 0px;
+    gap: 10px;
+
+    width: 944px;
+    height: 115px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.p1 {
+    /* 11.10.22 */
+    width: 883px;
+    height: 23px;
+    margin-bottom: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 143%;
+    /* identical to box height, or 23px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.p2 {
+    /* Первая машинка не работает до декабря */
+
+
+    width: 883px;
+    height: 80px;
+
+    /* 21px, Medium */
+    margin-top: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}

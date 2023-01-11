@@ -1,0 +1,602 @@
+body {
+    background: url('../img/background.png');
+    background-attachment: fixed;
+}
+
+.divv{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    /* оплатить */
+
+    margin-top: 0;
+    position: absolute;
+    width: 215px;
+    height: 48px;
+    left: 852.5px;
+    top: 165px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 133%;
+    /* identical to box height, or 48px */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.div1 {
+        /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+    margin-bottom: 70px;
+    margin-top: 150px;
+    width: 1024px;
+    height: 750px;
+    left: 448px;
+    top: 160px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+}
+
+.div1-1 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 95px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.p1 {
+    /* 1. Для начала оплатите стирку: */
+
+
+    width: 883px;
+    height: 43px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    /* identical to box height, or 43px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-2 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+    gap: 30px;
+
+    width: 944px;
+    height: 61px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.input1 {
+        /* Кнопка */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 20px;
+    gap: 10px;
+
+    width: 201px;
+    height: 61px;
+
+    top: 365px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    position: absolute;
+
+
+    background: #E02420;
+    border-radius: 4px;
+    border: solid 5px #E02420;
+
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 112%;
+    color: #FFFFFF;
+}
+
+
+
+.div1-3 {
+        /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 95px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.p2 {
+    /* 2. Ниже введите купленный код: */
+
+    margin-bottom: 0;
+    width: 883px;
+    height: 43px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    /* identical to box height, or 43px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-4 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+    gap: 30px;
+
+    width: 944px;
+    height: 62px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+}
+
+.input2 {
+    /* Кнопка */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 25px;
+    gap: 10px;
+
+    width: 356px;
+    height: 36px;
+
+    border: 1px solid #626262;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 160%;
+    /* identical to box height, or 24px */
+    background-color: #F2F6FA;
+
+    /* Серый 5 */
+
+    color: #7E868E;
+}
+
+
+
+.div1-5 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+    gap: 30px;
+
+    width: 944px;
+    height: 91px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+}
+
+.input3 {
+    /* Кнопка */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 20px;
+    gap: 10px;
+
+    width: 208px;
+    height: 61px;
+
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    position: absolute;
+
+
+    background: #E02420;
+    border-radius: 4px;
+    border: solid 5px #E02420;
+
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 112%;
+    color: #FFFFFF;
+}
+
+
+
+.div1-6 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 183px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 5;
+    flex-grow: 0;
+}
+
+.p3 {
+    /* 3. Проверьте количество стирок: */
+
+    margin-bottom: 5px;
+    width: 883px;
+    height: 43px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    /* identical to box height, or 43px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-6-1 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 56px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.p4 {
+    /* Количество стирок без порошка: 0 */
+
+    margin: 0;
+    width: 883px;
+    height: 30px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-6-2 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 56px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.p5 {
+    /* Количество стирок с парашком\: 4 */
+
+    margin: 0;
+    width: 883px;
+    height: 30px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-7 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 0px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 183px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 6;
+    flex-grow: 0;
+}
+
+.p6 {
+    /* 4. Перейдите на страничку «Записаться» */
+
+    margin: 0;
+    width: 883px;
+    height: 60px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    /* identical to box height, or 43px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.input4 {
+    /* Кнопка */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 20px;
+    gap: 10px;
+
+    width: 203px;
+    height: 61px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    background: #E02420;
+    border-radius: 4px;
+    border: solid 5px #E02420;
+
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 112%;
+    color: #FFFFFF;
+}
+

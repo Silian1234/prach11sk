@@ -1,0 +1,143 @@
+body {
+    background: url('background.png');
+    background-attachment: fixed;
+}
+
+.divv{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    /* профиль */
+
+    margin-top: 0;
+    position: absolute;
+    width: 204px;
+    height: 48px;
+    left: 857.5px;
+    top: 55px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 133%;
+    /* identical to box height, or 48px */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.div1{
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    position: absolute;
+    width: 1024px;
+    height: 263px;
+    left: 448px;
+    top: 160px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+}
+
+.div1-1{
+    /* Text & icon */
+
+
+    /* Auto layout */
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 26px 60px 0px 0px;
+    gap: 1px;
+
+    width: 944px;
+    height: 33px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.p1 {
+    /* Коссе Иван */
+
+
+    width: 349px;
+    height: 43px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    /* identical to box height, or 43px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.p2 {
+    /* Логин: vanya.kosse */
+
+
+    width: 649px;
+    height: 30px;
+
+    /* 21px, Medium */
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}

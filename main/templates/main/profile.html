@@ -1,0 +1,30 @@
+{% extends 'main/shapka.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class= "divv">
+            <h1>Профиль</h1>
+            <div class = "div1">
+                <div class = "div1-1">
+                    <p class="p1">{{ user.first_name }} {{ user.last_name }}</p>
+                </div>
+                <div class = "div1-1">
+                    <p class="p2">Логин: {{ user.username }}</p>
+                </div>
+                <div class = "div1-1">
+                    <p class="p2">Почта: {{ user.email }}</p>
+                </div>
+                <div class = "div1-1">
+                    <p class="p2">Ближайшая стирка: 29.11.22 на 10:00 / не запланирована</p>
+                </div>
+            </div>
+    </div>
+{% endblock %}

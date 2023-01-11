@@ -1,0 +1,57 @@
+{% extends 'main/shapka.html' %}
+{% load static %}
+{% block head %}
+    <title>Запись</title>
+    <link rel="stylesheet" href="{% static 'main/css/record.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class= "divv">
+        <h1>записаться</h1>
+        <form>
+            <div class = "div1">
+                    <div class = "div2">
+                        <select name="data" required="required">
+                            <option value="">Выберите дату</option>
+                            <option value="1">31.12.2022</option>
+                            <option value="2">01.01.2023</option>
+                            <option value="3">02.01.2023</option>
+                            <option value="4">03.01.2023</option>
+                            <option value="5">04.01.2023</option>
+                        </select>
+                    </div>
+
+                    <div class = "div2">
+                        <select name="time" required="required">
+                            <option value="">Выберите время</option>
+                            <option value="1">10:00</option>
+                            <option value="2">14:00</option>
+                            <option value="3">18:00</option>
+                            <option value="4">20:00</option>
+                        </select>
+                    </div>
+
+                    <div class = "div2">
+                        <select name="const" required="required">
+                            <option value="">Выберите количество машинок</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+
+                    <div class = "div2">
+                        <select name="or" required="required">
+                            <option value="">С порошком/без порошка</option>
+                            <option value="1">С порошком</option>
+                            <option value="2">Без порошка</option>
+                        </select>
+                    </div>
+            </div>
+                <button class="ButtonRecord" type="button">Записаться</button>
+        </form>
+    </div>
+{% endblock %}

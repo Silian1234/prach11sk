@@ -1,0 +1,59 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Шапка</title>
+    <link rel="stylesheet" href="{% static 'main/css/shapka.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body class = "body1">
+{% csrf_token %}
+    <div class = "bodyShap">
+        <a href="https://freekassa.ru" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.freekassa.ru/banners/small-dark-1.png" title="Прием платежей на сайте"></a>
+        <div class = "Logo">
+            <div class = "Pic">
+                <a href="{% url 'mainPage' %}"><img src="{% static 'main/img/logo.png' %}"></a>
+            </div>
+            <div class = "Text">
+                <h2 class = "hh2-1">Запись в прачечную комнату для 11 С/К</h2>
+            </div>
+        </div>
+        <div class = "Nav">
+            <div class = "Nav1">
+                <a href="{% url 'news' %}" class = "aa1">Новости</a>
+            </div>
+            <div class = "Nav1">
+                <a href="{% url 'profile' %}" class = "aa1">Профиль</a>
+            </div>
+            <div class = "Nav1">
+                <a href="{% url 'payment' %}" class = "aa1">Оплатить</a>
+            </div>
+            <div class = "Nav1">
+                <a href="{% url 'record' %}" class = "aa1">Записаться</a>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class = "Button">
+            <a href="{% url 'logout' %}">
+                <input type="button" value="ВЫЙТИ" class = "inputt1"></a>
+        </div>
+        {% else %}
+        <div class = "Button">
+            <a href="{% url 'login' %}">
+                <input type="button" value="ВОЙТИ" class = "inputt1"></a>
+        </div>
+        {% endif %}
+        <div class = "Line">
+        </div>
+    </div>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
