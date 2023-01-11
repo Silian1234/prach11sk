@@ -15,11 +15,11 @@ from .models import *
 from .utils import *
 from django.views.generic import ListView
 
-def add(request):
+"""def add(request):
     if request.method == "POST":
         keys = Keys()
         keys.key = keyGenerator(1)
-        keys.save()
+        keys.save()"""
 
 
 class BlogListView(ListView):
