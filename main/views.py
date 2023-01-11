@@ -22,6 +22,9 @@ from django.views.generic import ListView
         keys.save()"""
 
 
+def fkVerify(request):
+    return render(request, 'main/fk-verify.html', {})
+
 class BlogListView(ListView):
     model = Post
     template_name = 'main/news.html'
