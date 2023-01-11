@@ -13,7 +13,7 @@ urlpatterns = [
     path('rega', views.rega, name='rega'),
     path('profile', views.profile, name='profile'),
     path('record', views.record, name='record'),
-    path('login', LoginView.as_view(template_name='login.html'), name='login'),
+    path('login', LoginView.as_view(template_name='main/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     #path('news', views.news, name='news'),
     path('news', BlogListView.as_view(), name='news'),

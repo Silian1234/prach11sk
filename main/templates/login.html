@@ -1,6 +1,5 @@
 {% extends 'main/shapka.html' %}
 {% load static %}
-
 {% block head %}
     <meta charset="UTF-8">
     <title>Вход</title>
@@ -23,16 +22,12 @@
                         <div class="div3-3">
                             <div class="div3-3-1">
                                 <div class="div3-3-1-1">
-                                    <tr>
-                                    <td>{{ form.username.label_tag }}</td>
-                                    <td>{{ form.username }}</td>
-                                    </tr>
+                                    <p class="pp1">Ввведите логин</p>
+                                    {{ form.username }}
                                 </div>
                                 <div class="div3-3-1-2">
-                                    <tr>
-                                    <td>{{ form.password.label_tag }}</td>
-                                    <td>{{ form.password }}</td>
-                                    </tr>
+                                    <p class="pp1">Ввведите пароль</p>
+                                    {{ form.password }}
                                 </div>
                             </div>
                             <div class="div3-3-2">
