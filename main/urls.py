@@ -18,7 +18,7 @@ urlpatterns = [
     #path('news', views.news, name='news'),
     path('news', BlogListView.as_view(), name='news'),
     path('payment', views.payment, name='payment'),
-    path('fk-verify', views.fkVerify, name='fk-verify')
+    path('fk-verify.html', views.fkVerify, name='fk-verify')
 ]
 
 if settings.DEBUG:

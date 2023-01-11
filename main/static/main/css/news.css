@@ -18,7 +18,7 @@ h1{
     width: 195px;
     height: 48px;
     left: 862.5px;
-    top: 165px;
+    top: 55px;
 
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -49,7 +49,7 @@ h1{
     width: 1024px;
     height: 415px;
     left: 448px;
-    top: 260px;
+    top: 160px;
 }
 
 .div2-1 {
@@ -66,7 +66,7 @@ h1{
     padding: 0px 40px;
 
     width: 1024px;
-    height: 115px;
+    height: auto;
 
     /* Серый 11 */
 
@@ -97,7 +97,7 @@ h1{
     padding: 0px 40px;
 
     width: 1023px;
-    height: 115px;
+    height: auto;
 
     /* Серый 11 */
 
@@ -128,7 +128,7 @@ h1{
     padding: 0px 40px;
 
     width: 1024px;
-    height: 145px;
+    height: auto;
 
     /* Серый 11 */
 
@@ -159,7 +159,7 @@ h1{
     gap: 10px;
 
     width: 944px;
-    height: 115px;
+    height: auto;
 
 
     /* Inside auto layout */
@@ -172,8 +172,8 @@ h1{
 .p1 {
     /* 11.10.22 */
     width: 883px;
-    height: 23px;
-    margin-bottom: 0;
+    height: auto;
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -199,10 +199,10 @@ h1{
 
 
     width: 883px;
-    height: 80px;
+    height: auto;
 
     /* 21px, Medium */
-    margin-top: 0;
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
