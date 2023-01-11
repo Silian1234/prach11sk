@@ -13,6 +13,7 @@
         <div class="div1">
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
+                {{ form.non_field_errors }}
                 <div class="div2">
                     <div class="div3">
                         <div class="div3-1"></div>
@@ -24,10 +25,12 @@
                                 <div class="div3-3-1-1">
                                     <p class="pp1">Ввведите логин</p>
                                     {{ form.username }}
+                                    {{ form.username.errors }}
                                 </div>
                                 <div class="div3-3-1-2">
                                     <p class="pp1">Ввведите пароль</p>
                                     {{ form.password }}
+                                    {{ form.password.errors }}
                                 </div>
                             </div>
                             <div class="div3-3-2">
