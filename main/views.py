@@ -53,9 +53,11 @@ def mainPage(request):
 def login(request):
     return render(request, 'main/login.html', {})
 
+@login_required
 def record(request):
     return render(request, 'main/record.html', {})
 
+@login_required
 def payment(request):
     return render(request, 'main/payment.html', {})
 
@@ -73,7 +75,7 @@ def rega(request):
             new_user.set_last_name(form.cleaned_data['last_name'])
             new_user.set_email(form.cleaned_data['email'])"""
             new_user.save()
-            return render(request, 'main/login.html', {'new_user': new_user})
+            return render(request, 'main/successRega.html', {'new_user': new_user})
     else:
         form = RegaForm()
     return render(request, 'main/rega.html', {'form': form})
