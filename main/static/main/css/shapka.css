@@ -140,7 +140,7 @@
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 135%;
     /* identical to box height, or 15px */
 
@@ -158,6 +158,11 @@
     flex: none;
     order: 0;
     flex-grow: 0;
+}
+
+.aa1:hover {
+    color: rgba(255, 255, 255, 0.67); /* Цвет ссылки при наведении */
+    text-decoration: auto; /* Добавляем подчёркивание */
 }
 
 .Button {
@@ -200,6 +205,11 @@
     font-size: 11px;
     line-height: 0%;
     color: #2C2C2C;
+}
+
+.inputt1:hover {
+    color: #ffffff;
+    background: rgba(242, 246, 250, 0.67);
 }
 
 .Line {

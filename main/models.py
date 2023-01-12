@@ -17,7 +17,8 @@ class Keys(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    wash_with = models.IntegerField('Стирки с порошком')
+    wash_without = models.IntegerField('Стирки без порошка')
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f'{self.user} Profile'

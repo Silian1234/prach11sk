@@ -165,7 +165,7 @@ h1{
 
     background: #E02420;
     border-radius: 4px;
-    border: solid 5px #E02420;
+    border: 0;
 
 
     font-family: 'Montserrat', sans-serif;
@@ -176,7 +176,10 @@ h1{
     color: #FFFFFF;
 }
 
-
+.input1:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
+}
 
 .div1-3 {
         /* Text & icon */
@@ -346,7 +349,7 @@ h1{
 
     background: #E02420;
     border-radius: 4px;
-    border: solid 5px #E02420;
+    border: 0;
 
 
     font-family: 'Montserrat', sans-serif;
@@ -357,7 +360,10 @@ h1{
     color: #FFFFFF;
 }
 
-
+.input3:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
+}
 
 .div1-6 {
     /* Text & icon */
@@ -589,7 +595,7 @@ h1{
 
     background: #E02420;
     border-radius: 4px;
-    border: solid 5px #E02420;
+    border: 0;
 
 
     font-family: 'Montserrat', sans-serif;
@@ -600,3 +606,7 @@ h1{
     color: #FFFFFF;
 }
 
+.input4:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
+}

@@ -170,7 +170,7 @@ h3 {
 
     background: #E02420;
     border-radius: 5px;
-    border: solid 5px #E02420;
+    border: 0;
 
     /* Inside auto layout */
 
@@ -184,6 +184,15 @@ h3 {
     font-size: 18px;
     line-height: 152%;
     color: #FFFFFF;
+}
+
+.button1:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
+}
+
+a {
+    text-decoration: none;
 }
 
 .div5 {
@@ -302,3 +311,4 @@ p {
     order: 0;
     flex-grow: 0;
 }
+

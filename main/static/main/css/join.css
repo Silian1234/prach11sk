@@ -398,7 +398,7 @@ body {
 
     background: #E02420;
     border-radius: 4px;
-    border: solid 5px #E02420;
+    border: 0;
 
 
     font-family: 'Montserrat', sans-serif;
@@ -408,6 +408,11 @@ body {
     line-height: 152%;
     color: #FFFFFF;
 
+}
+
+.input2:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
 }
 
 .input3 {
@@ -437,7 +442,7 @@ body {
 
     background: #626262;
     border-radius: 4px;
-    border: solid 5px #626262;
+    border: 0;
 
 
     font-family: 'Montserrat', sans-serif;
@@ -448,3 +453,9 @@ body {
     color: #FFFFFF;
 
 }
+
+.input3:hover {
+    color: #ffffff;
+    background: rgba(44, 44, 44, 0.67);
+}
+
