@@ -29,7 +29,7 @@ class BlogListView(ListView):
     model = Post
     template_name = 'main/news.html'
 
-def user_login(request):
+"""def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -45,7 +45,7 @@ def user_login(request):
                 return HttpResponse('Invalid login')
     else:
         form = LoginForm()
-    return render(request, 'main/login.html', {'form': form})
+    return render(request, 'main/login.html', {'form': form})"""
 
 def mainPage(request):
     return render(request, 'main/mainPage.html', {})

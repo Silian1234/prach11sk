@@ -16,7 +16,7 @@ class UserLoginForm(AuthenticationForm):
         }
 ))
 
-class LoginForm(ModelForm):
+"""class LoginForm(ModelForm):
     class Meta:
         model = User
         fields =[
@@ -32,7 +32,7 @@ class LoginForm(ModelForm):
                 'class': 'input1',
                 'placeholder': '*********'
             }),
-        }
+        }"""
 
 class RegaForm(ModelForm):
     class Meta:

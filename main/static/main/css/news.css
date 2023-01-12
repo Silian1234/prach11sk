@@ -222,3 +222,31 @@ h1{
     order: 1;
     flex-grow: 0;
 }
+
+.p3 {
+
+
+    width: 950px;
+    height: auto;
+
+    /* 21px, Medium */
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    /* Серый 1 */
+
+    color: #11263A;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
