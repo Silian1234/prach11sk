@@ -32,7 +32,6 @@ body {
 .div2 {
     /* Form */
 
-    margin-bottom: 133px;
     width: 502.26px;
     height: 1267px;
 
@@ -61,7 +60,7 @@ body {
 
     position: absolute;
     width: 502px;
-    height: 1267px;
+    height: 1147px;
     left: 0px;
     top: 0px;
 
@@ -203,7 +202,7 @@ h4 {
     gap: 35px;
 
     width: 314px;
-    height: 769px;
+    height: 640px;
 
 
     /* Inside auto layout */
