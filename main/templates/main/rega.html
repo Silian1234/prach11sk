@@ -32,6 +32,9 @@
                             <h4>Регистрация</h4>
                             <p class="ppp">Вводите все данные корректно, после регистрании их нельзя будет изменить.</p>
                         </div>
+                        {{ form.email.errors }}
+                        {{ form.username.errors }}
+                        {{ form.password.errors }}
                         <div class="div3-3">
                             <div class="div3-3-1">
                                 <div class="div3-3-1-1">
@@ -42,6 +45,7 @@
                                     <p>Введите вашу фамилию</p>
                                     {{ form.last_name }}
                                 </div>
+
                                 <div class="div3-3-1-2">
                                     <p>Введите ваш email</p>
                                     {{ form.email }}
@@ -50,6 +54,7 @@
                                     <p>Придумайте логин</p>
                                     {{ form.username }}
                                 </div>
+
                                 <div class="div3-3-1-2">
                                     <p>Придумайте пароль</p>
                                     {{ form.password }}
@@ -60,7 +65,8 @@
                                 </div>-->
                             </div>
                             <div class="div3-3-2">
-                                <input type="submit" value="Зарегистрироваться" class="input2">
+                                <a href="{% url 'login' %}">
+                                <input type="submit" value="Зарегистрироваться" class="input2"></a>
                             </div>
                             <div class="div3-3-3">
                                 <a href="{% url 'login' %}">
