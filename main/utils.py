@@ -9,10 +9,10 @@ def keyGenerator(keyCount):
     fullPassword = []
     for n in range(keyCount):
         password =''
-        for i in range(50):
+        for i in range(16):
             password += random.choice(chars)
         if password not in fullPassword:
             fullPassword.append(password)
     return fullPassword
 
-print(keyGenerator(50))
+print(keyGenerator(1)[0])

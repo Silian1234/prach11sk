@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
-from  django.views.generic.base  import  TemplateView
+from  django.views.generic.base  import  TemplateView, RedirectView
 from .views import *
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     #path('news', views.news, name='news'),
     path('news', BlogListView.as_view(), name='news'),
+    #path('payment', Payment.as_view(), name='payment'),
     path('payment', views.payment, name='payment'),
     path('fk-verify.html', views.fkVerify, name='fk-verify')
 ]

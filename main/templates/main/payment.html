@@ -18,7 +18,8 @@
                         <input type="button" value="Перейти к оплате" class= "input1"></a>
                 </div>
                 <br><br>
-                <form>
+                <form method="post">
+                    {% csrf_token %}
                     <div class = "div1-3">
                         <p class = "p2">2. Ниже введите купленный код:</p>
                     </div>
@@ -32,10 +33,10 @@
                 <div class = "div1-6">
                     <p class = "p3">3. Проверьте количество стирок:</p>
                     <div class = "div1-6-1">
-                        <p class= "p4">Количество стирок без порошка: 0</p>
+                        <p class= "p4">Количество стирок без порошка: {{ user.profile.wash_without }}</p>
                     </div>
                     <div class = "div1-6-2">
-                        <p class = "p5">Количество стирок с порошком: 0</p>
+                        <p class = "p5">Количество стирок с порошком: {{ user.profile.wash_with }}</p>
                     </div>
                 </div>
                 <div class = "div1-7">

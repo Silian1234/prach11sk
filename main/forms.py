@@ -2,6 +2,28 @@ from django.forms import ModelForm, TextInput, CharField, Form, PasswordInput
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.core.exceptions import ValidationError
+from .models import *
+
+class AddWashForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(AddWashForm, self).__init__(*args, *kwargs)
+
+    def clean_account(self):
+        form_account = self.cleaned_data.get('key_with')
+        existing1 = KeyWith.objects.filter(client=self.user, account=form_account).exists()
+        existing2 = KeyWithout.objects.filter(client=self.user, account=form_account).exists()
+        if not existing1:
+            print(11)
+            raise ValidationError('Такого кода не существует')
+
+        return form_account
+
+    class Meta:
+        model = KeyWith
+        fields = ['key_with']
+
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

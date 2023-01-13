@@ -12,13 +12,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class Keys(models.Model):
-    key = models.CharField('Ключ', max_length=50)
+class KeyWith(models.Model):
+    key_with = models.CharField('Ключ с порошком', max_length=16)
+
+class KeyWithout(models.Model):
+    key_without = models.CharField('Ключ без порошка', max_length=16)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    wash_with = models.IntegerField('Стирки с порошком')
-    wash_without = models.IntegerField('Стирки без порошка')
+    wash_with = models.IntegerField('Стирки с порошком', default=0)
+    wash_without = models.IntegerField('Стирки без порошка', default=0)
 
     def __str__(self):
         return f'{self.user} Profile'

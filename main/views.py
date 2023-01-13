@@ -57,9 +57,27 @@ def login(request):
 def record(request):
     return render(request, 'main/record.html', {})
 
+"""@login_required
+def payment(request):
+    #keysWithout = KeyWithout.objects.all()
+    #keysWith = KeyWith.objects.all()
+    return render(request, 'main/payment.html', {})"""
+
 @login_required
 def payment(request):
-    return render(request, 'main/payment.html', {})
+    user = request.user
+    keysWith = KeyWith.objects.all()
+    print(0)
+    if request.method == 'POST':
+        print(1)
+        form = AddWashForm(request.POST, user=request.user)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.save()
+            print(2)
+    else:
+        form = AddWashForm()
+    return render(request, 'main/payment.html', {'keysWith': keysWith})
 
 def news(request):
     return render(request, 'main/news.html', {})
