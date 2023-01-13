@@ -11,6 +11,7 @@
     <div class= "divv">
         <h1>записаться</h1>
         <form method="post">
+            {% csrf_token %}
             <div class = "div1">
                     <div class = "div2">
                         <select name="data" required="required">
@@ -51,7 +52,7 @@
                         </select>
                     </div>
             </div>
-                <button class="ButtonRecord" type="button">Записаться</button>
+                <input type="submit" value="Записаться" class= "ButtonRecord">
         </form>
     </div>
 {% endblock %}

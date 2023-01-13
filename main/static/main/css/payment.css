@@ -610,3 +610,7 @@ h1{
     color: #ffffff;
     background: rgba(224, 36, 32, 0.67);
 }
+
+a {
+    text-decoration-line: none;
+}
