@@ -14,7 +14,7 @@
             <div class="div1">
                 <div class = "div1-1">
                     <p class = "p1">1. Для начала оплатите стирку:</p>
-                    <a href="https://www.digiseller.market/asp2/pay_wm.asp?id_d=3599100&lang=ru-RU">
+                    <a href="{% url 'digPay' %}">
                         <input type="button" value="Перейти к оплате" class= "input1"></a>
                 </div>
                 <br><br>
@@ -41,7 +41,8 @@
                 </div>
                 <div class = "div1-7">
                     <p class = "p6">4. Перейдите на страничку «Записаться»</p>
-                    <input type="submit" value="Перейти к записи" class= "input4">
+                    <a href="{% url 'record' %}">
+                        <input type="submit" value="Перейти к записи" class= "input4"></a>
                 </div>
             </div>
     </div>

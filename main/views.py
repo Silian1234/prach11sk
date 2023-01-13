@@ -15,6 +15,9 @@ from .models import *
 from .utils import *
 from django.views.generic import ListView
 
+def digPay(request):
+    return render(request, 'main/digPay.html', {})
+
 """def add(request):
     if request.method == "POST":
         keys = Keys()

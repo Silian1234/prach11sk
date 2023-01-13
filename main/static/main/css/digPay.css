@@ -1,0 +1,30 @@
+body {
+    background: url('../img/background.png');
+    background-attachment: fixed;
+}
+
+.divv{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div1 {
+    /* Content */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 116px;
+
+    position: absolute;
+    width: 502.26px;
+    height: 645px;
+    left: 609px;
+    top: 177px;
+}

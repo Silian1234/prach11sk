@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     #path('news', views.news, name='news'),
     path('news', BlogListView.as_view(), name='news'),
+    path('digPay', views.digPay, name='digPay'),
     #path('payment', Payment.as_view(), name='payment'),
     path('payment', views.payment, name='payment'),
     path('fk-verify.html', views.fkVerify, name='fk-verify')
