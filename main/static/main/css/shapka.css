@@ -147,7 +147,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.04em;
-    text-decoration-line: underline;
+    text-decoration-line: none;
     text-transform: uppercase;
 
     color: #FFFFFF;
@@ -162,7 +162,6 @@
 
 .aa1:hover {
     color: rgba(255, 255, 255, 0.67); /* Цвет ссылки при наведении */
-    text-decoration: auto; /* Добавляем подчёркивание */
 }
 
 .Button {
@@ -197,12 +196,12 @@
 
     background: #F2F6FA;
     border-radius: 5px;
-    border: solid 5px #F2F6FA;
+    border: 0;
 
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 0%;
     color: #2C2C2C;
 }
