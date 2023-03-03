@@ -17,6 +17,9 @@ class Post(models.Model):
 class InvoiceNumber(models.Model):
     invoice_number = models.CharField('Номер оплаченного счета', max_length=16)
 
+    def __str__(self):
+        return self.invoice_number
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

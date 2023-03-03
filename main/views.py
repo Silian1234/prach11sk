@@ -83,22 +83,23 @@ def payment(request):
 @login_required
 def payment(request):
     user = request.user
-    # print(user.profile)
-    print(User)
     if request.method == 'POST':
         form = WashForm(request.POST)
         if form.is_valid():
             unique_code = form.cleaned_data['unique_code']
             json = check_code(unique_code)
-            invoice = json['inv']
-            if InvoiceNumber.objects.filter(invoice_number=invoice):
-                print('code already exists')
-            else:
-                # InvoiceNumber.objects.create(invoice_number=invoice)
-                if json['id_goods'] == 3599100:
-                    print(Profile.wash_without)
-                elif json['id_goods'] == 3599134:
-                    print(Profile.wash_with)
+            if json['retval'] == 0:
+                invoice = json['inv']
+                if InvoiceNumber.objects.filter(invoice_number=invoice):
+                    print('code already exists')
+                else:
+                    InvoiceNumber.objects.create(invoice_number=invoice)
+                    profile = Profile.objects.get(user_id=user.id)
+                    if json['id_goods'] == 3599100:
+                        profile.wash_without += 1
+                    elif json['id_goods'] == 3599134:
+                        profile.wash_with += 1
+                    profile.save()
     else:
         form = WashForm()
     return render(request, 'main/payment.html', {'form': form})
