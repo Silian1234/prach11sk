@@ -4,8 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 admin.site.register(Post)
-admin.site.register(KeyWith)
-admin.site.register(KeyWithout)
+# admin.site.register(KeyWith)
+# admin.site.register(KeyWithout)
 
 class ProfileInLine(admin.StackedInline):
     model = Profile

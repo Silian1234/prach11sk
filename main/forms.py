@@ -5,24 +5,30 @@ from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
 from .models import *
 
-class AddWashForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super(AddWashForm, self).__init__(*args, *kwargs)
 
-    def clean_account(self):
-        form_account = self.cleaned_data.get('key_with')
-        existing1 = KeyWith.objects.filter(client=self.user, account=form_account).exists()
-        existing2 = KeyWithout.objects.filter(client=self.user, account=form_account).exists()
-        if not existing1:
-            print(11)
-            raise ValidationError('Такого кода не существует')
+class WashForm(forms.Form):
+    unique_code = forms.CharField(max_length=16, strip=True, widget=forms.TextInput(
+        attrs={'class': "input2"}))
 
-        return form_account
 
-    class Meta:
-        model = KeyWith
-        fields = ['key_with']
+# class AddWashForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         self.user = kwargs.pop('user', None)
+#         super(AddWashForm, self).__init__(*args, *kwargs)
+#
+#     def clean_account(self):
+#         form_account = self.cleaned_data.get('key_with')
+#         existing1 = KeyWith.objects.filter(client=self.user, account=form_account).exists()
+#         existing2 = KeyWithout.objects.filter(client=self.user, account=form_account).exists()
+#         if not existing1:
+#             print(11)
+#             raise ValidationError('Такого кода не существует')
+#
+#         return form_account
+#
+#     class Meta:
+#         model = KeyWith
+#         fields = ['key_with']
 
 
 class UserLoginForm(AuthenticationForm):
@@ -36,7 +42,8 @@ class UserLoginForm(AuthenticationForm):
             'class': 'input1',
             'placeholder': 'Пароль',
         }
-))
+    ))
+
 
 """class LoginForm(ModelForm):
     class Meta:
@@ -56,10 +63,11 @@ class UserLoginForm(AuthenticationForm):
             }),
         }"""
 
+
 class RegaForm(ModelForm):
     class Meta:
         model = User
-        fields =[
+        fields = [
             'first_name', 'last_name', 'username', 'password', 'email'
         ]
         widgets = {
@@ -81,8 +89,7 @@ class RegaForm(ModelForm):
                 'placeholder': '*********'
             }),
             "email": TextInput(attrs={
-               'class': 'input1',
-               'placeholder': 'email'
+                'class': 'input1',
+                'placeholder': 'email'
             }),
         }
-

@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth import logout, login
@@ -14,9 +14,16 @@ from .forms import *
 from .models import *
 from .utils import *
 from django.views.generic import ListView
+from django.db.models import F
+from django.contrib.auth.models import User
+
 
 def digPay(request):
     return render(request, 'main/digPay.html', {})
+
+
+# def payment(request):
+#     return render(request, '')
 
 """def add(request):
     if request.method == "POST":
@@ -28,9 +35,11 @@ def digPay(request):
 def fkVerify(request):
     return render(request, 'main/fk-verify.html', {})
 
+
 class BlogListView(ListView):
     model = Post
     template_name = 'main/news.html'
+
 
 """def user_login(request):
     if request.method == 'POST':
@@ -50,15 +59,19 @@ class BlogListView(ListView):
         form = LoginForm()
     return render(request, 'main/login.html', {'form': form})"""
 
+
 def mainPage(request):
     return render(request, 'main/mainPage.html', {})
+
 
 def login(request):
     return render(request, 'main/login.html', {})
 
+
 @login_required
 def record(request):
     return render(request, 'main/record.html', {})
+
 
 """@login_required
 def payment(request):
@@ -66,24 +79,41 @@ def payment(request):
     #keysWith = KeyWith.objects.all()
     return render(request, 'main/payment.html', {})"""
 
+
 @login_required
 def payment(request):
     user = request.user
-    keysWith = KeyWith.objects.all()
-    print(0)
+    # print(user.profile)
+    print(User)
     if request.method == 'POST':
-        print(1)
-        form = AddWashForm(request.POST, user=request.user)
+        form = WashForm(request.POST)
         if form.is_valid():
-            payment = form.save(commit=False)
-            payment.save()
-            print(2)
+            unique_code = form.cleaned_data['unique_code']
+            json = check_code(unique_code)
+            invoice = json['inv']
+            if InvoiceNumber.objects.filter(invoice_number=invoice):
+                print('code already exists')
+            else:
+                # InvoiceNumber.objects.create(invoice_number=invoice)
+                if json['id_goods'] == 3599100:
+                    print(Profile.wash_without)
+                elif json['id_goods'] == 3599134:
+                    print(Profile.wash_with)
     else:
-        form = AddWashForm()
-    return render(request, 'main/payment.html', {'keysWith': keysWith})
+        form = WashForm()
+    return render(request, 'main/payment.html', {'form': form})
+    #     form = AddWashForm(request.POST, user=request.user)
+    #     if form.is_valid():
+    #         payment = form.save(commit=False)
+    #         payment.save()
+    #         print(2)
+    # else:
+    #     form = AddWashForm()
+
 
 def news(request):
     return render(request, 'main/news.html', {})
+
 
 def rega(request):
     if request.method == 'POST':
@@ -100,6 +130,7 @@ def rega(request):
     else:
         form = RegaForm()
     return render(request, 'main/rega.html', {'form': form})
+
 
 @login_required
 def profile(request):

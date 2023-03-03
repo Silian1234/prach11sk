@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     title = models.CharField('Название', max_length=50)
     anons = models.CharField('Анонс', max_length=250)
@@ -12,11 +13,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class KeyWith(models.Model):
-    key_with = models.CharField('Ключ с порошком', max_length=16)
 
-class KeyWithout(models.Model):
-    key_without = models.CharField('Ключ без порошка', max_length=16)
+class InvoiceNumber(models.Model):
+    invoice_number = models.CharField('Номер оплаченного счета', max_length=16)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
