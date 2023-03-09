@@ -100,8 +100,7 @@ def payment(request):
                     elif json['id_goods'] == 3599134:
                         profile.wash_with += 1
                     profile.save()
-    else:
-        form = WashForm()
+    form = WashForm()
     return render(request, 'main/payment.html', {'form': form})
     #     form = AddWashForm(request.POST, user=request.user)
     #     if form.is_valid():
