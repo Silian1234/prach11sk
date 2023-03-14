@@ -1,38 +1,19 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
-from django.contrib import messages
+import datetime
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
-from django.contrib.auth import logout, login
 from .forms import *
 from .models import *
 from .utils import *
 from django.views.generic import ListView
-from django.db.models import F
-from django.contrib.auth.models import User
+import json
 
 
-def digPay(request):
+def dig_pay(request):
     return render(request, 'main/digPay.html', {})
 
 
-# def payment(request):
-#     return render(request, '')
-
-"""def add(request):
-    if request.method == "POST":
-        keys = Keys()
-        keys.key = keyGenerator(1)
-        keys.save()"""
-
-
-def fkVerify(request):
+def fk_verify(request):
     return render(request, 'main/fk-verify.html', {})
 
 
@@ -41,26 +22,7 @@ class BlogListView(ListView):
     template_name = 'main/news.html'
 
 
-"""def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse('Authenticated successfully')
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid login')
-    else:
-        form = LoginForm()
-    return render(request, 'main/login.html', {'form': form})"""
-
-
-def mainPage(request):
+def main_page(request):
     return render(request, 'main/mainPage.html', {})
 
 
@@ -70,28 +32,58 @@ def login(request):
 
 @login_required
 def record(request):
-    return render(request, 'main/record.html', {})
-
-
-"""@login_required
-def payment(request):
-    #keysWithout = KeyWithout.objects.all()
-    #keysWith = KeyWith.objects.all()
-    return render(request, 'main/payment.html', {})"""
+    if Washes.objects.all().count() == 0 or datetime.now(tz=timezone.get_current_timezone()) > Washes.objects.last().date_time and datetime.now().strftime('%a') != 'Sun':
+        Washes.objects.all().delete()
+        for d in generate_dates():
+            wash = Washes.objects.create(date_time=d)
+            wash.save()
+    if request.method == 'POST':
+        form = BookWashForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            date_time = datetime.combine(form.cleaned_data['date'], form.cleaned_data['time'], timezone.get_current_timezone())
+            washes = form.cleaned_data['washes']
+            powder = form.cleaned_data['powder'] == 1
+            selected_wash = Washes.objects.get(date_time=date_time)
+            profile = Profile.objects.get(user_id=request.user.id)
+            if powder and profile.wash_with >= washes:
+                selected_wash.washes -= washes
+                profile.wash_with -= washes
+                profile.save()
+            elif not powder and profile.wash_without >= washes:
+                selected_wash.washes -= washes
+                profile.wash_without -= washes
+                profile.save()
+            else:
+                print('Недостаточно стирок на аккаунте')
+            selected_wash.save()
+            return HttpResponseRedirect('record')
+    washes = Washes.objects.filter(date_time__gte=datetime.now(tz=timezone.get_current_timezone())).exclude(washes=0)
+    date_and_time = {}
+    for wash in washes:
+        current_date = wash.date_time.strftime('%d.%m.%Y')
+        time = wash.date_time.astimezone(timezone.get_current_timezone()).strftime('%H:%M')
+        if current_date not in date_and_time.keys():
+            date_and_time[current_date] = [(time, wash.washes)]
+        else:
+            date_and_time[current_date].append((time, wash.washes))
+    date_dict = json.dumps(date_and_time)
+    form = BookWashForm()
+    return render(request, 'main/record.html', {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
 
 
 @login_required
 def payment(request):
     user = request.user
     if request.method == 'POST':
-        form = WashForm(request.POST)
+        form = CheckCodeForm(request.POST)
         if form.is_valid():
             unique_code = form.cleaned_data['unique_code']
             json = check_code(unique_code)
             if json['retval'] == 0:
                 invoice = json['inv']
                 if InvoiceNumber.objects.filter(invoice_number=invoice):
-                    print('code already exists')
+                    form.add_error(None, 'Такой код уже был использован!')
                 else:
                     InvoiceNumber.objects.create(invoice_number=invoice)
                     profile = Profile.objects.get(user_id=user.id)
@@ -100,15 +92,14 @@ def payment(request):
                     elif json['id_goods'] == 3599134:
                         profile.wash_with += 1
                     profile.save()
-    form = WashForm()
+                    return HttpResponseRedirect('profile')
+            else:
+                form.add_error(None, 'Несуществующий код!')
+                print(form.errors)
+
+    else:
+        form = CheckCodeForm()
     return render(request, 'main/payment.html', {'form': form})
-    #     form = AddWashForm(request.POST, user=request.user)
-    #     if form.is_valid():
-    #         payment = form.save(commit=False)
-    #         payment.save()
-    #         print(2)
-    # else:
-    #     form = AddWashForm()
 
 
 def news(request):
@@ -121,10 +112,6 @@ def rega(request):
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
-            """new_user.set_username(form.cleaned_data['username'])
-            new_user.set_first_name(form.cleaned_data['first_name'])
-            new_user.set_last_name(form.cleaned_data['last_name'])
-            new_user.set_email(form.cleaned_data['email'])"""
             new_user.save()
             return render(request, 'main/successRega.html', {'new_user': new_user})
     else:

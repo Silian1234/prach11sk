@@ -1,67 +1,34 @@
-from django.forms import ModelForm, TextInput, CharField, Form, PasswordInput
-from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, TextInput
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
-from django.core.exceptions import ValidationError
 from .models import *
 
 
-class WashForm(forms.Form):
-    unique_code = forms.CharField(max_length=16, strip=True, widget=forms.TextInput(
+class CheckCodeForm(forms.Form):
+    unique_code = forms.CharField(min_length=16, max_length=16, strip=True, widget=forms.TextInput(
         attrs={'class': "input2"}))
 
 
-# class AddWashForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         self.user = kwargs.pop('user', None)
-#         super(AddWashForm, self).__init__(*args, *kwargs)
-#
-#     def clean_account(self):
-#         form_account = self.cleaned_data.get('key_with')
-#         existing1 = KeyWith.objects.filter(client=self.user, account=form_account).exists()
-#         existing2 = KeyWithout.objects.filter(client=self.user, account=form_account).exists()
-#         if not existing1:
-#             print(11)
-#             raise ValidationError('Такого кода не существует')
-#
-#         return form_account
-#
-#     class Meta:
-#         model = KeyWith
-#         fields = ['key_with']
+class BookWashForm(forms.Form):
+    date = forms.DateField()
+    time = forms.TimeField()
+    washes = forms.IntegerField()
+    powder = forms.IntegerField()
 
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
-    username = UsernameField(widget=forms.TextInput(
+    username = UsernameField(required=True, widget=forms.TextInput(
         attrs={'class': 'input1', 'placeholder': 'Логин'}))
-    password = forms.CharField(widget=forms.PasswordInput(
+    password = forms.CharField(required=True, widget=forms.PasswordInput(
         attrs={
             'class': 'input1',
             'placeholder': 'Пароль',
         }
     ))
-
-
-"""class LoginForm(ModelForm):
-    class Meta:
-        model = User
-        fields =[
-           'username', 'password'
-        ]
-        widgets = {
-            "username": TextInput(attrs={
-                'class': 'input1',
-                'placeholder': 'Логин'
-            }),
-            "password": TextInput(attrs={
-                'type': 'password',
-                'class': 'input1',
-                'placeholder': '*********'
-            }),
-        }"""
 
 
 class RegaForm(ModelForm):

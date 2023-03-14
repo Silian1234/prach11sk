@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 
 
@@ -28,3 +26,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user} Profile'
+
+
+class Washes(models.Model):
+    date_time = models.DateTimeField('Дата и время стирки')
+    washes = models.IntegerField('Количество оставшихся стирок', default=4)
+
+    def __str__(self):
+        return self.date_time.__str__()
