@@ -30,7 +30,7 @@ class Profile(models.Model):
 
 class Washes(models.Model):
     date_time = models.DateTimeField('Дата и время стирки')
-    washes = models.IntegerField('Количество оставшихся стирок', default=4)
+    washes = models.IntegerField('Количество оставшихся стирок', default=2)
 
     def __str__(self):
         return self.date_time.__str__()

@@ -1,6 +1,7 @@
 import datetime
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
@@ -26,13 +27,24 @@ def main_page(request):
     return render(request, 'main/mainPage.html', {})
 
 
-def login(request):
-    return render(request, 'main/login.html', {})
+def login_page(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.login()
+            if user:
+                login(request, user)
+                return redirect('/profile')
+    else:
+        form = LoginForm()
+    return render(request, 'main/login.html', {'form': form})
 
 
 @login_required
 def record(request):
-    if Washes.objects.all().count() == 0 or datetime.now(tz=timezone.get_current_timezone()) > Washes.objects.last().date_time and datetime.now().strftime('%a') != 'Sun':
+    if Washes.objects.all().count() == 0 or datetime.now(
+            tz=timezone.get_current_timezone()) > Washes.objects.last().date_time and datetime.now().strftime(
+        '%a') != 'Sun':
         Washes.objects.all().delete()
         for d in generate_dates():
             wash = Washes.objects.create(date_time=d)
@@ -40,8 +52,9 @@ def record(request):
     if request.method == 'POST':
         form = BookWashForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            date_time = datetime.combine(form.cleaned_data['date'], form.cleaned_data['time'], timezone.get_current_timezone())
+            # print(form.cleaned_data)
+            date_time = datetime.combine(form.cleaned_data['date'], form.cleaned_data['time'],
+                                         timezone.get_current_timezone())
             washes = form.cleaned_data['washes']
             powder = form.cleaned_data['powder'] == 1
             selected_wash = Washes.objects.get(date_time=date_time)
@@ -106,16 +119,14 @@ def news(request):
     return render(request, 'main/news.html', {})
 
 
-def rega(request):
+def registration(request):
     if request.method == 'POST':
-        form = RegaForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.set_password(form.cleaned_data['password'])
-            new_user.save()
-            return render(request, 'main/successRega.html', {'new_user': new_user})
+            form.save()
+            return redirect('/profile')
     else:
-        form = RegaForm()
+        form = RegistrationForm()
     return render(request, 'main/rega.html', {'form': form})
 
 

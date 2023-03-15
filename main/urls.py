@@ -8,10 +8,10 @@ from .views import *
 urlpatterns = [
     path('', views.main_page, name='mainPage'),
     path('profile', views.profile, name='profile'),
-    path('rega', views.rega, name='rega'),
+    path('registration', views.registration, name='rega'),
     path('profile', views.profile, name='profile'),
     path('record', views.record, name='record'),
-    path('login', LoginView.as_view(template_name='main/login.html', authentication_form=UserLoginForm), name='login'),
+    path('login', views.login_page, name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('news', BlogListView.as_view(), name='news'),
     path('digPay', views.dig_pay, name='digPay'),
