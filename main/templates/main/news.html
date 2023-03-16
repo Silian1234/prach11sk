@@ -1,26 +1,22 @@
-{% extends 'main/shapka.html' %}
+{% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
-    <meta charset="UTF-8">
-    <title>Новости</title>
-    <link rel="stylesheet" href="{% static 'main/css/news.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Новости</title>
+<link rel="stylesheet" href="{% static 'main/css/news.css' %}">
 {% endblock %}
 {% block content %}
-    <div class= "divv">
-            <h1>Новости</h1>
-            <div class="div2">
-                {% for post in object_list reversed %}
-                    <div class="div2-1">
-                        <div class="div3">
-                            <p class="p1">{{ post.date }}</p>
-                            <p class="p3">{{ post.title }}</p>
-                            <p class="p2">{{ post.full_text }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
+<div class="divv">
+    <h1>Новости</h1>
+    <div class="div2">
+        {% for post in object_list reversed %}
+        <div class="div2-1">
+            <div class="div3">
+                <p class="p1">{{ post.date }}</p>
+                <p class="p3">{{ post.title }}</p>
+                <p class="p2">{{ post.full_text }}</p>
             </div>
+        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

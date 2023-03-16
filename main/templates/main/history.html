@@ -1,0 +1,16 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% block head %}
+<title>История</title>
+{% endblock %}
+{% block content %}
+{% for date, times in washes_history.items %}
+    <p>{{ date }}</p>
+    {% for time, users in times.items %}
+        <p>{{ time }}</p>
+        {% for user in users %}
+            <p>{{ user }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+{% endblock %}

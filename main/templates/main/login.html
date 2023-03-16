@@ -1,49 +1,46 @@
-{% extends 'main/shapka.html' %}
+{% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
-    <meta charset="UTF-8">
-    <title>Вход</title>
-    <link rel="stylesheet" href="{% static 'main/css/join.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Вход</title>
+<link rel="stylesheet" href="{% static 'main/css/join.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="divv">
-        <div class="div1">
-            <form method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="div2">
-                    <div class="div3">
-                        <div class="div3-1"></div>
-                        <div class="div3-2">
-                            <h4 class="hhh4">Войдите в аккаунт</h4>
-                            {{ form.username.errors }}
-                            {{ form.password.errors }}
+<div class="divv">
+    <div class="div1">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="div2">
+                <div class="div3">
+                    <div class="div3-1"></div>
+                    <div class="div3-2">
+                        <h4 class="hhh4">Войдите в аккаунт</h4>
+                        {{ form.username.errors }}
+                        {{ form.password.errors }}
+                    </div>
+                    <div class="div3-3">
+                        <div class="div3-3-1">
+                            <div class="div3-3-1-1">
+                                <p class="pp1">Ввведите логин</p>
+                                {{ form.username }}
+                            </div>
+                            <div class="div3-3-1-2">
+                                <p class="pp1">Ввведите пароль</p>
+                                {{ form.password }}
+                            </div>
                         </div>
-                        <div class="div3-3">
-                            <div class="div3-3-1">
-                                <div class="div3-3-1-1">
-                                    <p class="pp1">Ввведите логин</p>
-                                    {{ form.username }}
-                                </div>
-                                <div class="div3-3-1-2">
-                                    <p class="pp1">Ввведите пароль</p>
-                                    {{ form.password }}
-                                </div>
-                            </div>
-                            <div class="div3-3-2">
-                                <input type="submit" value="Войти" class="input2" />
-                                <input type="hidden" name="next" value="{{ next }}" />
-                            </div>
-                            <div class="div3-3-3">
-                                <a href="{% url 'rega' %}">
+                        {{ form.non_field_errors }}
+                        <div class="div3-3-2">
+                            <input type="submit" value="Войти" class="input2"/>
+                            <input type="hidden" name="next" value="{{ next }}"/>
+                        </div>
+                        <div class="div3-3-3">
+                            <a href="{% url 'registration' %}">
                                 <input type="button" value="Зарегистрироваться" class="input3"></a>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
 {% endblock %}

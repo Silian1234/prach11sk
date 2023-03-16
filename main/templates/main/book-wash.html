@@ -1,11 +1,8 @@
-{% extends 'main/shapka.html' %}
+{% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
 <title>Запись</title>
 <link rel="stylesheet" href="{% static 'main/css/record.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <div class="divv">
@@ -14,7 +11,6 @@
         {% csrf_token %}
         <div class="div1">
             <div class="div2">
-<!--                {{ form.date_time }}-->
                 <select name="date" required="required" id="dateSelect">
                     <option value="">Выберите дату</option>
                     {% for date, times in date_and_time.items %}
@@ -47,27 +43,22 @@
 <script>
     const date_dict = JSON.parse('{{date_dict|escapejs}}');
     const dateSelect = document.getElementById('dateSelect');
-    // const bookWashForm = document.getElementById('bookWashForm');
-    // bookWashForm.addEventListener('submit', () => {
-    //     bookWashForm.reset();
-    //     // console.log('submitted')
-    // })
     dateSelect.addEventListener('change', (event) => {
         const date = event.target.value;
         const timeSelect = document.getElementById('timeSelect');
         timeSelect.innerHTML = '<option value="">Выберите время</option>';
         timeSelect.addEventListener('change', event => {
-                const washesSelect = document.getElementById('washesSelect');
-                washesSelect.innerHTML = '<option value="">Выберите количество машинок</option>';
-                time = event.target.value;
-                washes = date_dict[date].filter(e => e[0] === time)[0][1]
-                for (let i = 1; i <= washes; i++){
-                    const washOption = document.createElement('option');
-                    washOption.value = i;
-                    washOption.text = i;
-                    washesSelect.append(washOption);
-                }
-            })
+            const washesSelect = document.getElementById('washesSelect');
+            washesSelect.innerHTML = '<option value="">Выберите количество машинок</option>';
+            time = event.target.value;
+            washes = date_dict[date].filter(e => e[0] === time)[0][1]
+            for (let i = 1; i <= washes; i++) {
+                const washOption = document.createElement('option');
+                washOption.value = i;
+                washOption.text = i;
+                washesSelect.append(washOption);
+            }
+        })
         date_dict[date].forEach(elem => {
             const time = elem[0];
             const timeOption = document.createElement('option');

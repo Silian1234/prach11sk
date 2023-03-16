@@ -10,8 +10,8 @@ from django.views.generic import ListView
 import json
 
 
-def dig_pay(request):
-    return render(request, 'main/digPay.html', {})
+def payment_digiseller(request):
+    return render(request, 'main/digiseller-payment.html', {})
 
 
 def fk_verify(request):
@@ -24,7 +24,7 @@ class BlogListView(ListView):
 
 
 def main_page(request):
-    return render(request, 'main/mainPage.html', {})
+    return render(request, 'main/main.html', {})
 
 
 def login_page(request):
@@ -41,7 +41,7 @@ def login_page(request):
 
 
 @login_required
-def record(request):
+def book_wash(request):
     if Washes.objects.all().count() == 0 or datetime.now(
             tz=timezone.get_current_timezone()) > Washes.objects.last().date_time and datetime.now().strftime(
         '%a') != 'Sun':
@@ -49,10 +49,10 @@ def record(request):
         for d in generate_dates():
             wash = Washes.objects.create(date_time=d)
             wash.save()
+
     if request.method == 'POST':
         form = BookWashForm(request.POST)
         if form.is_valid():
-            # print(form.cleaned_data)
             date_time = datetime.combine(form.cleaned_data['date'], form.cleaned_data['time'],
                                          timezone.get_current_timezone())
             washes = form.cleaned_data['washes']
@@ -62,27 +62,40 @@ def record(request):
             if powder and profile.wash_with >= washes:
                 selected_wash.washes -= washes
                 profile.wash_with -= washes
+                wash_history = WashesHistory.objects.create(date_time=date_time,
+                                                            user=f'{request.user.first_name} {request.user.last_name}',
+                                                            washes=washes)
+                wash_history.save()
                 profile.save()
             elif not powder and profile.wash_without >= washes:
                 selected_wash.washes -= washes
                 profile.wash_without -= washes
+                wash_history = WashesHistory.objects.create(date_time=date_time,
+                                                            user=f'{request.user.first_name} {request.user.last_name}',
+                                                            washes=washes)
+                wash_history.save()
                 profile.save()
             else:
                 print('Недостаточно стирок на аккаунте')
             selected_wash.save()
             return HttpResponseRedirect('record')
+
     washes = Washes.objects.filter(date_time__gte=datetime.now(tz=timezone.get_current_timezone())).exclude(washes=0)
     date_and_time = {}
+    ssk_group = request.user.groups.filter(name='ССК')
     for wash in washes:
         current_date = wash.date_time.strftime('%d.%m.%Y')
+        day = wash.date_time.strftime('%a')
         time = wash.date_time.astimezone(timezone.get_current_timezone()).strftime('%H:%M')
+        if not ssk_group and (day == 'Wed' or day == 'Sun'):
+            continue
         if current_date not in date_and_time.keys():
             date_and_time[current_date] = [(time, wash.washes)]
         else:
             date_and_time[current_date].append((time, wash.washes))
     date_dict = json.dumps(date_and_time)
     form = BookWashForm()
-    return render(request, 'main/record.html', {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
+    return render(request, 'main/book-wash.html', {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
 
 
 @login_required
@@ -105,11 +118,9 @@ def payment(request):
                     elif json['id_goods'] == 3599134:
                         profile.wash_with += 1
                     profile.save()
-                    return HttpResponseRedirect('profile')
+                    return HttpResponseRedirect('payment')
             else:
                 form.add_error(None, 'Несуществующий код!')
-                print(form.errors)
-
     else:
         form = CheckCodeForm()
     return render(request, 'main/payment.html', {'form': form})
@@ -127,9 +138,45 @@ def registration(request):
             return redirect('/profile')
     else:
         form = RegistrationForm()
-    return render(request, 'main/rega.html', {'form': form})
+    return render(request, 'main/registration.html', {'form': form})
 
 
 @login_required
 def profile(request):
     return render(request, 'main/profile.html')
+
+
+@login_required
+def history(request):
+    history = {}
+    washes_history = WashesHistory.objects.all()
+    for wash in washes_history:
+        date_time = wash.date_time.astimezone(timezone.get_current_timezone())
+        date = date_time.strftime('%d.%m.%Y')
+        time = date_time.strftime('%H:%M')
+        if date not in history.keys():
+            history[date] = {}
+        if date in history.keys() and time not in history[date].keys():
+            history[date][time] = [wash.user for _ in range(wash.washes)]
+        else:
+            for _ in range(wash.washes):
+                history[date][time].append(wash.user)
+    return render(request, 'main/history.html', {'washes_history': history})
+
+
+@login_required
+def applications(request):
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            room = form.cleaned_data['room']
+            descr = form.cleaned_data['description']
+            application = Applications(room=room, user=f'{request.user.first_name} {request.user.last_name}',
+                                       description=descr)
+            application.save()
+    form = ApplicationForm()
+    return render(request, 'main/applications.html', {'form': form})
+
+@login_required
+def menu(request):
+    return render(request, 'main/menu.html')

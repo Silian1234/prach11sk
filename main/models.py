@@ -34,3 +34,21 @@ class Washes(models.Model):
 
     def __str__(self):
         return self.date_time.__str__()
+
+
+class WashesHistory(models.Model):
+    date_time = models.DateTimeField('Дата и время стирки')
+    user = models.CharField('Фамилия и имя', max_length=100)
+    washes = models.IntegerField('Количество стирок', default=1)
+
+    def __str__(self):
+        return self.user
+
+
+class Applications(models.Model):
+    room = models.IntegerField('Комната')
+    user = models.CharField('Фамилия и имя', max_length=100)
+    description = models.TextField('Описание проблемы')
+
+    def __str__(self):
+        return self.room

@@ -1,0 +1,12 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% block head %}
+<title>Меню записи</title>
+{% endblock %}
+{% block content %}
+<a href="{% url 'book-wash' %}">Прачечная</a>
+<br>
+<a href="{% url 'applications' %}">Журнал заявок</a>
+<br>
+<a href="#">Учебная комната</a>
+{% endblock %}

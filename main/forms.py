@@ -15,6 +15,9 @@ class BookWashForm(forms.Form):
     washes = forms.IntegerField()
     powder = forms.IntegerField()
 
+class ApplicationForm(forms.Form):
+    room = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '100', 'max': '550'}))
+    description = forms.CharField(widget=forms.Textarea())
 
 class LoginForm(forms.Form):
     username = forms.CharField(min_length=3, max_length=40, required=True, widget=forms.TextInput(
@@ -104,56 +107,3 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
-# class RegaForm(UserCreationForm):
-#
-#     username = forms.CharField(min_length=3, max_length=40,
-#                                widget=forms.TextInput(attrs={'class': 'input1', 'placeholder': 'Логин'}),
-#                                label='Придумайте логин')
-#     email = forms.EmailField(
-#         widget=forms.EmailInput(attrs={'class': 'input1', 'placeholder': 'Email'}), label='Введите вашу почту')
-#     password1 = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'input1', 'placeholder': '**********'}), label='Придумайте пароль')
-#     password2 = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'input1', 'placeholder': '**********'}), label='Подтвердите пароль')
-#     first_name = forms.CharField(min_length=2, max_length=40,
-#                                  widget=forms.TextInput(attrs={'class': 'input1', 'placeholder': 'Имя'}),
-#                                  label='Введите ваше имя')
-#     last_name = forms.CharField(min_length=2, max_length=40,
-#                                 widget=forms.TextInput(attrs={'class': 'input1', 'placeholder': 'Фамилия'}),
-#                                 label='Введите вашу фамилию')
-# class Meta:
-#     model = User
-#
-# fields = [
-#     'first_name', 'last_name', 'username', 'email', 'password1', 'password2'
-# ]
-# # fields = '__all__'
-# widgets = {
-#     "first_name": forms.TextInput(attrs={
-#         'class': 'input1',
-#         'placeholder': 'Имя',
-#     }),
-#     "last_name": forms.TextInput(attrs={
-#         'class': 'input1',
-#         'placeholder': 'Фамилия'
-#     }),
-#     "username": forms.TextInput(attrs={
-#         'class': 'input1',
-#         'placeholder': 'Логин'
-#     }),
-#
-#     "email": forms.TextInput(attrs={
-#         'class': 'input1',
-#         'placeholder': 'email'
-#     }),
-#     "password1": forms.TextInput(attrs={
-#         'type': 'password',
-#         'class': 'input1',
-#         'placeholder': '*********'
-#     }),
-#     "password2": forms.PasswordInput(attrs={
-#         'type': 'password',
-#         'class': 'input1',
-#         'placeholder': '*********'
-#     }),
-# }
