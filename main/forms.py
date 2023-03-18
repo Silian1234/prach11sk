@@ -15,9 +15,11 @@ class BookWashForm(forms.Form):
     washes = forms.IntegerField()
     powder = forms.IntegerField()
 
+
 class ApplicationForm(forms.Form):
     room = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '100', 'max': '550'}))
     description = forms.CharField(widget=forms.Textarea())
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(min_length=3, max_length=40, required=True, widget=forms.TextInput(
@@ -49,7 +51,6 @@ class RegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].label = 'Введите ваше имя'
         self.fields['last_name'].label = 'Введите вашу фамилию'
-        self.fields['email'].label = 'Введите ваш email'
         self.fields['username'].label = 'Придумайте логин'
         self.fields['password1'].label = 'Придумайте пароль'
         self.fields['password2'].label = 'Повторите пароль'
@@ -59,8 +60,8 @@ class RegistrationForm(UserCreationForm):
             'type': 'text',
             'class': 'input1',
             'placeholder': 'Имя',
-            'minlength': '3',
-            'maxlength': '40'
+            'minlength': '2',
+            'maxlength': '50'
         })
         self.fields['last_name'].widget.attrs.update({
             'required': 'True',
@@ -68,8 +69,8 @@ class RegistrationForm(UserCreationForm):
             'type': 'text',
             'class': 'input1',
             'placeholder': 'Фамилия',
-            'minlength': '3',
-            'maxlength': '40'
+            'minlength': '2',
+            'maxlength': '50'
         })
         self.fields['username'].widget.attrs.update({
             'required': 'True',
@@ -79,14 +80,12 @@ class RegistrationForm(UserCreationForm):
             'minlength': '3',
             'maxlength': '40'
         })
-        self.fields['email'].widget.attrs.update({
-            'required': 'True',
-            'type': 'email',
-            'class': 'input1',
-            'placeholder': 'Email',
-            # 'minlength': '3',
-            # 'maxlength': '40'
-        })
+        # self.fields['email'].widget.attrs.update({
+        #     'required': 'True',
+        #     'type': 'email',
+        #     'class': 'input1',
+        #     'placeholder': 'Email',
+        # })
         self.fields['password1'].widget.attrs.update({
             'required': 'True',
             'type': 'text',
@@ -106,4 +105,4 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'password1', 'password2']

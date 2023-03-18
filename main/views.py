@@ -28,23 +28,26 @@ def main_page(request):
 
 
 def login_page(request):
+    next = 'profile'
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        next = request.POST['next']
         if form.is_valid():
             user = form.login()
             if user:
                 login(request, user)
-                return redirect('/profile')
+                return redirect(next)
     else:
+        if request.GET.get('next'):
+            next = request.GET['next']
         form = LoginForm()
-    return render(request, 'main/login.html', {'form': form})
+    return render(request, 'main/login.html', {'form': form, 'next': next})
 
 
 @login_required
 def book_wash(request):
     if Washes.objects.all().count() == 0 or datetime.now(
-            tz=timezone.get_current_timezone()) > Washes.objects.last().date_time and datetime.now().strftime(
-        '%a') != 'Sun':
+            tz=timezone.get_current_timezone()) > Washes.objects.last().date_time:
         Washes.objects.all().delete()
         for d in generate_dates():
             wash = Washes.objects.create(date_time=d)
@@ -58,27 +61,27 @@ def book_wash(request):
             washes = form.cleaned_data['washes']
             powder = form.cleaned_data['powder'] == 1
             selected_wash = Washes.objects.get(date_time=date_time)
-            profile = Profile.objects.get(user_id=request.user.id)
-            if powder and profile.wash_with >= washes:
+            user = User.objects.get(pk=request.user.id)
+            if powder and user.profile.wash_with >= washes:
                 selected_wash.washes -= washes
-                profile.wash_with -= washes
+                user.profile.wash_with -= washes
                 wash_history = WashesHistory.objects.create(date_time=date_time,
-                                                            user=f'{request.user.first_name} {request.user.last_name}',
+                                                            user=f'{user.first_name} {user.last_name}',
                                                             washes=washes)
                 wash_history.save()
-                profile.save()
-            elif not powder and profile.wash_without >= washes:
+                user.save()
+            elif not powder and user.profile.wash_without >= washes:
                 selected_wash.washes -= washes
-                profile.wash_without -= washes
+                user.profile.wash_without -= washes
                 wash_history = WashesHistory.objects.create(date_time=date_time,
-                                                            user=f'{request.user.first_name} {request.user.last_name}',
+                                                            user=f'{user.first_name} {user.last_name}',
                                                             washes=washes)
                 wash_history.save()
-                profile.save()
+                user.save()
             else:
                 print('Недостаточно стирок на аккаунте')
             selected_wash.save()
-            return HttpResponseRedirect('record')
+            return HttpResponseRedirect('book-wash')
 
     washes = Washes.objects.filter(date_time__gte=datetime.now(tz=timezone.get_current_timezone())).exclude(washes=0)
     date_and_time = {}
@@ -95,12 +98,12 @@ def book_wash(request):
             date_and_time[current_date].append((time, wash.washes))
     date_dict = json.dumps(date_and_time)
     form = BookWashForm()
-    return render(request, 'main/book-wash.html', {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
+    return render(request, 'main/book-wash.html',
+                  {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
 
 
 @login_required
 def payment(request):
-    user = request.user
     if request.method == 'POST':
         form = CheckCodeForm(request.POST)
         if form.is_valid():
@@ -112,12 +115,12 @@ def payment(request):
                     form.add_error(None, 'Такой код уже был использован!')
                 else:
                     InvoiceNumber.objects.create(invoice_number=invoice)
-                    profile = Profile.objects.get(user_id=user.id)
+                    user = User.objects.get(pk=request.user.id)
                     if json['id_goods'] == 3599100:
-                        profile.wash_without += 1
+                        user.profile.wash_without += 1
                     elif json['id_goods'] == 3599134:
-                        profile.wash_with += 1
-                    profile.save()
+                        user.profile.wash_with += 1
+                    user.save()
                     return HttpResponseRedirect('payment')
             else:
                 form.add_error(None, 'Несуществующий код!')
@@ -133,9 +136,10 @@ def news(request):
 def registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        # print(form)
         if form.is_valid():
             form.save()
-            return redirect('/profile')
+            return redirect(get_auth_url())
     else:
         form = RegistrationForm()
     return render(request, 'main/registration.html', {'form': form})
@@ -143,6 +147,12 @@ def registration(request):
 
 @login_required
 def profile(request):
+    if request.GET.get('code', '') != '':
+        json = get_access_token(request.GET['code'])
+        if 'error' not in json:
+            user = User.objects.get(pk=request.user.id)
+            user.profile.vk_id = json['user_id']
+            user.save()
     return render(request, 'main/profile.html')
 
 
@@ -176,6 +186,7 @@ def applications(request):
             application.save()
     form = ApplicationForm()
     return render(request, 'main/applications.html', {'form': form})
+
 
 @login_required
 def menu(request):

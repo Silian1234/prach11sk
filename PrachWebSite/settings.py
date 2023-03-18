@@ -25,13 +25,13 @@ SECRET_KEY = 'django-insecure-z%012$)#cgj-c09-no8bo6xcw&!n+rjicbkp_489q^gcxzae0#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['www.11student.site']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'main',
-    #'register',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,4 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
-LOGOUT_REDIRECT_URL = "mainPage"
+LOGOUT_REDIRECT_URL = "main"
