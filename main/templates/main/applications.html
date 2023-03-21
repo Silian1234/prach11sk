@@ -7,9 +7,13 @@
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
+    {% if not field.is_hidden %}
     <p>{{ field.label }}</p>
+    <p>{{ field.errors }}</p>
     {{ field }}
+    {% endif %}
     {% endfor %}
+    <input type="hidden" name="user_id" value="{{ user.id }}">
     <br>
     <button type="submit" value="Подать заявку">Подать заявку</button>
 </form>

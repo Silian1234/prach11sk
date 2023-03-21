@@ -1,4 +1,5 @@
 {% load static %}
+{% load group_filter %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -34,6 +35,11 @@
         <div class="Nav1">
             <a href="{% url 'menu' %}" class="aa1">Записаться</a>
         </div>
+        {% if user.groups|has_group:"Админ прачки" %}
+        <div class="Nav1">
+            <a href="{% url 'washes-history' %}" class="aa1">Для админов</a>
+        </div>
+        {% endif %}
     </div>
     {% if user.is_authenticated %}
     <div class="Button">

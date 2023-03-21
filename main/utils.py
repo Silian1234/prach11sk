@@ -7,18 +7,6 @@ from hashlib import sha256
 from django.utils import timezone
 
 
-# def keyGenerator(keyCount):
-#     chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-#     fullPassword = []
-#     for n in range(keyCount):
-#         password = ''
-#         for i in range(16):
-#             password += random.choice(chars)
-#         if password not in fullPassword:
-#             fullPassword.append(password)
-#     return fullPassword
-
-
 def check_code(unique_code):
     seller_id = 1115984
     api_key = '7B147C6B96084B36AC66CD2AB05F57D8'
@@ -34,7 +22,7 @@ def check_code(unique_code):
     return json
 
 
-def generate_dates():
+def generate_wash_dates():
     dates = []
     for day in range(7):
         current_date = timedelta(days=+day) + date.today()
@@ -54,20 +42,20 @@ def generate_dates():
 
 
 def get_auth_url():
-    app_id = 51584619
-    secure_key = '0Xmd2fuaeybsFcGplK8y'
-    url = 'http://127.0.0.1:8000/profile'
+    client_id = 51584619
+    client_secret = '0Xmd2fuaeybsFcGplK8y'
+    redirect_uri = 'http://127.0.0.1:8000/profile'
     response_type = 'code'
-    auth = f'https://oauth.vk.com/authorize?client_id={app_id}&client_secret={secure_key}&redirect_uri={url}&response_type={response_type}&v=5.131'
+    auth = f'https://oauth.vk.com/authorize?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&response_type={response_type}&v=5.131'
     return auth
 
 
 def get_access_token(code):
-    app_id = 51584619
-    secure_key = '0Xmd2fuaeybsFcGplK8y'
-    url = 'http://127.0.0.1:8000/profile'
+    client_id = 51584619
+    client_secret = '0Xmd2fuaeybsFcGplK8y'
+    redirect_uri = 'http://127.0.0.1:8000/profile'
     return requests.get('https://oauth.vk.com/access_token',
-                        params={'client_id': app_id, 'client_secret': secure_key, 'redirect_uri': url,
+                        params={'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri,
                                 'code': code}).json()
 
 

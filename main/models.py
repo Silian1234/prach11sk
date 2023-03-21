@@ -24,6 +24,7 @@ class InvoiceNumber(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     vk_id = models.IntegerField(default=-1)
+    wash_limit = models.IntegerField(default=2)
     wash_with = models.IntegerField('Стирки с порошком', default=0)
     wash_without = models.IntegerField('Стирки без порошка', default=0)
 
@@ -42,7 +43,7 @@ class Profile(models.Model):
 
 class Washes(models.Model):
     date_time = models.DateTimeField('Дата и время стирки')
-    washes = models.IntegerField('Количество оставшихся стирок', default=2)
+    washes = models.IntegerField('Количество оставшихся стирок', default=4)
 
     def __str__(self):
         return self.date_time.__str__()
@@ -50,16 +51,19 @@ class Washes(models.Model):
 
 class WashesHistory(models.Model):
     date_time = models.DateTimeField('Дата и время стирки')
-    user = models.CharField('Фамилия и имя', max_length=100)
-    washes = models.IntegerField('Количество стирок', default=1)
+    user_name = models.CharField('Фамилия и имя', max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    washes = models.IntegerField()
+    limit_returned = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user
+        return self.user_name
 
 
 class Applications(models.Model):
     room = models.IntegerField('Комната')
-    user = models.CharField('Фамилия и имя', max_length=100)
+    user_name = models.CharField('Фамилия и имя', max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField('Описание проблемы')
 
     def __str__(self):

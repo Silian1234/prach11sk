@@ -16,7 +16,7 @@ urlpatterns = [
     path('payment/digiseller', views.payment_digiseller, name='payment-digiseller'),
     path('payment', views.payment, name='payment'),
     path('fk-verify.html', views.fk_verify, name='fk-verify'),
-    path('history', views.history, name='history'),
+    path('washes-history', views.washes_history, name='washes-history'),
     path('applications', views.applications, name='applications'),
     path('menu', views.menu, name='menu')
 ]

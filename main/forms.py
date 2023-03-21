@@ -12,13 +12,25 @@ class CheckCodeForm(forms.Form):
 class BookWashForm(forms.Form):
     date = forms.DateField()
     time = forms.TimeField()
-    washes = forms.IntegerField()
+    washes = forms.IntegerField(max_value=2)
     powder = forms.IntegerField()
 
 
 class ApplicationForm(forms.Form):
     room = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '100', 'max': '550'}))
     description = forms.CharField(widget=forms.Textarea())
+    user_id = forms.IntegerField(widget=forms.NumberInput(attrs={'type': 'hidden'}))
+
+    def clean_room(self):
+        room = self.cleaned_data.get('room')
+        if room % 100 > 50:
+            raise forms.ValidationError('Неверно указан номер комнаты!')
+        return room
+
+    def clean_description(self):
+        if len(self.cleaned_data.get('description').split()) < 2:
+            raise forms.ValidationError('Описание проблемы должно содержать минимум 2 слова!')
+        return self.cleaned_data.get('description')
 
 
 class LoginForm(forms.Form):
