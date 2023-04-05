@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import datetime
+from django.utils import timezone
 
 
 class Post(models.Model):
@@ -55,16 +57,20 @@ class WashesHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     washes = models.IntegerField()
     limit_returned = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user_name
+    powder = models.BooleanField()
 
 
 class Applications(models.Model):
     room = models.IntegerField('Комната')
-    user_name = models.CharField('Фамилия и имя', max_length=100)
+    full_name = models.CharField('Фамилия и имя', max_length=100)
+    created_at = models.DateTimeField('Дата создания')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField('Описание проблемы')
 
-    def __str__(self):
-        return self.room
+
+class StudyRoom(models.Model):
+    date = models.DateField('Дата')
+    start_time = models.TimeField('Дата начала')
+    end_time = models.TimeField('Дата окончания')
+    people = models.IntegerField('Количество человек')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

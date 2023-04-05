@@ -16,9 +16,12 @@ urlpatterns = [
     path('payment/digiseller', views.payment_digiseller, name='payment-digiseller'),
     path('payment', views.payment, name='payment'),
     path('fk-verify.html', views.fk_verify, name='fk-verify'),
-    path('washes-history', views.washes_history, name='washes-history'),
+    path('washes-admin', views.washes_admin, name='washes-admin'),
     path('applications', views.applications, name='applications'),
-    path('menu', views.menu, name='menu')
+    path('menu', views.menu, name='menu'),
+    path('applications-admin', views.applications_admin, name='applications-admin'),
+    path('study-room', views.study_room, name='study-room'),
+    path('history', views.history, name='history')
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,28 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% block head %}
+<title>Журнал заявок</title>
+{% endblock %}
+{% block content %}
+{% for application in applications %}
+    <div style="border: 1px solid black; padding: 15px">
+        <p>{{ application.created_at }}</p>
+        <p > От кого: <a href="https://vk.com/id{{ application.user.profile.vk_id }}" target="_blank">{{ application.full_name }}</a></p>
+        <p>Комната: {{ application.room }}</p>
+        <p>Описание проблемы: {{ application.description.lower }}</p>
+        <button class="btn">Заявка сделана</button>
+        <button class="btn">Выполнено</button>
+    </div>
+{% endfor %}
+
+<style>
+    .btn{
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor:pointer;
+        background-color: #626262;
+        color: white;
+    }
+</style>
+{% endblock %}

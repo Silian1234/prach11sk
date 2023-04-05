@@ -37,23 +37,28 @@
         </div>
         {% if user.groups|has_group:"Админ прачки" %}
         <div class="Nav1">
-            <a href="{% url 'washes-history' %}" class="aa1">Для админов</a>
+            <a href="{% url 'washes-admin' %}" class="aa1">Для админов</a>
+        </div>
+        {% elif user.groups|has_group:"Админ журнала заявок" %}
+        <div class="Nav1">
+            <a href="{% url 'applications-admin' %}" class="aa1">Для админов</a>
         </div>
         {% endif %}
     </div>
     {% if user.is_authenticated %}
-    <div class="Button">
-        <a href="{% url 'logout' %}">
-            <input type="button" value="ВЫЙТИ" class="inputt1"></a>
+    <div style="display: flex; align-items: center;">
+        <a class="inputt1" href="{% url 'logout' %}">Выйти
+    </a>
     </div>
+
     {% else %}
-    <div class="Button">
-        <a href="{% url 'login' %}">
-            <input type="button" value="ВОЙТИ" class="inputt1"></a>
+    <div style="display: flex; align-items: center;">
+        <a class="inputt1" href="{% url 'login' %}">Войти
+    </a>
     </div>
     {% endif %}
-    <div class="Line">
-    </div>
+    <!--    <div class="Line">-->
+    <!--    </div>-->
 </div>
 {% block content %}
 

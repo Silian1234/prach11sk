@@ -58,14 +58,14 @@
                 washOption.text = i;
                 washesSelect.append(washOption);
             }
-        })
+        });
         date_dict[date].forEach(elem => {
             const time = elem[0];
             const timeOption = document.createElement('option');
             timeOption.value = time;
             timeOption.text = time;
             timeSelect.append(timeOption);
-        })
+        });
     })
 </script>
 {% endblock %}

@@ -33,6 +33,13 @@ class ApplicationForm(forms.Form):
         return self.cleaned_data.get('description')
 
 
+class StudyRoomForm(forms.Form):
+    date = forms.DateField()
+    choices = ((i, i) for i in range(10, 22))
+    time = forms.MultipleChoiceField(choices=choices)
+    people = forms.IntegerField()
+
+
 class LoginForm(forms.Form):
     username = forms.CharField(min_length=3, max_length=40, required=True, widget=forms.TextInput(
         attrs={'class': 'input1', 'placeholder': 'Логин'}))

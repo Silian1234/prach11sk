@@ -1,4 +1,5 @@
 import datetime
+from datetime import date, time
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -8,10 +9,15 @@ from .models import *
 from .utils import *
 from django.views.generic import ListView
 import json
+from django.db.models import Q
 
 
-def is_admin(user):
+def is_wash_admin(user):
     return user.groups.filter(name__in=['Админ прачки']).exists()
+
+
+def is_applications_admin(user):
+    return user.groups.filter(name__in=['Админ журнала заявок']).exists()
 
 
 def payment_digiseller(request):
@@ -73,7 +79,7 @@ def book_wash(request):
                 wash_history = WashesHistory.objects.create(date_time=date_time,
                                                             user_name=f'{user.first_name} {user.last_name}',
                                                             user=user,
-                                                            washes=washes)
+                                                            washes=washes, powder=powder)
                 wash_history.save()
                 user.save()
                 selected_wash.save()
@@ -85,7 +91,7 @@ def book_wash(request):
                 wash_history = WashesHistory.objects.create(date_time=date_time,
                                                             user_name=f'{user.first_name} {user.last_name}',
                                                             user=user,
-                                                            washes=washes)
+                                                            washes=washes, powder=powder)
                 wash_history.save()
                 user.save()
                 selected_wash.save()
@@ -164,23 +170,26 @@ def profile(request):
             user = User.objects.get(pk=request.user.id)
             user.profile.vk_id = json['user_id']
             user.save()
-    return render(request, 'main/profile.html')
+    washes = WashesHistory.objects.filter(date_time__gte=datetime.now(
+        tz=timezone.get_current_timezone()) + timedelta(hours=-2), user=request.user).order_by('date_time')
+    applications = Applications.objects.filter(user=request.user).order_by('created_at')
+    study_room = StudyRoom.objects.filter(
+        Q(date=datetime.now().date()) & Q(end_time__gte=datetime.now().time()) | Q(date__gt=datetime.now().date()),
+        user=request.user).order_by('date', 'start_time')
+    return render(request, 'main/profile.html',
+                  {'washes': washes, 'applications': applications, 'study_room': study_room})
 
 
 @login_required
-@user_passes_test(is_admin)
-def washes_history(request):
-    print(datetime.now(
-        tz=timezone.get_current_timezone()))
+@user_passes_test(is_wash_admin)
+def washes_admin(request):
     all_washes, washes_history = {}, {}
     view = request.GET.get('view', None)
     limit_not_returned = WashesHistory.objects.filter(limit_returned=False, date_time__lt=datetime.now(
         tz=timezone.get_current_timezone()) + timedelta(hours=+2))
 
     for limit_return in limit_not_returned:
-        print(limit_return.user)
         limit_return.limit_returned = True
-        # user = User.objects.get(pk=limit_return.user_id)
         if limit_return.user.profile.wash_limit < 2:
             limit_return.user.profile.wash_limit += 1
             limit_return.user.save()
@@ -188,7 +197,7 @@ def washes_history(request):
 
     if view == 'history':
         washes_history = WashesHistory.objects.filter(date_time__lt=datetime.now(
-            tz=timezone.get_current_timezone()) + timedelta(hours=-2))
+            tz=timezone.get_current_timezone()) + timedelta(hours=-2)).order_by('-date_time')
     elif view == 'settings':
         print('load settings')
     else:
@@ -206,7 +215,16 @@ def washes_history(request):
         else:
             for _ in range(wash.washes):
                 all_washes[date][time].append(wash.user_name)
-    return render(request, 'main/washes-history.html', {'washes_history': all_washes})
+    return render(request, 'main/washes-admin.html', {'washes_history': all_washes})
+
+
+@login_required
+@user_passes_test(is_applications_admin)
+def applications_admin(request):
+    # applications = []
+    # for application in Applications.objects.all():
+    #     applications.append(a)
+    return render(request, 'main/applications-admin.html', {'applications': Applications.objects.all()})
 
 
 @login_required
@@ -216,8 +234,9 @@ def applications(request):
         if form.is_valid():
             room = form.cleaned_data['room']
             descr = form.cleaned_data['description']
-            application = Applications(room=room, user_name=f'{request.user.first_name} {request.user.last_name}',
-                                       description=descr, user=request.user)
+            application = Applications(room=room, full_name=f'{request.user.first_name} {request.user.last_name}',
+                                       description=descr, user=request.user,
+                                       created_at=datetime.now(tz=timezone.get_current_timezone()))
             application.save()
             return redirect('profile')
     else:
@@ -226,5 +245,39 @@ def applications(request):
 
 
 @login_required
+def study_room(request):
+    if request.method == 'POST':
+        form = StudyRoomForm(request.POST)
+        if form.is_valid():
+            study_date = form.cleaned_data['date']
+            start_time = form.cleaned_data['time'][0]
+            end_time = int(form.cleaned_data['time'][-1]) + 1
+            people = form.cleaned_data['people']
+            study_room = StudyRoom.objects.create(date=study_date, start_time=start_time, end_time=str(end_time),
+                                                  people=people)
+            study_room.save()
+            return redirect('profile')
+    study_dates = {}
+    for day in range(7):
+        current_date = timedelta(days=+day) + date.today()
+        occupied_times = StudyRoom.objects.filter(date=current_date)
+        restricted_hours = [j for occupied_time in occupied_times for j in
+                            range(occupied_time.start_time.hour, occupied_time.end_time.hour)]
+        hours = []
+        start_time = 10 if current_date != date.today() else datetime.now().time().hour + 1
+        for start_hour in range(start_time, 22):
+            if start_hour not in restricted_hours:
+                hours.append(start_hour)
+        study_dates[current_date.strftime('%d.%m.%Y')] = hours
+    study_time = json.dumps(study_dates)
+    return render(request, 'main/study-room.html', {'study_time': study_time, 'study_dates': study_dates})
+
+
+@login_required
 def menu(request):
     return render(request, 'main/menu.html')
+
+
+@login_required
+def history(request):
+    return render(request, 'main/history.html')

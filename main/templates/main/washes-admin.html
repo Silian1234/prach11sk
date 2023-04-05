@@ -1,0 +1,25 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% block head %}
+<title>История</title>
+{% endblock %}
+{% block content %}
+<div style="padding: 10px; margin-bottom: 10px">
+    <a href="/washes-admin">Актуальные записи</a>
+    <a href="/washes-admin?view=history">История записей</a>
+    <a href="/washes-admin?view=settings">Настройки</a>
+</div>
+
+{% for date, times in washes_history.items %}
+    <div style="border: 1px solid black; padding: 15px">
+        <p>{{ date }}</p>
+        {% for time, users in times.items %}
+            <p>{{ time }}</p>
+            {% for user_name in users %}
+                <div style="margin-bottom: 5px"><a href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+{% endfor %}
+{% endblock %}

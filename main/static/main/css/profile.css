@@ -8,17 +8,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 h1{
-    /* профиль */
-
-    margin-top: 0;
-    position: absolute;
-    width: 204px;
-    height: 48px;
-    left: 857.5px;
-    top: 175px;
 
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -34,25 +27,14 @@ h1{
 }
 
 .div1{
-    /* Vopros */
-
-
-    box-sizing: border-box;
-
-    /* Auto layout */
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 0px 40px;
+    /*align-items: center;*/
+    padding: 20px 40px;
 
-    position: absolute;
+    /*position: absolute;*/
     width: 1024px;
-    height: 263px;
-    left: 448px;
-    top: 260px;
-
-    /* Серый 11 */
 
     background: #F2F6FA;
     /* Серый 11 */
@@ -86,58 +68,34 @@ h1{
 }
 
 .p1 {
-    /* Коссе Иван */
-
-
-    width: 349px;
-    height: 43px;
-
+    margin: 0;
+    margin-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
     line-height: 143%;
-    /* identical to box height, or 43px */
-
-
-    /* Серый 1 */
 
     color: #11263A;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 
 .p2 {
-    /* Логин: vanya.kosse */
-
-
-    width: 649px;
-    height: 30px;
-
-    /* 21px, Medium */
-
+    /*width: 649px;*/
+    /*height: 30px;*/
+    margin: 0;
+    margin-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 21px;
     line-height: 143%;
-    /* identical to box height, or 30px */
-
-
-    /* Серый 1 */
-
     color: #11263A;
 
 
     /* Inside auto layout */
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    /*flex: none;*/
+    /*order: 0;*/
+    /*flex-grow: 0;*/
 }

@@ -5,70 +5,32 @@
 .bodyShap {
     /* Шапка */
 
-
-    position: relative;
-    width: 1930px;
-    height: 120px;
-
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-content: center;
     background: #2C2C2C;
 }
 
 .Logo {
-
-    /* Logo */
-
-
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0px;
+    /*padding: 0px;*/
     gap: 17px;
 
-    position: absolute;
-    width: 232px;
-    height: 42px;
-    left: 448px;
-    top: calc(50% - 42px/2 - 0.5px);
 }
 
 .Pic {
-    /* Без имени-1 1 */
-
-
     width: 35px;
-
-
     transform: matrix(-1, 0, 0, 1, 0, 0);
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .Text{
-    /* 02. Надпись в 2 строки */
-
-
     width: 150px;
-    height: 42px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
 .hh2-1 {
-    /* Запись в прачечную комнату для 11 С/К */
-
-
-    position: absolute;
     left: 23%;
     right: -9.49%;
     top: 0%;
@@ -92,58 +54,30 @@
 }
 
 .Nav {
-    /* Content */
-
-
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     padding: 0px;
     gap: 26px;
-
-    position: absolute;
-    width: 556px;
-    height: 49px;
-    left: 707px;
-    top: 33px;
 }
 
 .Nav1 {
-    /* 01. Надпись */
-
-
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0px 11px;
     gap: 10px;
-
-    width: 112px;
-    height: 49px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .aa1 {
-    width: 62px;
-    height: 15px;
+    /*width: 62px;*/
+    /*height: 15px;*/
 
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 135%;
-    /* identical to box height, or 15px */
-
     display: flex;
     align-items: center;
     letter-spacing: 0.04em;
@@ -151,13 +85,9 @@
     text-transform: uppercase;
 
     color: #FFFFFF;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    /*flex: none;*/
+    /*order: 0;*/
+    /*flex-grow: 0;*/
 }
 
 .aa1:hover {
@@ -165,45 +95,26 @@
 }
 
 .Button {
-    /* вход */
-
-
-    position: absolute;
-    width: 85px;
-    height: 37px;
-    left: 1387px;
-    top: 41px;
+    /*width: 85px;*/
+    /*height: 37px;*/
+    /*left: 1387px;*/
+    /*top: 41px;*/
 }
 
 .inputt1 {
-    /* Надзаголовки / 01. Заливка */
-
-
-    /* Auto layout */
-
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    /*flex-direction: row;*/
+    /*justify-content: center;*/
     align-items: center;
     padding: 10px 18px;
-    gap: 10px;
-
-    position: absolute;
-    width: 85px;
-    height: 37px;
-
-    /* Серый 11 */
-
     background: #F2F6FA;
     border-radius: 5px;
-    border: 0;
-
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
-    line-height: 0%;
     color: #2C2C2C;
+    text-decoration: none;
 }
 
 .inputt1:hover {
@@ -212,10 +123,6 @@
 }
 
 .Line {
-    /* Line 1 */
-
-
-    position: absolute;
     width: 1920px;
     height: 0px;
     left: -2px;

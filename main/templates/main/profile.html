@@ -1,25 +1,49 @@
 {% extends 'main/template.html' %}
 {% load static %}
+{% load format_datetime %}
+{% load format_people %}
+{% load get_statuses %}
 {% block head %}
 <title>Профиль</title>
 <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
 {% endblock %}
 {% block content %}
-<div class="divv">
+<div class="divv" style="margin-bottom: 30px;">
     <h1>Профиль</h1>
     <div class="div1">
-        <div class="div1-1">
-            <p class="p1">{{ user.first_name }} {{ user.last_name }}</p>
-        </div>
-        <div class="div1-1">
-            <p class="p2">Логин: {{ user.username }}</p>
-        </div>
-<!--        <div class="div1-1">-->
-<!--            <p class="p2">Почта: {{ user.email }}</p>-->
-<!--        </div>-->
-        <div class="div1-1">
-            <p class="p2">Ближайшая стирка: не запланирована</p>
-        </div>
+        <p class="p1">{{ user.first_name }} {{ user.last_name }}</p>
+        <p class="p2">Логин: {{ user.username }}</p>
+        <a style="text-decoration: none; padding: 9px 16px; background-color: #626262; color: white; align-self: flex-start; border-radius: 4px" href="{% url 'history' %}">История записей/заявок</a>
     </div>
 </div>
+{% if washes %}
+<div style="width: 1024px; background-color: white; border-radius: 10px; padding: 20px 40px; margin: 0 auto; margin-bottom: 30px;">
+    <h2>Прачечная</h2>
+    {% for wash in washes %}
+    <p>Статус: {{wash.date_time | get_wash_status}}</p>
+    <p>Описание: {{ wash.date_time | format_datetime }} {{wash.washes}} {% if wash.washes == 1 %} машинка {% else %}
+        машинки {% endif %} {% if wash.powder %} с порошком {% else %} без порошка {%endif%}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% if applications %}
+<div style="width: 1024px; background-color: white; border-radius: 10px; padding: 20px 40px; margin: 0 auto; margin-bottom: 30px;">
+    <h2>Журнал заявок</h2>
+    {% for application in applications %}
+    <p>Статус: </p>
+    <p>Описание: {{application.room}} {{application.description.lower}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if study_room %}
+<div style="width: 1024px; background-color: white; border-radius: 10px; padding: 20px 40px; margin: 0 auto;">
+    <h2>Учебная комната</h2>
+    {% for study_info in study_room %}
+    <p>Статус: {% if study_info.date|is_today and study_info.start_time|gte_time_now and study_info.end_time|lt_time_now %} в процессе {% else %} запланирована {% endif %}</p>
+    <p>Описание: {{study_info.date}} на {{study_info.start_time}}-{{study_info.end_time}} {{study_info.people}}
+        {{study_info.people | format_people}}</p>
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}
