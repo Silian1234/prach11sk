@@ -4,10 +4,22 @@
 <title>История</title>
 {% endblock %}
 {% block content %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h1 style="color: white;">История</h1>
+    {% for element in history %}
+    <div style="width: 1024px; background-color: white; border-radius: 10px; margin-bottom: 20px; padding: 15px;">
+        <p>{{ element.date }}</p>
+        <h2>{{ element.name }}</h2>
+        <p>Статус: {{ element.status }}</p>
+        <p>Описание: {{ element.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+
 <style>
     body {
-    background: #454343;
-    background-attachment: fixed;
-}
+        background: #454343;
+        background-attachment: fixed;
+    }
 </style>
 {% endblock %}

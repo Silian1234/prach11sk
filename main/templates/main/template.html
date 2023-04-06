@@ -43,6 +43,10 @@
         <div class="Nav1">
             <a href="{% url 'applications-admin' %}" class="aa1">Для админов</a>
         </div>
+        {% elif user.groups|has_group:"Админ учебной комнаты" %}
+        <div class="Nav1">
+            <a href="{% url 'study-room-admin' %}" class="aa1">Для админов</a>
+        </div>
         {% endif %}
     </div>
     {% if user.is_authenticated %}

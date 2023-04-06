@@ -63,3 +63,15 @@ def get_user_info(access_token, user_id):
     return requests.get('https://api.vk.com/method/users.get',
                         params={'user_ids': user_id, 'fields': 'first_name,last_name,domain',
                                 'access_token': access_token, 'v': '5.131'}).json()
+
+def format_people(people):
+    if people % 10 in [0, 1, 5, 6, 7, 8, 9] or people in [11, 12, 13, 14]:
+        return 'человек'
+    return 'человека'
+
+def format_washing_machines(washing_machines):
+    if washing_machines % 10 in [2, 3, 4] and  washing_machines not in [12, 13, 14]:
+        return 'машинки'
+    elif washing_machines % 10 in [0, 5, 6, 7, 8, 9] or washing_machines in [12, 13, 14]:
+        return 'машинок'
+    return 'машинка'

@@ -21,7 +21,8 @@ urlpatterns = [
     path('menu', views.menu, name='menu'),
     path('applications-admin', views.applications_admin, name='applications-admin'),
     path('study-room', views.study_room, name='study-room'),
-    path('history', views.history, name='history')
+    path('history', views.history, name='history'),
+    path('study-room-admin', views.study_room_admin, name='study-room-admin')
 ]
 
 if settings.DEBUG:

@@ -20,6 +20,10 @@ def is_applications_admin(user):
     return user.groups.filter(name__in=['Админ журнала заявок']).exists()
 
 
+def is_study_room_admin(user):
+    return user.groups.filter(name__in=['Админ учебной комнаты']).exists()
+
+
 def payment_digiseller(request):
     return render(request, 'main/digiseller-payment.html', {})
 
@@ -110,7 +114,7 @@ def book_wash(request):
         time = wash.date_time.astimezone(timezone.get_current_timezone()).strftime('%H:%M')
         if not ssk_group and (day == 'Wed' or day == 'Sun'):
             continue
-        if current_date not in date_and_time.keys():
+        if current_date not in date_and_time:
             date_and_time[current_date] = [(time, request.user.profile.wash_limit)]
         else:
             date_and_time[current_date].append((time, request.user.profile.wash_limit))
@@ -254,7 +258,7 @@ def study_room(request):
             end_time = int(form.cleaned_data['time'][-1]) + 1
             people = form.cleaned_data['people']
             study_room = StudyRoom.objects.create(date=study_date, start_time=start_time, end_time=str(end_time),
-                                                  people=people)
+                                                  people=people, user=request.user)
             study_room.save()
             return redirect('profile')
     study_dates = {}
@@ -280,4 +284,53 @@ def menu(request):
 
 @login_required
 def history(request):
-    return render(request, 'main/history.html')
+    history = []
+    washes_history = WashesHistory.objects.filter(user=request.user).filter(date_time__lt=datetime.now(
+        tz=timezone.get_current_timezone()) + timedelta(hours=-2)).order_by('-date_time')
+    # applications_history = Applications.objects.filter(name=request.user).filter(created_at)
+    study_room_history = StudyRoom.objects.filter(user=request.user).filter(
+        Q(date=datetime.now().date()) & Q(end_time__lt=datetime.now().time()) | Q(date__lt=datetime.now().date()))
+    for wash_history in washes_history:
+        wash_date1 = wash_history.date_time.date().strftime('%d %B %Y г.').lower()
+        wash_date2 = wash_history.date_time.date().strftime('%d.%m.%Y')
+        wash_time = wash_history.date_time.astimezone(timezone.get_current_timezone()).time().strftime("%H:%M")
+        washing_machine = format_washing_machines(wash_history.washes)
+        history.append({
+            'date': f'{wash_date1} {wash_time}',
+            'name': 'Прачечная', 'status': 'Завершена',
+            'description': f'{wash_date2} на {wash_time} {wash_history.washes} {washing_machine} {"с порошком" if wash_history.powder else "без порошка"}'})
+
+    for study_info in study_room_history:
+        date1 = study_info.date.strftime('%d %B %Y г.').lower()
+        date2 = study_info.date.strftime('%d.%m.%Y')
+        start_time = study_info.start_time.strftime("%H:%M")
+        end_time = study_info.end_time.strftime("%H:%M")
+        history.append({
+            'date': f'{date1} {start_time}',
+            'name': 'Учебная комната', 'status': 'Завершена',
+            'description': f'{date2} на {start_time} - {end_time} {study_info.people} {format_people(study_info.people)}'})
+    return render(request, 'main/history.html', {'history': sorted(history, key=lambda item: item['date'])})
+
+
+@login_required
+@user_passes_test(is_study_room_admin)
+def study_room_admin(request):
+    view = request.GET.get('view', None)
+    study_info = {}
+    if view:
+        study_room = StudyRoom.objects.filter(user=request.user).filter(
+            Q(date=datetime.now().date()) & Q(end_time__lt=datetime.now().time()) | Q(date__lt=datetime.now().date()))
+    else:
+        study_room = StudyRoom.objects.filter(
+            Q(date=datetime.now().date()) & Q(end_time__gte=datetime.now().time()) | Q(date__gt=datetime.now().date()),
+            user=request.user).order_by('date', 'start_time')
+    for info in study_room:
+        if info.date.strftime('%d.%m.%Y') in study_info:
+            study_info[info.date.strftime('%d.%m.%Y')].append({'start_time': info.start_time, 'end_time': info.end_time,
+                                                               'full_name': f'{info.user.first_name} {info.user.last_name}',
+                                                               'people': info.people})
+        else:
+            study_info[info.date.strftime('%d.%m.%Y')] = [{'start_time': info.start_time, 'end_time': info.end_time,
+                                                           'full_name': f'{info.user.first_name} {info.user.last_name}',
+                                                           'people': info.people}]
+    return render(request, 'main/study-room-admin.html', {'study_info': study_info})

@@ -1,0 +1,53 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% load format_people %}
+{% block head %}
+<title>Админ учебной комнаты</title>
+{% endblock %}
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; ">
+    <h1 style="color: white;">Для админов (Учебная комната)</h1>
+    <div style="display: flex; align-items: center; width: 1024px; background-color: white; border-radius: 10px; padding: 26px; margin-bottom: 20px;">
+        <a class="btn" href="/study-room-admin">Актуальные записи</a>
+        <a class="btn" href="/study-room-admin?view=history">История записей</a>
+    </div>
+    {% for study_date, information in study_info.items %}
+    <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1024px; background-color: white; border-radius: 10px; padding: 26px; margin-bottom: 20px;">
+        <h2 style="margin: 0; margin-bottom: 15px;">{{ study_date }}</h2>
+        {% for elem in information %}
+        <p style="margin: 0; margin-bottom: 7px;">{{ elem.start_time }} - {{ elem.end_time }}</p>
+        <span style="margin-bottom: 15px;"><a href="">{{ elem.full_name }}</a> <span>({{ elem.people }} {{ elem.people | format_people }})</span></span>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+<style>
+    body {
+        background: #454343;
+        background-attachment: fixed;
+    }
+
+    .btn {
+        padding: 9px 15px;
+        background-color: #626262;
+        color: white;
+        margin-right: 20px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .btn-active {
+        background-color: #E02420;
+    }
+</style>
+<script>
+    const buttons = document.querySelectorAll('.btn');
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const view = urlSearchParams.get('view');
+    if (view) {
+        buttons[1].classList.add('btn-active');
+    } else {
+        buttons[0].classList.add('btn-active');
+    }
+</script>
+{% endblock %}
