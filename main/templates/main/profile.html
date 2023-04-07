@@ -30,7 +30,7 @@
 <div style="width: 1024px; background-color: white; border-radius: 10px; padding: 20px 40px; margin: 0 auto; margin-bottom: 30px;">
     <h2>Журнал заявок</h2>
     {% for application in applications %}
-    <p>Статус: </p>
+    <p>Статус: {{ application.get_status_display.lower }}</p>
     <p>Описание: {{application.room}} {{application.description.lower}}</p>
     {% endfor %}
 </div>

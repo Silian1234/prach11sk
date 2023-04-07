@@ -66,6 +66,8 @@ class Applications(models.Model):
     created_at = models.DateTimeField('Дата создания')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField('Описание проблемы')
+    status_choices = ((0, 'Заявка подана'), (1, 'Заявка сделана'), (2, 'Заявка выполнена'))
+    status = models.IntegerField(choices=status_choices)
 
 
 class StudyRoom(models.Model):

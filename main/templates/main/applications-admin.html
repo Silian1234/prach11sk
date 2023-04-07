@@ -5,24 +5,75 @@
 {% endblock %}
 {% block content %}
 {% for application in applications %}
-    <div style="border: 1px solid black; padding: 15px">
-        <p>{{ application.created_at }}</p>
-        <p > От кого: <a href="https://vk.com/id{{ application.user.profile.vk_id }}" target="_blank">{{ application.full_name }}</a></p>
-        <p>Комната: {{ application.room }}</p>
-        <p>Описание проблемы: {{ application.description.lower }}</p>
-        <button class="btn">Заявка сделана</button>
-        <button class="btn">Выполнено</button>
-    </div>
+<div class="application" data-id="{{ application.id }}" data-status="{{ application.status }}"
+     style="border: 1px solid black; padding: 15px">
+    <p>{{ application.created_at }}</p>
+    <p> От кого: <a href="https://vk.com/id{{ application.user.profile.vk_id }}"
+                    target="_blank">{{ application.full_name }}</a></p>
+    <p>Комната: {{ application.room }}</p>
+    <p>Описание проблемы: {{ application.description.lower }}</p>
+    <button value="1" class="btn">Заявка сделана</button>
+    <button value="2" class="btn">Выполнено</button>
+</div>
 {% endfor %}
 
 <style>
-    .btn{
+    .btn {
         padding: 10px;
         border: none;
         border-radius: 3px;
-        cursor:pointer;
+        cursor: pointer;
         background-color: #626262;
         color: white;
     }
+
+    .btn-active {
+        background-color: #E02420;
+    }
 </style>
+<script>
+    const applications = document.querySelectorAll('.application');
+    applications.forEach(application => {
+        const status = application.dataset.status;
+        const buttons = application.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', event => {
+                const isActive = btn.classList.contains('btn-active');
+                if (!isActive) {
+                    fetch('{% url "applications-admin" %}', {
+                        method: 'POST',
+                        body: JSON.stringify({'id': application.dataset.id, 'value': btn.value})
+                    });
+                    if (btn.value === '1') {
+                        buttons[0].classList.add('btn-active');
+                        buttons[1].classList.remove('btn-active');
+                    } else if (btn.value === '2') {
+                        buttons[0].classList.add('btn-active');
+                        buttons[1].classList.add('btn-active');
+                    }
+                } else {
+                    fetch('{% url "applications-admin" %}', {
+                        method: 'POST',
+                        body: JSON.stringify({'id': application.dataset.id, 'value': parseInt(btn.value) - 1})
+                    });
+                    if (btn.value === '1') {
+                        buttons[0].classList.remove('btn-active');
+                        buttons[1].classList.remove('btn-active');
+                    } else if (btn.value === '2') {
+                        buttons[0].classList.add('btn-active');
+                        buttons[1].classList.remove('btn-active');
+                    }
+                }
+
+            });
+        });
+        if (status === '1') {
+            buttons[0].classList.add('btn-active');
+            buttons[1].classList.remove('btn-active');
+        } else if (status === '2') {
+            buttons[0].classList.add('btn-active');
+            buttons[1].classList.add('btn-active');
+        }
+    })
+</script>
 {% endblock %}
