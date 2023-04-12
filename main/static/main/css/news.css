@@ -3,19 +3,19 @@ body {
     background-attachment: fixed;
 }
 
-.divv{
+.divv {
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-h1{
+h1 {
     /* Новости */
 
     margin-top: 0;
     position: absolute;
-    width: 195px;
+    max-width: 195px;
     height: 48px;
     left: 862.5px;
     top: 165px;
@@ -34,21 +34,12 @@ h1{
 }
 
 .div2 {
-    /* Content */
 
-
-    /* Auto layout */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
     gap: 20px;
-
-    position: absolute;
-    width: 1024px;
-    height: auto;
-    left: 448px;
-    top: 260px;
 }
 
 .div2-1 {
@@ -64,7 +55,7 @@ h1{
     align-items: center;
     padding: 0px 40px;
 
-    width: 1024px;
+    max-width: 1024px;
     height: auto;
 
     /* Серый 11 */
@@ -95,7 +86,7 @@ h1{
     align-items: center;
     padding: 0px 40px;
 
-    width: 1023px;
+    max-width: 1023px;
     height: auto;
 
     /* Серый 11 */
@@ -126,7 +117,7 @@ h1{
     align-items: center;
     padding: 0px 40px;
 
-    width: 1024px;
+    max-width: 1024px;
     height: auto;
 
     /* Серый 11 */
@@ -144,7 +135,7 @@ h1{
     flex-grow: 0;
 }
 
-.div3{
+.div3 {
     /* Text & icon */
 
 
@@ -157,7 +148,7 @@ h1{
     padding: 26px 60px 26px 0px;
     gap: 10px;
 
-    width: 944px;
+    max-width: 944px;
     height: auto;
 
 
@@ -170,7 +161,7 @@ h1{
 
 .p1 {
     /* 11.10.22 */
-    width: 883px;
+    max-width: 883px;
     height: auto;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -197,7 +188,7 @@ h1{
     /* Первая машинка не работает до декабря */
 
 
-    width: 883px;
+    max-width: 883px;
     height: auto;
 
     /* 21px, Medium */
@@ -226,7 +217,7 @@ h1{
     /* Первая машинка не работает до декабря */
 
 
-    width: 883px;
+    max-width: 883px;
     height: auto;
 
     /* 21px, Medium */

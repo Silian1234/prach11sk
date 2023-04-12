@@ -3,22 +3,19 @@ body {
     background-attachment: fixed;
 }
 
-.divv{
+.divv {
 
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-h1{
+h1 {
     /* записаться */
 
     margin-top: 0;
-    position: absolute;
-    width: 263px;
-    height: 48px;
-    left: 828.5px;
-    top: 165px;
+
 
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -34,7 +31,7 @@ h1{
 }
 
 form {
-        /* Vopros */
+    /* Vopros */
 
 
     box-sizing: border-box;
@@ -46,11 +43,6 @@ form {
     align-items: center;
     padding: 0px 40px 26px;
 
-    position: absolute;
-    width: 1024px;
-    height: 558px;
-    left: 448px;
-    top: 260px;
 
     /* Серый 11 */
 
@@ -74,7 +66,6 @@ form {
     gap: 26px;
 
     width: 1024px;
-    height: 474px;
 
 
     /* Inside auto layout */
@@ -120,14 +111,6 @@ form {
     align-items: center;
     padding: 18px 48px;
     gap: 10px;
-
-    position: absolute;
-
-    width: 201px;
-    height: 61px;
-    left: 410px;
-    top: 470px;
-
 
 
     /* Inside auto layout */

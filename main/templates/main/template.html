@@ -11,7 +11,7 @@
 
     {% endblock %}
 </head>
-<body class="body1">
+<body class="body1" style="font-family: 'Montserrat'; font-style: normal;">
 {% csrf_token %}
 <div class="bodyShap">
     <div class="Logo">
@@ -52,13 +52,13 @@
     {% if user.is_authenticated %}
     <div style="display: flex; align-items: center;">
         <a class="inputt1" href="{% url 'logout' %}">Выйти
-    </a>
+        </a>
     </div>
 
     {% else %}
     <div style="display: flex; align-items: center;">
         <a class="inputt1" href="{% url 'login' %}">Войти
-    </a>
+        </a>
     </div>
     {% endif %}
     <!--    <div class="Line">-->

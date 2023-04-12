@@ -4,22 +4,63 @@
 <title>История</title>
 {% endblock %}
 {% block content %}
-<div style="padding: 10px; margin-bottom: 10px">
-    <a href="/washes-admin">Актуальные записи</a>
-    <a href="/washes-admin?view=history">История записей</a>
-    <a href="/washes-admin?view=settings">Настройки</a>
-</div>
-
-{% for date, times in washes_history.items %}
-    <div style="border: 1px solid black; padding: 15px">
-        <p>{{ date }}</p>
+<div style="display: flex; flex-direction: column; align-items: center; padding: 55px 0">
+    <h1 style="color: white; margin-bottom: 57px;">Для админов (прачечная)</h1>
+    <div style="padding: 26px 40px; margin-bottom: 20px; background-color: white; display: flex; align-content: center; width: 1024px; border-radius: 5px; box-sizing: border-box;">
+        <a class="wash__link" href="/washes-admin">Актуальные записи</a>
+        <a class="wash__link" href="/washes-admin?view=history">История записей</a>
+        <a class="wash__link" href="/washes-admin?view=settings">Настройки</a>
+    </div>
+    {% for date, times in washes_history.items %}
+    <div style="border: 1px solid black; padding: 20px 40px; background-color: white; border-radius: 5px; width: 1024px; box-sizing: border-box;margin-bottom: 20px;">
+        <p><b>{{ date }} </b></p>
         {% for time, users in times.items %}
-            <p>{{ time }}</p>
-            {% for user_name in users %}
-                <div style="margin-bottom: 5px"><a href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
-            {% endfor %}
+        <p style="color: #11263A;">{{ time }}</p>
+        {% for user_name in users %}
+        <div style="margin-bottom: 5px;"><a style="text-decoration: none;color: #11263A;"
+                                            href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
+        {% endfor %}
         {% endfor %}
     </div>
 
-{% endfor %}
+    {% endfor %}
+</div>
+<style>
+    .wash__link {
+        padding: 10px 15px;
+        color: white;
+        background-color: #626262;
+        border-radius: 4px;
+        margin-right: 28px;
+        text-decoration: None;
+    }
+
+    .wash__link--active {
+        background-color: #E02420;
+    }
+
+    .body1 {
+        background-color: #454343;
+    }
+</style>
+<script>
+    function removeActiveClass(buttons) {
+        buttons.forEach(btn => btn.classList.remove('wash__link--active'));
+    }
+
+    const buttons = document.querySelectorAll('.wash__link');
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('view')) {
+        if (searchParams.get('view') === 'history') {
+            removeActiveClass(buttons);
+            buttons[1].classList.add('wash__link--active');
+        } else {
+            removeActiveClass(buttons);
+            buttons[2].classList.add('wash__link--active');
+        }
+    } else {
+        removeActiveClass(buttons);
+        buttons[0].classList.add('wash__link--active');
+    }
+</script>
 {% endblock %}
