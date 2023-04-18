@@ -11,6 +11,7 @@ from django.views.generic import ListView
 import json
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 
 def is_wash_admin(user):
@@ -26,7 +27,7 @@ def is_study_room_admin(user):
 
 
 def payment_digiseller(request):
-    return render(request, 'main/digiseller-payment.html', {})
+    return render(request, 'main/digiseller-payment.html', {'settings': settings.WASH_ADMIN})
 
 
 def fk_verify(request):
@@ -122,7 +123,7 @@ def book_wash(request):
     date_dict = json.dumps(date_and_time)
     form = BookWashForm()
     return render(request, 'main/book-wash.html',
-                  {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form})
+                  {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form, 'settings': settings.WASH_ADMIN})
 
 
 @login_required
@@ -186,10 +187,20 @@ def profile(request):
                   {'washes': washes, 'applications': applications, 'study_room': study_room})
 
 
+@csrf_exempt
 @login_required
 @user_passes_test(is_wash_admin)
 def washes_admin(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        settings_key = data.get('key')
+        value = data.get('value')
+        if settings_key is not None and value is not None:
+            if settings_key in settings.WASH_ADMIN:
+                settings.WASH_ADMIN[settings_key] = value
+
     all_washes, washes_history = {}, {}
+    wash_settings = False
     view = request.GET.get('view', None)
     limit_not_returned = WashesHistory.objects.filter(limit_returned=False, date_time__lt=datetime.now(
         tz=timezone.get_current_timezone()) + timedelta(hours=+2))
@@ -205,7 +216,7 @@ def washes_admin(request):
         washes_history = WashesHistory.objects.filter(date_time__lt=datetime.now(
             tz=timezone.get_current_timezone()) + timedelta(hours=-2)).order_by('-date_time')
     elif view == 'settings':
-        print('load settings')
+        wash_settings = True
     else:
         washes_history = WashesHistory.objects.filter(date_time__gte=datetime.now(
             tz=timezone.get_current_timezone()) + timedelta(hours=-2))
@@ -221,7 +232,7 @@ def washes_admin(request):
         else:
             for _ in range(wash.washes):
                 all_washes[date][time].append(wash.user_name)
-    return render(request, 'main/washes-admin.html', {'washes_history': all_washes})
+    return render(request, 'main/washes-admin.html', {'washes_history': all_washes, 'wash_settings': wash_settings, 'settings': settings.WASH_ADMIN})
 
 
 @csrf_exempt

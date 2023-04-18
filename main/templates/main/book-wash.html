@@ -32,8 +32,8 @@
             <div class="div2">
                 <select name="powder" required="required">
                     <option value="">С порошком/без порошка</option>
-                    <option value="1">С порошком</option>
-                    <option value="0">Без порошка</option>
+                    <option {% if not settings.wash_with_powder %}hidden{% endif %} value="1">С порошком</option>
+                    <option {% if not settings.wash_without_powder %}hidden{% endif %} value="0">Без порошка</option>
                 </select>
             </div>
         </div>

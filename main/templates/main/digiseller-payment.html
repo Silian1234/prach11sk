@@ -19,10 +19,15 @@
 {% block content %}
 <div class="divv">
     <div class="div1">
-        <div class="digiseller-buy-standalone" data-id="3599100" data-owner="0" data-lang=""
-             data-img="1" data-img-size="180" data-name="1" data-price="1" data-no-price="0"></div>
-        <div class="digiseller-buy-standalone" data-id="3599134" data-owner="0" data-lang=""
-             data-img="1" data-img-size="180" data-name="1" data-price="1" data-no-price="0"></div>
+        <div {% if not settings.buy_without_powder %}hidden{% endif %}>
+            <div class="digiseller-buy-standalone" data-id="3599100" data-owner="0" data-lang=""
+                 data-img="1" data-img-size="180" data-name="1" data-price="1" data-no-price="0"></div>
+        </div>
+        <div {% if not settings.buy_with_powder %}hidden{% endif %}>
+            <div class="digiseller-buy-standalone" data-id="3599134" data-owner="0" data-lang=""
+                 data-img="1" data-img-size="180" data-name="1" data-price="1" data-no-price="0"></div>
+        </div>
+
     </div>
 </div>
 {% endblock %}
