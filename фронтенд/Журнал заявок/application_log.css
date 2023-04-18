@@ -1,0 +1,274 @@
+body {
+    background: url('background.png');
+    background-attachment: fixed;
+}
+
+.divv{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    /* Журнал заявок */
+
+
+    position: absolute;
+    width: 344px;
+    height: 48px;
+    left: 787.5px;
+    top: 55px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 133%;
+    /* identical to box height, or 48px */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+
+.div1 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px 26px;
+
+    position: absolute;
+    width: 1024px;
+    height: 337px;
+    left: 448px;
+    top: 160px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    /* Серый 11 */
+
+    border: 1px solid #F2F6FA;
+    border-radius: 5px;
+}
+
+.div1-1 {
+    /* Content */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 0px 0px 50px;
+    gap: 26px;
+
+    width: 1024px;
+    height: 230px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-1-1 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    width: 972px;
+    height: 86px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    border: 1px solid #626262;
+    border-radius: 10px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-1-1-1 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px;
+    gap: 1px;
+
+    width: 930px;
+    height: 86px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.div1-1-2 {
+    /* Vopros */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+
+    width: 972px;
+    height: 86px;
+
+    /* Серый 11 */
+
+    background: #F2F6FA;
+    border: 1px solid #626262;
+    border-radius: 10px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.div1-1-2-2 {
+    /* Text & icon */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px;
+    gap: 1px;
+
+    width: 930px;
+    height: 86px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.p1{
+    /* Комната/этаж,крыло */
+
+
+    width: 930px;
+    height: 30px;
+
+    /* 21px, Medium */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    /* identical to box height, or 30px */
+
+
+    color: #626262;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.div1-2 {
+    /* Кнопка */
+
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 25px;
+    gap: 10px;
+
+    width: 201px;
+    height: 61px;
+
+    background: #E02420;
+    border: 2px solid #E02420;
+    border-radius: 5px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.p2{
+    /* Подать заявку */
+
+
+    width: 148px;
+    height: 25px;
+    margin-left: 14px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 152%;
+    /* identical to box height, or 24px */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}

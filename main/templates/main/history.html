@@ -1,25 +1,19 @@
 {% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'main/css/history.css'%}">
 <title>История</title>
 {% endblock %}
 {% block content %}
-<div style="display: flex; flex-direction: column; align-items: center;">
-    <h1 style="color: white;">История</h1>
+<div class="container">
+    <h1>История</h1>
     {% for element in history %}
-    <div style="width: 1024px; background-color: white; border-radius: 10px; margin-bottom: 20px; padding: 15px;">
-        <p>{{ element.date }}</p>
-        <h2>{{ element.name }}</h2>
-        <p>Статус: {{ element.status }}</p>
-        <p>Описание: {{ element.description }}</p>
+    <div class="card">
+        <p class="card__date">{{ element.date }}</p>
+        <h2 class="card__title">{{ element.name }}</h2>
+        <p class="card__text">Статус: {{ element.status }}</p>
+        <p class="card__text">Описание: {{ element.description }}</p>
     </div>
     {% endfor %}
 </div>
-
-<style>
-    body {
-        background: #454343;
-        background-attachment: fixed;
-    }
-</style>
 {% endblock %}

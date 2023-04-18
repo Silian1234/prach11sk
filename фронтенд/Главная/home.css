@@ -78,11 +78,11 @@ body {
 h2 {
     /* Заголовок */
 
-    margin: 0;
-    width: 415px;
-    height: auto;
 
-    font-family: 'Montserrat', sans-serif;
+    width: 415px;
+    height: 90px;
+
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
@@ -101,16 +101,17 @@ h2 {
     flex: none;
     order: 0;
     flex-grow: 0;
+    margin-bottom: auto;
 }
 
 h3 {
     /* Подзаголовок */
 
-    margin: 0;
-    width: 415px;
-    height: 91px;
 
-    font-family: 'Montserrat', sans-serif;
+    width: 415px;
+    height: 121px;
+
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
@@ -128,6 +129,7 @@ h3 {
     flex: none;
     order: 1;
     flex-grow: 0;
+    margin-top: 0;
 }
 
 .div3 {
@@ -195,10 +197,10 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px;
+    padding: 108px 0px 0px;
     gap: 50px;
 
-    width: 511px;
+    width: 523px;
     height: 500px;
 
 
