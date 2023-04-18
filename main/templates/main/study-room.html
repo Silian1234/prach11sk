@@ -2,31 +2,28 @@
 {% load static %}
 {% block head %}
 <title>Учебная комната</title>
+<link rel="stylesheet" href="{% static 'main/css/study_room.css'%}">
 {% endblock %}
 {% block content %}
-<form method="post" id="studyRoomForm">
-    {% csrf_token %}
-    <div>
-        <select name="date" required="required" id="dateSelect">
+<div class="container">
+    <h1>Учебная комната</h1>
+    <form class="form" method="post" id="studyRoomForm">
+        {% csrf_token %}
+        <select class="form__select" name="date" required="required" id="dateSelect">
             <option value="">Выберите дату</option>
             {% for date in study_dates %}
             <option class="dateOptions" value="{{date}}">{{ date }}</option>
             {% endfor %}
         </select>
-    </div>
-    <div>
-        <select name="time" required="required" id="timeSelect" multiple>
+        <select class="form__select" name="time" required="required" id="timeSelect">
             <option value="">Выберите время</option>
         </select>
-    </div>
-    <div>
-        <select name="people" required="required" id="peopleSelect">
+        <select class="form__select" name="people" required="required" id="peopleSelect">
             <option value="">Выберите количество человек</option>
         </select>
-    </div>
-
-    <button type="submit" value="Записаться" class="ButtonRecord">Записаться</button>
-</form>
+        <button type="submit" value="Записаться" class="ButtonRecord form__input">Записаться</button>
+    </form>
+</div>
 <script>
     const study_time = JSON.parse('{{study_time|escapejs}}');
     const dateSelect = document.getElementById('dateSelect');
@@ -38,7 +35,6 @@
             const peopleSelect = document.getElementById('peopleSelect');
             peopleSelect.innerHTML = '<option value="">Выберите количество человек</option>';
             time = event.target.value;
-            // people = date_dict[date].filter(e => e[0] === time)[0][1]
             for (let i = 1; i <= 10; i++) {
                 const peopleOption = document.createElement('option');
                 peopleOption.value = i;
@@ -47,7 +43,6 @@
             }
         });
         study_time[date].forEach(start_time => {
-            // const time = elem;
             const timeOption = document.createElement('option');
             timeOption.value = start_time;
             timeOption.text = `${start_time}:00 - ${start_time + 1}:00`;
@@ -55,9 +50,4 @@
         });
     })
 </script>
-<style>
-    div{
-        margin-bottom: 10px;
-    }
-</style>
 {% endblock %}
