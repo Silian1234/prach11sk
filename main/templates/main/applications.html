@@ -1,51 +1,26 @@
 {% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'main/css/application_log.css'%}">
 <title>Журнал заявок</title>
 {% endblock %}
 {% block content %}
-<div style="display: flex; align-items: center; padding: 55px; flex-direction: column;">
-    <h1 style="color: white;">Журнал заявок</h1>
+<div class="container">
+    <h1>Журнал заявок</h1>
     <form method="post"
-          style="width: 1024px; border-radius: 5px; padding: 26px; display: flex; flex-direction: column; align-items: center; background-color: white;">
+          class="form">
         {% csrf_token %}
         {% for field in form %}
-        {% if not field.is_hidden %}
-        <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
-            <p>{{ field.errors }}</p>
+        <div class="field__container">
+            {% if field.errors %}
+            <p class="form__error">{{ field.errors }}</p>
+            {% endif %}
             {{ field }}
         </div>
-
-        {% endif %}
         {% endfor %}
-        <input type="hidden" name="user_id" value="{{ user.id }}">
-        <button style="padding: 18px 26px; color: white; background-color: #E02420; border: none; border-radius: 5px;"
+        <button class="form__btn"
                 type="submit" value="Подать заявку">Подать заявку
         </button>
     </form>
 </div>
-
-<style>
-    .body1 {
-        background-color: #454343;
-    }
-
-    p {
-        margin: 0;
-    }
-
-    .form__input {
-        width: 100%;
-        padding: 28px 21px;
-        border-radius: 10px;
-        margin-bottom: 26px;
-    }
-
-    .form__textarea {
-        width: 100%;
-        padding: 28px 21px;
-        border-radius: 10px;
-        margin-bottom: 26px;
-    }
-</style>
 {% endblock %}

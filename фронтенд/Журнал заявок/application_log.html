@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Журнал заявок</title>
@@ -8,26 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="divv">
+    <div class="container">
         <h1>Журнал заявок</h1>
-        <div class = "div1">
-            <div class = "div1-1">
-                <div class = "div1-1-1">
-                    <div class = "div1-1-1-1">
-                        <p class="p1">Комната/этаж,крыло</p>
-                    </div>
-                </div>
-                <div class = "div1-1-2">
-                    <div class = "div1-1-2-2">
-                        <p class="p1">Описание проблемы</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "div1-2">
-                <p class="p2">Подать заявку</p>
-            </div>
-        </div>
+        <form class="form">
+            <input type="text" class="form__input" placeholder="Комната/этаж,крыло">
+            </input>
+            <input type="text" class="form__input" placeholder="Описание проблемы">
+            </input>
+            <button class="form__btn">Подать заявку</button>
+        </form>
     </div>
 </body>
+
 </html>

@@ -18,8 +18,8 @@ class BookWashForm(forms.Form):
 
 class ApplicationForm(forms.Form):
     room = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '100', 'max': '550', 'class': 'form__input', 'placeholder': 'Комната/этаж, крыло'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form__textarea', 'placeholder': 'Описание проблемы'}))
-    user_id = forms.IntegerField(widget=forms.NumberInput(attrs={'type': 'hidden'}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form__input', 'placeholder': 'Описание проблемы'}))
+    # user_id = forms.IntegerField(widget=forms.NumberInput(attrs={'type': 'hidden'}))
 
     def clean_room(self):
         room = self.cleaned_data.get('room')
