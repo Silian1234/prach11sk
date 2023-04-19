@@ -6,46 +6,30 @@ body {
     background-image: url('background.png');
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Montserrat';
 }
 
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     padding: 55px 0;
 }
 
-h1 {
-    margin: 0;
-    margin-bottom: 50px;
+.application__header {
+    margin-bottom: 57px;
+    color: white;
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
-    line-height: 152%;
-    text-align: center;
+    line-height: 133%;
     text-transform: uppercase;
-    color: #FFFFFF;
 }
 
-.card {
-    padding: 26px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 944px;
-    background: #F2F6FA;
-    border-radius: 5px;
-}
-
-.card:not(:last-child) {
-    margin-bottom: 20px;
-}
-
-.card__date {
+.application__date {
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -53,18 +37,9 @@ h1 {
     color: #11263A;
 }
 
-.card__title {
+.application__text {
     margin: 0;
-    margin-bottom: 20px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 143%;
-    color: #11263A;
-}
-
-.card__text {
-    margin: 0;
+    margin-bottom: 10px;
     font-style: normal;
     font-weight: 500;
     font-size: 21px;
@@ -72,6 +47,32 @@ h1 {
     color: #11263A;
 }
 
-.card__text:not(:last-child) {
+.btn {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #626262;
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 143%;
+    font-family: 'Montserrat';
+}
+
+.application {
+    width: 944px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 26px 40px;
     margin-bottom: 20px;
+}
+
+.btn-active {
+    background-color: #E02420;
+}
+
+.application__link{
+    text-decoration: none;
 }

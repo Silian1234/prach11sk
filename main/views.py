@@ -1,8 +1,6 @@
 import datetime
-from datetime import date, time
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import *
 from .models import *
@@ -123,7 +121,8 @@ def book_wash(request):
     date_dict = json.dumps(date_and_time)
     form = BookWashForm()
     return render(request, 'main/book-wash.html',
-                  {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form, 'settings': settings.WASH_ADMIN})
+                  {'date_and_time': date_and_time, 'date_dict': date_dict, 'form': form,
+                   'settings': settings.WASH_ADMIN})
 
 
 @login_required
@@ -232,7 +231,8 @@ def washes_admin(request):
         else:
             for _ in range(wash.washes):
                 all_washes[date][time].append(wash.user_name)
-    return render(request, 'main/washes-admin.html', {'washes_history': all_washes, 'wash_settings': wash_settings, 'settings': settings.WASH_ADMIN})
+    return render(request, 'main/washes-admin.html',
+                  {'washes_history': all_washes, 'wash_settings': wash_settings, 'settings': settings.WASH_ADMIN})
 
 
 @csrf_exempt
