@@ -18,6 +18,7 @@ body {
 }
 
 .application__header {
+    margin: 0;
     margin-bottom: 57px;
     color: white;
     font-style: normal;
@@ -50,7 +51,7 @@ body {
 .btn {
     padding: 10px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
     background-color: #626262;
     color: white;
@@ -73,6 +74,6 @@ body {
     background-color: #E02420;
 }
 
-.application__link{
+.application__link {
     text-decoration: none;
 }

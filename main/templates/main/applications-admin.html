@@ -10,8 +10,9 @@
     {% for application in applications %}
     <div class="application" data-id="{{ application.id }}" data-status="{{ application.status }}">
         <p class="application__date">{{ application.created_at }}</p>
-        <p class="application__text"> От кого: <a class="application__link" href="https://vk.com/id{{ application.user.profile.vk_id }}"
-                                                target="_blank">{{ application.full_name }}</a></p>
+        <p class="application__text"> От кого: <a class="application__link"
+                                                  href="https://vk.com/id{{ application.user.profile.vk_id }}"
+                                                  target="_blank">{{ application.full_name }}</a></p>
         <p class="application__text">Комната: {{ application.room }}</p>
         <p class="application__text">Описание проблемы: {{ application.description.lower }}</p>
         <button style="margin-right: 21px;" value="1" class="btn">Заявка сделана</button>

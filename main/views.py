@@ -355,9 +355,9 @@ def study_room_admin(request):
         if info.date.strftime('%d.%m.%Y') in study_info:
             study_info[info.date.strftime('%d.%m.%Y')].append({'start_time': info.start_time, 'end_time': info.end_time,
                                                                'full_name': f'{info.user.first_name} {info.user.last_name}',
-                                                               'people': info.people})
+                                                               'people': info.people, 'vk_id': info.user.profile.vk_id})
         else:
             study_info[info.date.strftime('%d.%m.%Y')] = [{'start_time': info.start_time, 'end_time': info.end_time,
                                                            'full_name': f'{info.user.first_name} {info.user.last_name}',
-                                                           'people': info.people}]
+                                                           'people': info.people, 'vk_id': info.user.profile.vk_id}]
     return render(request, 'main/study-room-admin.html', {'study_info': study_info})
