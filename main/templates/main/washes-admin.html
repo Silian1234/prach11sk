@@ -2,22 +2,23 @@
 {% load static %}
 {% block head %}
 <title>История</title>
+<link rel="stylesheet" href="{% static 'main/css/washes-admin.css'%}">
 {% endblock %}
 {% block content %}
-<div style="display: flex; flex-direction: column; align-items: center; padding: 55px 0">
-    <h1 style="color: white; margin-bottom: 57px;">Для админов (прачечная)</h1>
-    <div style="padding: 26px 40px; margin-bottom: 20px; background-color: white; display: flex; align-content: center; width: 1024px; border-radius: 5px; box-sizing: border-box;">
-        <a class="wash__link" href="/washes-admin">Актуальные записи</a>
-        <a class="wash__link" href="/washes-admin?view=history">История записей</a>
-        <a class="wash__link" href="/washes-admin?view=settings">Настройки</a>
+<div class="container">
+    <h1 class="header">Для админов (прачечная)</h1>
+    <div class="settings__container">
+        <a class="settings__link" href="/washes-admin">Актуальные записи</a>
+        <a class="settings__link" href="/washes-admin?view=history">История записей</a>
+        <a class="settings__link" href="/washes-admin?view=settings">Настройки</a>
     </div>
     {% for date, times in washes_history.items %}
-    <div style="border: 1px solid black; padding: 20px 40px; background-color: white; border-radius: 5px; width: 1024px; box-sizing: border-box;margin-bottom: 20px;">
-        <p><b>{{ date }} </b></p>
+    <div class="history">
+        <p class="history__date">{{ date }}</p>
         {% for time, users in times.items %}
-        <p style="color: #11263A;">{{ time }}</p>
+        <p class="history__time" style="color: #11263A;">{{ time }}</p>
         {% for user_name in users %}
-        <div style="margin-bottom: 5px;"><a style="text-decoration: none;color: #11263A;"
+        <div class="history__text" style="margin-bottom: 5px;"><a class="history__link"
                                             href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
         {% endfor %}
         {% endfor %}
@@ -48,89 +49,24 @@
     </div>
     {% endif %}
 </div>
-<style>
-    .wash__link {
-        padding: 10px 15px;
-        color: white;
-        background-color: #626262;
-        border-radius: 4px;
-        margin-right: 28px;
-        text-decoration: None;
-    }
-
-    .wash__link--active {
-        background-color: #E02420;
-    }
-
-    .body1 {
-        background-color: #454343;
-    }
-
-    .settings {
-        width: 944px;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 20px 40px;
-        background-color: #fff;
-        border-radius: 5px;
-    }
-
-    .settings__header {
-        margin: 0;
-        margin-bottom: 5px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 30px;
-        line-height: 143%;
-        color: #11263A;
-    }
-
-    .settings__btn {
-        padding: 10px 18px;
-        border: none;
-        border-radius: 4px;
-        color: #fff;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 143%;
-        background-color: #626262;
-        cursor: pointer;
-    }
-
-    .settings__btn--active {
-        background-color: #E02420;
-    }
-
-    .settings__btn:not(:last-child) {
-        margin-right: 28px;
-    }
-
-    .settings__buttons {
-        margin-bottom: 23px;
-    }
-</style>
 <script>
     function removeActiveClass(buttons) {
-        buttons.forEach(btn => btn.classList.remove('wash__link--active'));
+        buttons.forEach(btn => btn.classList.remove('settings__link--active'));
     }
 
-    const buttons = document.querySelectorAll('.wash__link');
+    const buttons = document.querySelectorAll('.settings__link');
     const searchParams = new URLSearchParams(window.location.search);
     if (searchParams.has('view')) {
         if (searchParams.get('view') === 'history') {
             removeActiveClass(buttons);
-            buttons[1].classList.add('wash__link--active');
+            buttons[1].classList.add('settings__link--active');
         } else {
             removeActiveClass(buttons);
-            buttons[2].classList.add('wash__link--active');
+            buttons[2].classList.add('settings__link--active');
         }
     } else {
         removeActiveClass(buttons);
-        buttons[0].classList.add('wash__link--active');
+        buttons[0].classList.add('settings__link--active');
     }
 
     const settingsBtns = document.querySelectorAll('.settings__btn');
