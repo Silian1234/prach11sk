@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 
 class CheckCodeForm(forms.Form):
     unique_code = forms.CharField(min_length=16, max_length=16, strip=True, widget=forms.TextInput(
-        attrs={'class': "input2"}))
+        attrs={'class': "form__input", 'placeholder': 'Введите купленный код'}))
 
 
 class BookWashForm(forms.Form):

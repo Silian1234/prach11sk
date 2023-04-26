@@ -70,6 +70,11 @@ h1 {
     font-weight: 500;
     font-size: 16px;
     line-height: 152%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.form__btn:hover {
+    background-color: rgba(224, 36, 32, 0.67);
 }
 
 .form__error {
@@ -78,6 +83,6 @@ h1 {
     color: red;
 }
 
-.field__container{
+.field__container {
     width: 100%;
 }

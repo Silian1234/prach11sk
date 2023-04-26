@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Оплата</title>
@@ -8,40 +9,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class= "divv">
-            <h1>Оплатить</h1>
-            <div class="div1">
-                <div class = "div1-1">
-                    <p class = "p1">1. Для начала оплатите стирку:</p>
-                    <input type="button" value="Перейти к оплате" class= "input1">
-                </div>
-                <br><br>
-                <form>
-                    <div class = "div1-3">
-                        <p class = "p2">2. Ниже введите купленный код:</p>
-                    </div>
-                    <div class = "div1-4">
-                        <input name="purchased-code" type="text"  class= "input2" placeholder="Введите купленный код">
-                    </div>
-                    <div class = "div1-5">
-                        <input type="submit" value="Пополнить стирки" class= "input3">
-                    </div>
-                </form>
-                <div class = "div1-6">
-                    <p class = "p3">3. Проверьте количество стирок:</p>
-                    <div class = "div1-6-1">
-                        <p class= "p4">Количество стирок без порошка: 0</p>
-                    </div>
-                    <div class = "div1-6-2">
-                        <p class = "p5">Количество стирок с порошком: 0</p>
-                    </div>
-                </div>
-                <div class = "div1-7">
-                    <p class = "p6">4. Перейдите на страничку «Записаться»</p>
-                    <input type="submit" value="Перейти к записи" class= "input4" onClick="document.location='/record'">
-                </div>
+    <div class="container">
+        <h1>Оплатить</h1>
+        <div class="container__info">
+            <div class="payment">
+                <p class="payment__text">1. Для начала оплатите стирку:</p>
+                <input type="button" value="Перейти к оплате" class="payment__btn">
             </div>
+            <form class="form">
+                <p class="form__text">2. Ниже введите купленный код:</p>
+                <input name="purchased-code" type="text" class="form__input" placeholder="Введите купленный код">
+                <input type="submit" value="Пополнить стирки" class="form__btn">
+            </form>
+            <div class="washes">
+                <p class="washes__header">3. Проверьте количество стирок:</p>
+                <p class="washes__text">Количество стирок без порошка: 0</p>
+                <p class="washes__text">Количество стирок с порошком: 0</p>
+            </div>
+            <input type="submit" value="Перейти к записи" class="btn">
+        </div>
     </div>
 </body>
+
 </html>

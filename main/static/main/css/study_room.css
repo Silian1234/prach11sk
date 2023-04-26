@@ -39,7 +39,7 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 18px 25px;
+    padding: 18px 36px;
     background-color: #E02420;
     border-radius: 5px;
     border: none;
@@ -47,10 +47,10 @@ h1 {
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 112%;
+    line-height: 152%;
     color: #FFFFFF;
     cursor: pointer;
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .form__input:hover {
@@ -64,8 +64,8 @@ h1 {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 113%;
+    font-size: 21px;
+    line-height: 143%;
     background-color: #F2F6FA;
     color: #626262;
     border-radius: 10px;
