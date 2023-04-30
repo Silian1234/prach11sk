@@ -125,3 +125,7 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
+
+
+class CreatePostForm(forms.Form):
+    text = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form__textarea', 'placeholder': 'Выберите текст', 'rows': '2'}))

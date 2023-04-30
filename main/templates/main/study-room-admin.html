@@ -11,7 +11,17 @@
     <div class="study__settings">
         <a class="study__btn" href="/study-room-admin">Актуальные записи</a>
         <a class="study__btn" href="/study-room-admin?view=history">История записей</a>
+        <a class="study__btn" href="/study-room-admin?view=news">Новости</a>
     </div>
+    {% if news_edit %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        <h2 class="form__header">Добавить новость</h2>
+        {{ form.text.errors }}
+        {{ form.text }}
+        <button class="form__btn" type="submit">Опубликовать</button>
+    </form>
+    {% else %}
     {% for study_date, information in study_info.items %}
     <div class="history">
         <h2 class="history__date">{{ study_date }}</h2>
@@ -21,13 +31,16 @@
         {% endfor %}
     </div>
     {% endfor %}
+    {% endif %}
 </div>
 <script>
     const buttons = document.querySelectorAll('.study__btn');
     const urlSearchParams = new URLSearchParams(window.location.search);
     const view = urlSearchParams.get('view');
-    if (view)
+    if (view === 'history')
         buttons[1].classList.add('study__btn-active');
+    else if (view === 'news')
+        buttons[2].classList.add('study__btn-active');
     else
         buttons[0].classList.add('study__btn-active');
 </script>

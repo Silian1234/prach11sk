@@ -11,19 +11,9 @@
         <a class="settings__link" href="/washes-admin">Актуальные записи</a>
         <a class="settings__link" href="/washes-admin?view=history">История записей</a>
         <a class="settings__link" href="/washes-admin?view=settings">Настройки</a>
+        <a class="settings__link" href="/washes-admin?view=news">Новости</a>
     </div>
-    {% for date, times in washes_history.items %}
-    <div class="history">
-        <p class="history__date">{{ date }}</p>
-        {% for time, users in times.items %}
-        <p class="history__time" style="color: #11263A;">{{ time }}</p>
-        {% for user_name in users %}
-        <div class="history__text" style="margin-bottom: 5px;"><a class="history__link"
-                                            href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
-        {% endfor %}
-        {% endfor %}
-    </div>
-    {% endfor %}
+
     {% if wash_settings %}
     <div class="settings">
         <p class="settings__header">Запись без порошка</p>
@@ -47,6 +37,27 @@
             <button class="settings__btn {% if not settings.buy_with_powder %} settings__btn--active {% endif %}">Закрыть покупки</button>
         </div>
     </div>
+    {% elif news_edit %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        <h2 class="form__header">Добавить новость</h2>
+        {{ form.text.errors }}
+        {{ form.text }}
+        <button class="form__btn" type="submit">Опубликовать</button>
+    </form>
+    {% else %}
+    {% for date, times in washes_history.items %}
+    <div class="history">
+        <p class="history__date">{{ date }}</p>
+        {% for time, users in times.items %}
+        <p class="history__time" style="color: #11263A;">{{ time }}</p>
+        {% for user_name in users %}
+        <div class="history__text" style="margin-bottom: 5px;"><a class="history__link"
+                                            href="https://vk.com/id{{ user.profile.vk_id }}" target="_blank">{{ user_name }}</a></div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    {% endfor %}
     {% endif %}
 </div>
 <script>
@@ -60,9 +71,12 @@
         if (searchParams.get('view') === 'history') {
             removeActiveClass(buttons);
             buttons[1].classList.add('settings__link--active');
-        } else {
+        } else if (searchParams.get('view') === 'settings') {
             removeActiveClass(buttons);
             buttons[2].classList.add('settings__link--active');
+        } else {
+            removeActiveClass(buttons);
+            buttons[3].classList.add('settings__link--active');
         }
     } else {
         removeActiveClass(buttons);

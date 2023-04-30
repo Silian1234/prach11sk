@@ -7,6 +7,19 @@
 {% block content %}
 <div class="container">
     <h1 class="application__header">Для админов (журнал заявок)</h1>
+    <div class="applications__settings">
+        <a class="applications__btn" href="/applications-admin">Актуальные записи</a>
+        <a class="applications__btn" href="/applications-admin?view=news">Новости</a>
+    </div>
+    {% if news_edit %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        <h2 class="form__header">Добавить новость</h2>
+        {{ form.text.errors }}
+        {{ form.text }}
+        <button class="form__btn" type="submit">Опубликовать</button>
+    </form>
+    {% else %}
     {% for application in applications %}
     <div class="application" data-id="{{ application.id }}" data-status="{{ application.status }}">
         <p class="application__date">{{ application.created_at }}</p>
@@ -19,6 +32,7 @@
         <button value="2" class="btn">Выполнено</button>
     </div>
     {% endfor %}
+    {% endif %}
 </div>
 <script>
     const applications = document.querySelectorAll('.application');
@@ -64,5 +78,12 @@
             buttons[1].classList.add('btn-active');
         }
     })
+    const buttons = document.querySelectorAll('.applications__btn');
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const view = urlSearchParams.get('view');
+    if (view === 'news')
+        buttons[1].classList.add('applications__btn--active');
+    else
+        buttons[0].classList.add('applications__btn--active');
 </script>
 {% endblock %}

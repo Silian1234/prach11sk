@@ -191,15 +191,24 @@ def profile(request):
 @user_passes_test(is_wash_admin)
 def washes_admin(request):
     if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        settings_key = data.get('key')
-        value = data.get('value')
-        if settings_key is not None and value is not None:
-            if settings_key in settings.WASH_ADMIN:
-                settings.WASH_ADMIN[settings_key] = value
+        if request.POST.get('csrfmiddlewaretoken') is not None:
+            form = CreatePostForm(request.POST)
+            if form.is_valid():
+                text = form.cleaned_data['text']
+                post = Post.objects.create(text=text, date=datetime.now(
+                    tz=timezone.get_current_timezone()))
+                post.save()
+        else:
+            data = json.loads(request.body.decode('utf-8'))
+            settings_key = data.get('key')
+            value = data.get('value')
+            if settings_key is not None and value is not None:
+                if settings_key in settings.WASH_ADMIN:
+                    settings.WASH_ADMIN[settings_key] = value
 
     all_washes, washes_history = {}, {}
     wash_settings = False
+    news_edit = False
     view = request.GET.get('view', None)
     limit_not_returned = WashesHistory.objects.filter(limit_returned=False, date_time__lt=datetime.now(
         tz=timezone.get_current_timezone()) + timedelta(hours=+2))
@@ -216,6 +225,8 @@ def washes_admin(request):
             tz=timezone.get_current_timezone()) + timedelta(hours=-2)).order_by('-date_time')
     elif view == 'settings':
         wash_settings = True
+    elif view == 'news':
+        news_edit = True
     else:
         washes_history = WashesHistory.objects.filter(date_time__gte=datetime.now(
             tz=timezone.get_current_timezone()) + timedelta(hours=-2))
@@ -231,8 +242,10 @@ def washes_admin(request):
         else:
             for _ in range(wash.washes):
                 all_washes[date][time].append(wash.user_name)
+    form = CreatePostForm()
     return render(request, 'main/washes-admin.html',
-                  {'washes_history': all_washes, 'wash_settings': wash_settings, 'settings': settings.WASH_ADMIN})
+                  {'washes_history': all_washes, 'wash_settings': wash_settings, 'settings': settings.WASH_ADMIN,
+                   'news_edit': news_edit, 'form': form})
 
 
 @csrf_exempt
@@ -240,14 +253,28 @@ def washes_admin(request):
 @user_passes_test(is_applications_admin)
 def applications_admin(request):
     if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        application_id = data.get('id')
-        value = data.get('value')
-        if application_id is not None and value is not None:
-            application = Applications.objects.get(pk=int(application_id))
-            application.status = value
-            application.save()
-    return render(request, 'main/applications-admin.html', {'applications': Applications.objects.all()})
+        if request.POST.get('csrfmiddlewaretoken') is not None:
+            form = CreatePostForm(request.POST)
+            if form.is_valid():
+                text = form.cleaned_data['text']
+                post = Post.objects.create(text=text, date=datetime.now(
+                    tz=timezone.get_current_timezone()))
+                post.save()
+        else:
+            data = json.loads(request.body.decode('utf-8'))
+            application_id = data.get('id')
+            value = data.get('value')
+            if application_id is not None and value is not None:
+                application = Applications.objects.get(pk=int(application_id))
+                application.status = value
+                application.save()
+    news_edit = False
+    view = request.GET.get('view', None)
+    if view == 'news':
+        news_edit = True
+    form = CreatePostForm()
+    return render(request, 'main/applications-admin.html',
+                  {'applications': Applications.objects.all(), 'form': form, 'news_edit': news_edit})
 
 
 @login_required
@@ -281,7 +308,8 @@ def study_room(request):
             study_room.save()
             return redirect('profile')
     study_dates = {}
-    for day in range(7):
+    study_range = 14 if is_study_room_admin(request.user) else 7
+    for day in range(study_range):
         current_date = timedelta(days=+day) + date.today()
         occupied_times = StudyRoom.objects.filter(date=current_date)
         restricted_hours = [j for occupied_time in occupied_times for j in
@@ -342,11 +370,22 @@ def history(request):
 @login_required
 @user_passes_test(is_study_room_admin)
 def study_room_admin(request):
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            post = Post.objects.create(text=text, date=datetime.now(
+                tz=timezone.get_current_timezone()))
+            post.save()
     view = request.GET.get('view', None)
     study_info = {}
-    if view:
+    study_room = {}
+    news_edit = False
+    if view == 'history':
         study_room = StudyRoom.objects.filter(user=request.user).filter(
             Q(date=datetime.now().date()) & Q(end_time__lt=datetime.now().time()) | Q(date__lt=datetime.now().date()))
+    elif view == 'news':
+        news_edit = True
     else:
         study_room = StudyRoom.objects.filter(
             Q(date=datetime.now().date()) & Q(end_time__gte=datetime.now().time()) | Q(date__gt=datetime.now().date()),
@@ -360,4 +399,6 @@ def study_room_admin(request):
             study_info[info.date.strftime('%d.%m.%Y')] = [{'start_time': info.start_time, 'end_time': info.end_time,
                                                            'full_name': f'{info.user.first_name} {info.user.last_name}',
                                                            'people': info.people, 'vk_id': info.user.profile.vk_id}]
-    return render(request, 'main/study-room-admin.html', {'study_info': study_info})
+    form = CreatePostForm()
+    return render(request, 'main/study-room-admin.html',
+                  {'study_info': study_info, 'form': form, 'news_edit': news_edit})
