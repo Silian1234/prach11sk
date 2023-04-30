@@ -1,243 +1,64 @@
-body {
-    background: url('../img/background.png');
-    background-attachment: fixed;
+html {
+    box-sizing: border-box;
 }
 
-.divv {
+body {
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Montserrat';
+}
 
+.container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    padding: 55px 0;
 }
 
 h1 {
-    /* Новости */
-
-    margin-top: 0;
-    position: absolute;
-    max-width: 195px;
-    height: 48px;
-    left: 862.5px;
-    top: 165px;
-
+    margin: 0;
+    margin-bottom: 57px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
     line-height: 133%;
-    /* identical to box height, or 48px */
-
     text-align: center;
     text-transform: uppercase;
-
     color: #FFFFFF;
 }
 
-.div2 {
-
+.news {
+    width: 944px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 20px;
-}
-
-.div2-1 {
-    /* Vopros */
-
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 40px;
-
-    max-width: 1024px;
-    height: auto;
-
-    /* Серый 11 */
-
-    background: #F2F6FA;
-    /* Серый 11 */
-
-    border: 1px solid #F2F6FA;
+    padding: 26px 40px;
+    background-color: #fff;
     border-radius: 5px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    margin-bottom: 20px;
 }
 
-.div2-2 {
-    /* Vopros */
 
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 40px;
-
-    max-width: 1023px;
-    height: auto;
-
-    /* Серый 11 */
-
-    background: #F2F6FA;
-    /* Серый 11 */
-
-    border: 1px solid #F2F6FA;
-    border-radius: 5px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.div2-3 {
-    /* Vopros */
-
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 40px;
-
-    max-width: 1024px;
-    height: auto;
-
-    /* Серый 11 */
-
-    background: #F2F6FA;
-    /* Серый 11 */
-
-    border: 1px solid #F2F6FA;
-    border-radius: 5px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-}
-
-.div3 {
-    /* Text & icon */
-
-
-    /* Auto layout */
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 26px 60px 26px 0px;
-    gap: 10px;
-
-    max-width: 944px;
-    height: auto;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.p1 {
-    /* 11.10.22 */
-    max-width: 883px;
-    height: auto;
+.news__date {
     margin: 0;
+    margin-bottom: 10px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 143%;
-    /* identical to box height, or 23px */
-
-
-    /* Серый 1 */
-
     color: #11263A;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
-.p2 {
-    /* Первая машинка не работает до декабря */
-
-
-    max-width: 883px;
-    height: auto;
-
-    /* 21px, Medium */
+.news__text {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 21px;
     line-height: 143%;
-    /* identical to box height, or 30px */
-
-
-    /* Серый 1 */
-
     color: #11263A;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
-.p3 {
-    /* Первая машинка не работает до декабря */
-
-
-    max-width: 883px;
-    height: auto;
-
-    /* 21px, Medium */
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 143%;
-    /* identical to box height, or 30px */
-
-
-    /* Серый 1 */
-
-    color: #11263A;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
