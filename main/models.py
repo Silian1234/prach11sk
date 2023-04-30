@@ -10,9 +10,6 @@ class Post(models.Model):
     text = models.TextField('Статья')
     date = models.DateTimeField('Дата публикации')
 
-    def __str__(self):
-        return self.title
-
 
 class InvoiceNumber(models.Model):
     invoice_number = models.CharField('Номер оплаченного счета', max_length=16)

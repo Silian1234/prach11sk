@@ -12,7 +12,7 @@ urlpatterns = [
     path('book-wash', views.book_wash, name='book-wash'),
     path('login', views.login_page, name='login'),
     path('logout', LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('news', BlogListView.as_view(), name='news'),
+    path('news', views.news, name='news'),
     path('payment/digiseller', views.payment_digiseller, name='payment-digiseller'),
     path('payment', views.payment, name='payment'),
     path('fk-verify.html', views.fk_verify, name='fk-verify'),

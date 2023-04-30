@@ -32,9 +32,17 @@ def fk_verify(request):
     return render(request, 'main/fk-verify.html', {})
 
 
-class BlogListView(ListView):
-    model = Post
-    template_name = 'main/news.html'
+@csrf_exempt
+def news(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        post_id = data.get('id')
+        if post_id is not None:
+            post = Post.objects.get(pk=int(post_id))
+            post.delete()
+            return redirect('news')
+    posts = Post.objects.all()
+    return render(request, 'main/news.html', {'posts': posts})
 
 
 def main_page(request):
@@ -150,10 +158,6 @@ def payment(request):
     else:
         form = CheckCodeForm()
     return render(request, 'main/payment.html', {'form': form})
-
-
-def news(request):
-    return render(request, 'main/news.html', {})
 
 
 def registration(request):

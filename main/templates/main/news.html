@@ -1,5 +1,6 @@
 {% extends 'main/template.html' %}
 {% load static %}
+{% load group_filter %}
 {% block head %}
 <title>Новости</title>
 <link rel="stylesheet" href="{% static 'main/css/news.css' %}">
@@ -7,11 +8,26 @@
 {% block content %}
 <div class="container">
     <h1>Новости</h1>
-    {% for post in object_list reversed %}
+    {% for post in posts reversed %}
     <div class="news">
         <p class="news__date">{{ post.date }}</p>
         <p class="news__text">{{ post.text }}</p>
+        {% if user.groups|has_group:"Админ учебной комнаты" or user.groups|has_group:"Админ прачки" or user.groups|has_group:"Админ журнала заявок" %}
+        <button class="news__btn" value="{{ post.id }}">Удалить</button>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
+<script>
+    const buttons = document.querySelectorAll('.news__btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            fetch('{% url "news" %}', {
+                method: 'POST',
+                body: JSON.stringify({'id': btn.value})
+            });
+            window.location.reload();
+        });
+    });
+</script>
 {% endblock %}
