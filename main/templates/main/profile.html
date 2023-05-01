@@ -13,7 +13,8 @@
     <div class="div1">
         <p class="p1">{{ user.first_name }} {{ user.last_name }}</p>
         <p class="p2">Логин: {{ user.username }}</p>
-        <a style="text-decoration: none; padding: 9px 16px; background-color: #626262; color: white; align-self: flex-start; border-radius: 4px" href="{% url 'history' %}">История записей/заявок</a>
+        <a style="text-decoration: none; padding: 9px 16px; background-color: #626262; color: white; align-self: flex-start; border-radius: 4px"
+           href="{% url 'history' %}">История записей/заявок</a>
     </div>
 </div>
 {% if washes %}
@@ -23,6 +24,7 @@
     <p>Статус: {{wash.date_time | get_wash_status}}</p>
     <p>Описание: {{ wash.date_time | format_datetime }} {{wash.washes}} {% if wash.washes == 1 %} машинка {% else %}
         машинки {% endif %} {% if wash.powder %} с порошком {% else %} без порошка {%endif%}</p>
+    <button class="wash__btn" value="{{ wash.date_time | get_wash_status }};{{ wash.id }}">Отменить</button>
     {% endfor %}
 </div>
 {% endif %}
@@ -32,6 +34,7 @@
     {% for application in applications %}
     <p>Статус: {{ application.get_status_display.lower }}</p>
     <p>Описание: {{application.room}} {{application.description.lower}}</p>
+    <button class="application__btn" value="{{ application.status }} {{ application.id }}">Отменить</button>
     {% endfor %}
 </div>
 {% endif %}
@@ -43,7 +46,49 @@
     <p>Статус: {% if study_info.date|is_today and study_info.start_time|gte_time_now and study_info.end_time|lt_time_now %} в процессе {% else %} запланирована {% endif %}</p>
     <p>Описание: {{study_info.date}} на {{study_info.start_time}}-{{study_info.end_time}} {{study_info.people}}
         {{study_info.people | format_people}}</p>
+    <button class="study__btn" value="{% if study_info.date|is_today and study_info.start_time|gte_time_now and study_info.end_time|lt_time_now %}1{% else %}0{% endif %} {{ study_info.id }}">Отменить</button>
     {% endfor %}
 </div>
 {% endif %}
+<script>
+    const washBtns = document.querySelectorAll('.wash__btn');
+    washBtns.forEach(btn => {
+        const status = btn.value.split(';')[0];
+        const washId = btn.value.split(';')[1];
+        if (status === 'в процессе') btn.style.display = 'none';
+        btn.addEventListener('click', async () => {
+            await fetch('{% url "profile" %}', {
+                method: 'POST',
+                body: JSON.stringify({'type': 'wash', 'wash_id': washId})
+            });
+            window.location.reload();
+        });
+    });
+    const applicationBtns = document.querySelectorAll('.application__btn');
+    applicationBtns.forEach(btn => {
+        const status = btn.value.split(' ')[0];
+        const applicationId = btn.value.split(' ')[1];
+        if (status !== '0') btn.style.display = 'none';
+        btn.addEventListener('click', async () => {
+            await fetch('{% url "profile" %}', {
+                method: 'POST',
+                body: JSON.stringify({'type': 'application', 'application_id': applicationId})
+            });
+            window.location.reload();
+        });
+    });
+    const studyBtns = document.querySelectorAll('.study__btn');
+    studyBtns.forEach(btn => {
+        const status = btn.value.split(' ')[0];
+        const studyId = btn.value.split(' ')[1];
+        if (status !== '0') btn.style.display = 'none';
+        btn.addEventListener('click', async () => {
+            await fetch('{% url "profile" %}', {
+                method: 'POST',
+                body: JSON.stringify({'type': 'study_room', 'study_id': studyId})
+            });
+            window.location.reload();
+        });
+    });
+</script>
 {% endblock %}

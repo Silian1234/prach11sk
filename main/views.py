@@ -171,13 +171,33 @@ def registration(request):
     return render(request, 'main/registration.html', {'form': form})
 
 
+@csrf_exempt
 @login_required
 def profile(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        info_type = data.get('type')
+        if info_type is not None:
+            if info_type == 'wash':
+                wash_id = int(data.get('wash_id'))
+                user = User.objects.get(pk=request.user.id)
+                wash = WashesHistory.objects.get(pk=wash_id)
+                user.profile.wash_limit += wash.washes
+                user.save()
+                wash.delete()
+            if info_type == 'application':
+                application_id = int(data.get('application_id'))
+                application = Applications.objects.get(pk=application_id)
+                application.delete()
+            if info_type == 'study_room':
+                study_id = int(data.get('study_id'))
+                study = StudyRoom.objects.get(pk=study_id)
+                study.delete()
     if request.GET.get('code', '') != '':
-        json = get_access_token(request.GET['code'])
-        if 'error' not in json:
+        json_data = get_access_token(request.GET['code'])
+        if 'error' not in json_data:
             user = User.objects.get(pk=request.user.id)
-            user.profile.vk_id = json['user_id']
+            user.profile.vk_id = json_data['user_id']
             user.save()
     washes = WashesHistory.objects.filter(date_time__gte=datetime.now(
         tz=timezone.get_current_timezone()) + timedelta(hours=-2), user=request.user).order_by('date_time')
