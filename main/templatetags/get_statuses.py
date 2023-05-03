@@ -19,3 +19,7 @@ def lt_time_now(end_time):
 @register.filter
 def gte_time_now(start_time):
     return datetime.now().time() >= start_time
+
+@register.filter
+def get_utc(date_time):
+    return date_time.timestamp() * 1000

@@ -7,3 +7,7 @@ register = template.Library()
 @register.filter
 def format_datetime(datetime):
     return f'{datetime.astimezone(timezone.get_current_timezone()).strftime("%d.%m.%Y")} на {datetime.astimezone(timezone.get_current_timezone()).strftime("%H:%M")}'
+
+@register.filter
+def format_date(date):
+    return date.strftime('%Y-%m-%d')

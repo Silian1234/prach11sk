@@ -24,7 +24,7 @@
     <p>Статус: {{wash.date_time | get_wash_status}}</p>
     <p>Описание: {{ wash.date_time | format_datetime }} {{wash.washes}} {% if wash.washes == 1 %} машинка {% else %}
         машинки {% endif %} {% if wash.powder %} с порошком {% else %} без порошка {%endif%}</p>
-    <button class="wash__btn" value="{{ wash.date_time | get_wash_status }};{{ wash.id }}">Отменить</button>
+    <button class="wash__btn" value="{{ wash.date_time | get_utc }};{{ wash.id }}">Отменить</button>
     {% endfor %}
 </div>
 {% endif %}
@@ -46,16 +46,18 @@
     <p>Статус: {% if study_info.date|is_today and study_info.start_time|gte_time_now and study_info.end_time|lt_time_now %} в процессе {% else %} запланирована {% endif %}</p>
     <p>Описание: {{study_info.date}} на {{study_info.start_time}}-{{study_info.end_time}} {{study_info.people}}
         {{study_info.people | format_people}}</p>
-    <button class="study__btn" value="{% if study_info.date|is_today and study_info.start_time|gte_time_now and study_info.end_time|lt_time_now %}1{% else %}0{% endif %} {{ study_info.id }}">Отменить</button>
+    <button class="study__btn" value="{{ study_info.date|format_date}} {{ study_info.start_time }};{{ study_info.id }}">
+        Отменить
+    </button>
     {% endfor %}
 </div>
 {% endif %}
 <script>
     const washBtns = document.querySelectorAll('.wash__btn');
     washBtns.forEach(btn => {
-        const status = btn.value.split(';')[0];
+        const statusDate = new Date(parseInt(btn.value.split(';')[0]));
         const washId = btn.value.split(';')[1];
-        if (status === 'в процессе') btn.style.display = 'none';
+        if ((statusDate - new Date()) / 1000 / 60 / 60 <= 12) btn.style.display = 'none';
         btn.addEventListener('click', async () => {
             await fetch('{% url "profile" %}', {
                 method: 'POST',
@@ -79,9 +81,9 @@
     });
     const studyBtns = document.querySelectorAll('.study__btn');
     studyBtns.forEach(btn => {
-        const status = btn.value.split(' ')[0];
-        const studyId = btn.value.split(' ')[1];
-        if (status !== '0') btn.style.display = 'none';
+        const statusDate = new Date((btn.value.split(';')[0]));
+        const studyId = btn.value.split(';')[1];
+        if ((statusDate - new Date()) / 1000 / 60 / 60 <= 6) btn.style.display = 'none';
         btn.addEventListener('click', async () => {
             await fetch('{% url "profile" %}', {
                 method: 'POST',
