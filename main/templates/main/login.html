@@ -2,45 +2,30 @@
 {% load static %}
 {% block head %}
 <title>Вход</title>
-<link rel="stylesheet" href="{% static 'main/css/join.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
 {% endblock %}
 {% block content %}
-<div class="divv">
-    <div class="div1">
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <div class="div2">
-                <div class="div3">
-                    <div class="div3-1"></div>
-                    <div class="div3-2">
-                        <h4 class="hhh4">Войдите в аккаунт</h4>
-                        {{ form.username.errors }}
-                        {{ form.password.errors }}
-                    </div>
-                    <div class="div3-3">
-                        <div class="div3-3-1">
-                            <div class="div3-3-1-1">
-                                <p class="pp1">Ввведите логин</p>
-                                {{ form.username }}
-                            </div>
-                            <div class="div3-3-1-2">
-                                <p class="pp1">Ввведите пароль</p>
-                                {{ form.password }}
-                            </div>
-                        </div>
-                        {{ form.non_field_errors }}
-                        <div class="div3-3-2">
-                            <input type="submit" value="Войти" class="input2"/>
-                            <input type="hidden" name="next" value="{{ next }}"/>
-                        </div>
-                        <div class="div3-3-3">
-                            <a href="{% url 'registration' %}">
-                                <input type="button" value="Зарегистрироваться" class="input3"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="container">
+    <form class="form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form__line"></div>
+        <h4 class="form__header">Войдите в аккаунт</h4>
+        {{ form.username.errors }}
+        {{ form.password.errors }}
+        {% for field in form %}
+        <div class="field__container">
+            {% if field.errors %}
+            <p class="form__error">{{ field.errors }}</p>
+            {% endif %}
+            <p class="form__label">{{ field.label }}</p>
+            {{ field }}
+        </div>
+        {% endfor %}
+        {{ form.non_field_errors }}
+        <input type="submit" value="Войти" class="form__btn"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+        <a href="{% url 'registration' %}">
+            <input type="button" value="Зарегистрироваться" class="form__btn--grey"></a>
+    </form>
 </div>
 {% endblock %}

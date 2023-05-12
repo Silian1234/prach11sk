@@ -3,61 +3,44 @@
 {% block head %}
 <title>Прачка</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="{% static 'main/css/mainPage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 {% endblock %}
 {% block content %}
-<div class="divv">
-    <div class="div1">
-        <div class="div2">
-            <div class="div3">
-                <h2 class="h222">Добро пожаловать в сервис для записи в прачечную комнату</h2>
-                <h3>Полностью автоматизированная система с личным кабинетом и оплатой</h3>
+<div class="container">
+    <div class="container__left">
+        <h2>Добро пожаловать на сайт 11 С/К</h2>
+        <h3>Здесь вы можете записаться в прачечную или учебную комнату, а также вызвать дезинфекцию, плотника,
+            электрика или сантехника.</h3>
+        {% if user.is_authenticated %}
+        <a href="{% url 'menu' %}">
+            <button class="button">Записаться</button>
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}">
+            <button class="button">Записаться</button>
+        </a>
+        {% endif %}
+    </div>
+    <div class="container__right">
+        <div class="cards">
+            <div class="card">
+                <h4>01</h4>
+                <p>Намите кнопку «Записаться» на главной странице</p>
             </div>
-            {% if user.is_authenticated %}
-            <a href="{% url 'menu' %}">
-                <button class="button1">Записаться</button>
-            </a>
-            {% else %}
-            <a href="{% url 'login' %}">
-                <button class="button1">Записаться</button>
-            </a>
-            {% endif %}
-        </div>
-        <div class="div5">
-            <div class="div5-1">
-                <div class="div6">
-                    <h4>01</h4>
-                    <p>Намите кнопку «Записаться» на главной странице</p>
-                </div>
-                <div class="div6">
-                    <h4>02</h4>
-                    <p>Войдите или зарегистрируйтесь,
-                        если вы ещё не сделали этого</p>
-                </div>
+            <div class="card">
+                <h4>02</h4>
+                <p>Войдите или зарегистрируйтесь,
+                    если вы ещё не сделали этого</p>
             </div>
-            <div class="div5-1">
-                <div class="div6">
-                    <h4>03</h4>
-                    <p>Прочитайте новостной раздел
-                        и будьте в курсе всех событий</p>
-                </div>
-                <div class="div6">
-                    <h4>04</h4>
-                    <p>Пополните баланс стирок
-                        через сервис оплаты</p>
-                </div>
+            <div class="card">
+                <h4>03</h4>
+                <p>Прочитайте новостной раздел
+                    и будьте в курсе всех событий</p>
             </div>
-            <div class="div5-1">
-                <div class="div6">
-                    <h4>05</h4>
-                    <p>Выбирете удобное место и
-                        нажмите кнопку «Записаться»</p>
-                </div>
-                <div class="div6">
-                    <h4>06</h4>
-                    <p>Приходите в выбраное время
-                        в прачку и не опаздывайте!</p>
-                </div>
+            <div class="card">
+                <h4>04</h4>
+                <p>Выберите нужный вам пункт
+                    на странице «Записаться» </p>
             </div>
         </div>
     </div>

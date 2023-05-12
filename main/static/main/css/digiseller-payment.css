@@ -1,0 +1,18 @@
+body {
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 0;
+}
+
+.card:not(:last-child){
+    margin-right: 75px;
+}

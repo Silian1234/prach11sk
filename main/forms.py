@@ -17,8 +17,11 @@ class BookWashForm(forms.Form):
 
 
 class ApplicationForm(forms.Form):
-    room = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '100', 'max': '550', 'class': 'form__input', 'placeholder': 'Комната/этаж, крыло'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form__input', 'placeholder': 'Описание проблемы'}))
+    room = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'min': '100', 'max': '550', 'class': 'form__input', 'placeholder': 'Комната/этаж, крыло'}))
+    description = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form__input', 'placeholder': 'Описание проблемы'}))
+
     # user_id = forms.IntegerField(widget=forms.NumberInput(attrs={'type': 'hidden'}))
 
     def clean_room(self):
@@ -41,11 +44,12 @@ class StudyRoomForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(min_length=3, max_length=40, required=True, widget=forms.TextInput(
-        attrs={'class': 'input1', 'placeholder': 'Логин'}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(
+    username = forms.CharField(min_length=3, max_length=40, required=True, label='Введите логин',
+                               widget=forms.TextInput(
+                                   attrs={'class': 'form__input', 'placeholder': 'Логин'}))
+    password = forms.CharField(required=True, label='Введите пароль', widget=forms.PasswordInput(
         attrs={
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': 'Пароль',
         }
     ))
@@ -77,7 +81,7 @@ class RegistrationForm(UserCreationForm):
             'required': 'True',
             'name': 'username',
             'type': 'text',
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': 'Имя',
             'minlength': '2',
             'maxlength': '50'
@@ -86,7 +90,7 @@ class RegistrationForm(UserCreationForm):
             'required': 'True',
             'name': 'last_name',
             'type': 'text',
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': 'Фамилия',
             'minlength': '2',
             'maxlength': '50'
@@ -94,21 +98,15 @@ class RegistrationForm(UserCreationForm):
         self.fields['username'].widget.attrs.update({
             'required': 'True',
             'type': 'text',
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': 'Логин',
             'minlength': '3',
             'maxlength': '40'
         })
-        # self.fields['email'].widget.attrs.update({
-        #     'required': 'True',
-        #     'type': 'email',
-        #     'class': 'input1',
-        #     'placeholder': 'Email',
-        # })
         self.fields['password1'].widget.attrs.update({
             'required': 'True',
             'type': 'text',
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': '**********',
             # 'minlength': '3',
             # 'maxlength': '40'
@@ -116,7 +114,7 @@ class RegistrationForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({
             'required': 'True',
             'type': 'text',
-            'class': 'input1',
+            'class': 'form__input',
             'placeholder': '**********',
             # 'minlength': '3',
             # 'maxlength': '40'
@@ -128,4 +126,5 @@ class RegistrationForm(UserCreationForm):
 
 
 class CreatePostForm(forms.Form):
-    text = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form__textarea', 'placeholder': 'Выберите текст', 'rows': '2'}))
+    text = forms.CharField(required=True, widget=forms.Textarea(
+        attrs={'class': 'form__textarea', 'placeholder': 'Выберите текст', 'rows': '2'}))

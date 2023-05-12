@@ -7,7 +7,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
 }
 
 .container {
@@ -72,6 +72,7 @@ h1 {
     font-size: 16px;
     line-height: 152%;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .payment__btn:hover,

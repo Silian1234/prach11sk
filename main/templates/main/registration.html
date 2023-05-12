@@ -1,44 +1,30 @@
 {% extends 'main/template.html' %}
 {% load static %}
 {% block head %}
-<!--<html lang="en">-->
-<!--<head>-->
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="{% static 'main/css/rega.css' %}">
-<!--    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>-->
-<!--</head>-->
+
+<title>Регистрация</title>
+<link rel="stylesheet" href="{% static 'main/css/registration.css' %}">
 {% endblock %}
 {% block content %}
 <body>
-<div class="divv">
-    <div class="div1">
-        <form method="post">
-            {% csrf_token %}
-            <div class="div2">
-                <div class="div3">
-                    <div class="div3-2">
-                        <h4>Регистрация</h4>
-                        <p class="ppp">Вводите все данные корректно, после регистрании их нельзя будет изменить.</p>
-                    </div>
-
-                    <div class="div3-3">
-                        {% for field in form %}
-                        <p>{{ field.label }}</p>
-                        {{ field.errors }}
-                        {{ field }}
-                        {% endfor %}
-                    </div>
-                    <div class="div3-3-2">
-                        <input type="submit" value="Зарегистрироваться" class="input2">
-                    </div>
-                    <div class="div3-3-3">
-                        <a href="{% url 'login' %}">
-                            <input type="button" value="Войти" class="input3"></a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="container">
+    <form class="form" method="post">
+        {% csrf_token %}
+        <h4>Регистрация</h4>
+        <p class="form__text">Вводите все данные корректно, после регистрании их нельзя будет изменить.</p>
+        <div class="field__container">
+            {% for field in form %}
+            <p class="form__label">{{ field.label }}</p>
+            {% if field.errors %}
+            <p class="form__error">{{ field.errors }}</p>
+            {% endif %}
+            {{ field }}
+            {% endfor %}
+        </div>
+        <input type="submit" value="Зарегистрироваться" class="form__btn">
+        <a href="{% url 'login' %}">
+            <input type="button" value="Войти" class="form__btn--grey"></a>
+    </form>
 </div>
 </body>
 </html>
