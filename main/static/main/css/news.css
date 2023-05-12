@@ -31,6 +31,7 @@ h1 {
 }
 
 .news {
+    position: relative;
     width: 944px;
     display: flex;
     flex-direction: column;
@@ -62,3 +63,18 @@ h1 {
     color: #11263A;
 }
 
+.news__btn{
+    position: absolute;
+    top: 19px;
+    right: 40px;
+    background: #626262;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 152%;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    cursor: pointer;
+}

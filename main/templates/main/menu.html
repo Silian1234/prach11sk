@@ -2,11 +2,28 @@
 {% load static %}
 {% block head %}
 <title>Меню записи</title>
+<link rel="stylesheet" href="{% static 'main/css/menu.css'%}">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 {% endblock %}
 {% block content %}
-<a href="{% url 'book-wash' %}">Прачечная</a>
-<br>
-<a href="{% url 'applications' %}">Журнал заявок</a>
-<br>
-<a href="{% url 'study-room' %}">Учебная комната</a>
+<div class="container">
+    <h1>записаться</h1>
+    <div class="cards">
+        <div class="card">
+            <div class="card__line"></div>
+            <h4>Прачечная</h4>
+            <a href="{% url 'book-wash' %}" class="card__btn">Записаться</a>
+        </div>
+        <div class="card">
+            <div class="card__line"></div>
+            <h4>Журнал заявок</h4>
+            <a href="{% url 'applications' %}" class="card__btn">Подать заявку</a>
+        </div>
+        <div class="card">
+            <div class="card__line"></div>
+            <h4>Учебная комната</h4>
+            <a href="{% url 'study-room' %}" class="card__btn">Записаться</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

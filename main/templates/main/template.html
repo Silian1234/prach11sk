@@ -11,57 +11,31 @@
 
     {% endblock %}
 </head>
-<body class="body1" style="font-family: 'Montserrat'; font-style: normal;">
+<body>
 {% csrf_token %}
-<div class="bodyShap">
-    <div class="Logo">
-        <div class="Pic">
-            <a href="{% url 'main' %}"><img src="{% static 'main/img/logo.png' %}"></a>
+<header class="header">
+    <div class="header__container">
+        <a href="{% url 'main' %}"><img src="{% static 'main/img/logo.png' %}"></a>
+        <div class="nav">
+            <a href="{% url 'news' %}" class="nav__link">Новости</a>
+            <a href="{% url 'profile' %}" class="nav__link">Профиль</a>
+            <a href="{% url 'payment' %}" class="nav__link">Оплатить</a>
+            <a href="{% url 'menu' %}" class="nav__link">Записаться</a>
+            {% if user.groups|has_group:"Админ прачки" %}
+            <a href="{% url 'washes-admin' %}" class="nav__link">Для админов</a>
+            {% elif user.groups|has_group:"Админ журнала заявок" %}
+            <a href="{% url 'applications-admin' %}" class="nav__link">Для админов</a>
+            {% elif user.groups|has_group:"Админ учебной комнаты" %}
+            <a href="{% url 'study-room-admin' %}" class="nav__link">Для админов</a>
+            {% endif %}
         </div>
-        <div class="Text">
-            <h2 class="hh2-1">Запись в прачечную комнату для 11 С/К</h2>
-        </div>
-    </div>
-    <div class="Nav">
-        <div class="Nav1">
-            <a href="{% url 'news' %}" class="aa1">Новости</a>
-        </div>
-        <div class="Nav1">
-            <a href="{% url 'profile' %}" class="aa1">Профиль</a>
-        </div>
-        <div class="Nav1">
-            <a href="{% url 'payment' %}" class="aa1">Оплатить</a>
-        </div>
-        <div class="Nav1">
-            <a href="{% url 'menu' %}" class="aa1">Записаться</a>
-        </div>
-        {% if user.groups|has_group:"Админ прачки" %}
-        <div class="Nav1">
-            <a href="{% url 'washes-admin' %}" class="aa1">Для админов</a>
-        </div>
-        {% elif user.groups|has_group:"Админ журнала заявок" %}
-        <div class="Nav1">
-            <a href="{% url 'applications-admin' %}" class="aa1">Для админов</a>
-        </div>
-        {% elif user.groups|has_group:"Админ учебной комнаты" %}
-        <div class="Nav1">
-            <a href="{% url 'study-room-admin' %}" class="aa1">Для админов</a>
-        </div>
+        {% if user.is_authenticated %}
+        <a class="nav__btn" href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <a class="nav__btn" href="{% url 'login' %}">Войти</a>
         {% endif %}
     </div>
-    {% if user.is_authenticated %}
-    <div style="display: flex; align-items: center;">
-        <a class="inputt1" href="{% url 'logout' %}">Выйти
-        </a>
-    </div>
-
-    {% else %}
-    <div style="display: flex; align-items: center;">
-        <a class="inputt1" href="{% url 'login' %}">Войти
-        </a>
-    </div>
-    {% endif %}
-</div>
+</header>
 {% block content %}
 
 {% endblock %}

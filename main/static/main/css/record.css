@@ -1,129 +1,47 @@
 body {
-    background: url('../img/background.png');
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.divv {
-
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 55px 0;
 }
 
 h1 {
-    /* записаться */
-
     margin-top: 0;
-
-
+    margin-bottom: 57px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
     line-height: 133%;
-    /* identical to box height, or 48px */
-
     text-align: center;
     text-transform: uppercase;
-
     color: #FFFFFF;
 }
 
 form {
-    /* Vopros */
-
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px 40px 26px;
-
-
-    /* Серый 11 */
-
-    background: #F2F6FA;
-    /* Серый 11 */
-
-    border: 1px solid #F2F6FA;
-    border-radius: 5px;
-}
-
-.div1 {
-    /* Content */
-
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 972px;
     padding: 26px;
-    gap: 26px;
-
-    width: 1024px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-
-.div2 {
-    /* Text & icon */
-
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px 30px;
-    gap: 1px;
-
-    width: 939px;
-    height: 46px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.ButtonRecord {
-    /* Кнопка */
-
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 18px 48px;
-    gap: 10px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-
-    background: #E02420;
+    background-color: #F2F6FA;
     border-radius: 5px;
-    border: 0;
+}
 
-
+.form__btn {
+    padding: 18px 48px;
+    background-color: #E02420;
+    border-radius: 5px;
+    border: none;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -132,35 +50,25 @@ form {
     color: #FFFFFF;
 }
 
-.ButtonRecord:hover {
+.form__btn:hover {
     color: #ffffff;
     background: rgba(224, 36, 32, 0.67);
 }
 
 select {
-    /* Выберите дату */
-
-
-    width: 963px;
-    height: 86px;
-
-    /* 21px, Medium */
-    padding: 0px 25px;
+    width: 100%;
+    padding: 28px 37px;
+    background-color: #F2F6FA;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 113%;
-    /* identical to box height, or 30px */
-
-    background-color: #F2F6FA;
     color: #626262;
-
     border-radius: 10px;
     border: solid 2px #858585;
-    /* Inside auto layout */
+}
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+select:not(:last-child) {
+    margin-bottom: 26px;
 }

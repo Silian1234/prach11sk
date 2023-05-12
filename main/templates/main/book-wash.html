@@ -5,39 +5,28 @@
 <link rel="stylesheet" href="{% static 'main/css/record.css' %}">
 {% endblock %}
 {% block content %}
-<div class="divv">
-    <h1>записаться</h1>
+<div class="container">
+    <h1>запись в прачечную</h1>
     <form method="post" id="bookWashForm">
         {% csrf_token %}
-        <div class="div1">
-            <div class="div2">
-                <select name="date" required="required" id="dateSelect">
-                    <option value="">Выберите дату</option>
-                    {% for date, times in date_and_time.items %}
-                    <option class="dateOptions" value="{{date}}">{{ date }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="div2">
-                <select name="time" required="required" id="timeSelect">
-                    <option value="">Выберите время</option>
-                </select>
-            </div>
-            <div class="div2">
-                <select name="washes" required="required" id="washesSelect">
-                    <option value="">Выберите количество машинок</option>
-                </select>
-            </div>
-
-            <div class="div2">
-                <select name="powder" required="required">
-                    <option value="">С порошком/без порошка</option>
-                    <option {% if not settings.wash_with_powder %}hidden{% endif %} value="1">С порошком</option>
-                    <option {% if not settings.wash_without_powder %}hidden{% endif %} value="0">Без порошка</option>
-                </select>
-            </div>
-        </div>
-        <button type="submit" value="Записаться" class="ButtonRecord">Записаться</button>
+        <select name="date" required="required" id="dateSelect">
+            <option value="">Выберите дату</option>
+            {% for date, times in date_and_time.items %}
+            <option class="dateOptions" value="{{date}}">{{ date }}</option>
+            {% endfor %}
+        </select>
+        <select name="time" required="required" id="timeSelect">
+            <option value="">Выберите время</option>
+        </select>
+        <select name="washes" required="required" id="washesSelect">
+            <option value="">Выберите количество машинок</option>
+        </select>
+        <select name="powder" required="required">
+            <option value="">С порошком/без порошка</option>
+            <option {% if not settings.wash_with_powder %}hidden{% endif %} value="1">С порошком</option>
+            <option {% if not settings.wash_without_powder %}hidden{% endif %} value="0">Без порошка</option>
+        </select>
+        <button type="submit" value="Записаться" class="form__btn">Записаться</button>
     </form>
 </div>
 <script>
