@@ -9,6 +9,10 @@ body {
     background-attachment: fixed;
 }
 
+a{
+    text-decoration: none;
+}
+
 .container {
     display: flex;
     justify-content: center;

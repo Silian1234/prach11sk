@@ -17,6 +17,7 @@ body {
     padding: 60px 94px;
     background-color: #fff;
     border-radius: 5px;
+    position: relative;
 }
 
 .container {
@@ -121,7 +122,15 @@ p {
 .form__btn--grey:hover {
     background: rgba(44, 44, 44, 0.67);
 }
-
+.form__line {
+    position: absolute;
+    height: 14px;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #E02420;
+    border-radius: 5px 5px 0 0;
+}
 @media only screen and (max-width: 767.98px) {
     body {
         background-color: #2C2C2C;

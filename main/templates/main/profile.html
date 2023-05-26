@@ -15,6 +15,7 @@
         <div class="card">
             <p class="card__header">{{ user.first_name }} {{ user.last_name }}</p>
             <p class="card__text">Логин: {{ user.username }}</p>
+            <a href="https://vk.com/id{{user.profile.vk_id}}" class="card__text">ВК: https://vk.com/id {{user.profile.vk_id}}</a>
             <a href="{% url 'history' %}" class="card__btn">История записей/заявок</a>
         </div>
         {% if washes %}
