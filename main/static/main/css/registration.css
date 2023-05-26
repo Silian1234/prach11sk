@@ -121,3 +121,49 @@ p {
 .form__btn--grey:hover {
     background: rgba(44, 44, 44, 0.67);
 }
+
+@media only screen and (max-width: 767.98px) {
+    body {
+        background-color: #2C2C2C;
+        background-image: none;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 209px;
+        padding: 60px 44px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+    .form__text{
+        font-size: 12px;
+    }
+    .form__btn {
+        margin-bottom: 18px;
+    }
+    .form__input{
+        padding: 2px 27px;
+    }
+    .form__btn, .form__btn--grey {
+        padding: 11px 28px;
+        /*background-color: #E02420;*/
+        border-radius: 4px;
+        border: 0;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 152%;
+        color: #FFFFFF;
+        cursor: pointer;
+        transition: background-color 0.4s ease-in-out;
+    }
+    .form__btn--grey {
+        padding: 11px 81px;
+        background-color: #626262;
+    }
+    .form__label{
+        font-size: 14px;
+    }
+}

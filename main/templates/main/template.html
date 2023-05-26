@@ -16,7 +16,11 @@
 <header class="header">
     <div class="header__container">
         <a href="{% url 'main' %}"><img src="{% static 'main/img/logo.png' %}"></a>
-        <div class="nav">
+        <div class="nav" id="nav">
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+            <button class="relatived"><img src="{% static 'main/img/buttonTemplate.png'%}"></button>
             <a href="{% url 'news' %}" class="nav__link">Новости</a>
             <a href="{% url 'profile' %}" class="nav__link">Профиль</a>
             <a href="{% url 'payment' %}" class="nav__link">Оплатить</a>
@@ -28,16 +32,38 @@
             {% elif user.groups|has_group:"Админ учебной комнаты" %}
             <a href="{% url 'study-room-admin' %}" class="nav__link">Для админов</a>
             {% endif %}
+            <div class="sidebar-left">
+                <a href="{% url 'news' %}" class="nav__link">Новости</a>
+                <a href="{% url 'profile' %}" class="nav__link">Профиль</a>
+                <a href="{% url 'payment' %}" class="nav__link">Оплатить</a>
+                <a href="{% url 'menu' %}" class="nav__link">Записаться</a>
+                {% if user.is_authenticated %}
+                <a class="nav__link" href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                <a class="nav__link" href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </div>
         </div>
-        {% if user.is_authenticated %}
-        <a class="nav__btn" href="{% url 'logout' %}">Выйти</a>
-        {% else %}
-        <a class="nav__btn" href="{% url 'login' %}">Войти</a>
-        {% endif %}
+        <div class="template__btn">
+            {% if user.is_authenticated %}
+            <a class="nav__btn" href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+            <a class="nav__btn" href="{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
     </div>
 </header>
 {% block content %}
 
 {% endblock %}
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+        document.querySelector('.relatived').addEventListener('click', function() {
+            const node = document.querySelector('.sidebar-left')
+            node.classList.toggle('sidebar-left--show')
+            console.log(1111)
+    });
+    })
+</script>
 </html>

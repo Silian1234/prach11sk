@@ -95,7 +95,6 @@ h1 {
 .application__btn,
 .wash__btn,
 .study__btn {
-    position: absolute;
     top: 0;
     right: 0;
     background: #626262;
@@ -116,4 +115,44 @@ h1 {
     height: 0;
     border: 1px solid rgba(17, 38, 58, 0.95);
     margin: 0 0 20px
+}
+
+@media only screen and (max-width: 767.98px) {
+    body {
+        background-color: #2C2C2C;
+        background-image: none;
+        margin: 0!important;
+        width: 100%;
+    }
+
+    /*header {*/
+    /*    display: none !important;*/
+    /*}*/
+    h1{
+        font-size: 22px;
+    }
+    .card{
+        width:215px;
+        padding:20px 22px;
+    }
+    .card__header{
+        font-size:18px;
+    }
+    .card__text{
+        font-size:16px;
+    }
+    .card__btn{
+        padding: 10px 19px;
+        font-size: 12px;
+    }
+    .wash__btn{
+        position: relative;
+    }
+    .container{
+        padding: 30px;
+        padding-top: 0;
+    }
+    .sidebar-left .nav__link:hover{
+        background: #eeeeee;
+    }
 }

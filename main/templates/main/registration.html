@@ -4,12 +4,14 @@
 
 <title>Регистрация</title>
 <link rel="stylesheet" href="{% static 'main/css/registration.css' %}">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 {% endblock %}
 {% block content %}
 <body>
 <div class="container">
     <form class="form" method="post">
         {% csrf_token %}
+        <div class="form__line"></div>
         <h4>Регистрация</h4>
         <p class="form__text">Вводите все данные корректно, после регистрании их нельзя будет изменить.</p>
         <div class="field__container">
