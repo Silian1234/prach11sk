@@ -78,3 +78,18 @@ h1 {
     padding: 5px 10px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 767.98px) {
+    .container{
+        padding: 55px 30px;
+        margin-left: 20px;
+        padding-right: 50px;
+    }
+    .news{
+        width:100%;
+        padding: 25px 15px;
+    }
+    .news__btn{
+        right: 10px;
+    }
+}

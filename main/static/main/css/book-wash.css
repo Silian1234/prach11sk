@@ -72,3 +72,16 @@ select {
 select:not(:last-child) {
     margin-bottom: 26px;
 }
+
+@media screen and (max-width: 767.98px) {
+    form{
+        width:65%;
+    }
+    .form__btn{
+        padding: 18px 30%;
+    }
+    select{
+        padding: 10px;
+        font-size: 12px;
+    }
+}

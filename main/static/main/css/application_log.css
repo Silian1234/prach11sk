@@ -86,3 +86,18 @@ h1 {
 .field__container {
     width: 100%;
 }
+
+@media screen and (max-width: 767.98px) {
+    .form{
+        width:80%;
+        padding:10px;
+    }
+    .form__input{
+        width:90%;
+        padding: 5px 8px;
+        margin-left:10px;
+    }
+    .form__btn{
+        padding: 18px 25%
+    }
+}

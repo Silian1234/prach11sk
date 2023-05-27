@@ -72,3 +72,20 @@ h1 {
     border: solid 2px #858585;
 
 }
+
+@media screen and (max-width: 767.98px) {
+    .form{
+        width:80%;
+        padding: 17px
+    }
+    .form__input{
+        padding:18px 34%;
+    }
+    .form__select{
+        font-size:16px;
+        padding:15px;
+    }
+    h1{
+        margin-bottom:30px;
+    }
+}

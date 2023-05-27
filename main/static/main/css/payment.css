@@ -116,3 +116,23 @@ h1 {
 .washes {
     align-items: flex-start;
 }
+
+@media screen and (max-width: 767.98px) {
+    .container__info{
+        width: 70%;
+        padding:24px 20px;
+    }
+    .payment__text, .form__text, .washes__header {
+        font-size: 18px;
+    }
+    .washes__text {
+        font-size: 14px;
+    }
+    .payment__btn, .form__btn, .btn {
+        font-size: 12px;
+        padding:18px 70px;
+    }
+    .form__input {
+        width:100%;
+    }
+}
