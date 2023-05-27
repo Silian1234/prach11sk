@@ -1,0 +1,138 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 55px 0;
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 57px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 133%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.container__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 40px;
+    width: 944px;
+    background: #F2F6FA;
+    border-radius: 5px;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 26px;
+}
+
+.payment__text,
+.form__text,
+.washes__header {
+    margin: 0;
+    margin-bottom: 26px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 143%;
+    color: #11263A;
+}
+
+.payment__btn,
+.form__btn,
+.btn {
+    padding: 18px 25px;
+    background: #E02420;
+    border-radius: 4px;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 152%;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.payment__btn:hover,
+.form__btn:hover,
+.btn:hover {
+    color: #ffffff;
+    background: rgba(224, 36, 32, 0.67);
+}
+
+.washes__text {
+    margin: 0;
+    margin-bottom: 27px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 143%;
+    color: #11263A;
+}
+
+.form__input {
+    padding: 6px 25px;
+    width: 356px;
+    margin-bottom: 26px;
+    border: 1px solid #626262;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 152%;
+    font-family: 'Montserrat', sans-serif;
+    color: #626262;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 26px;
+}
+
+.washes {
+    align-items: flex-start;
+}
+
+@media screen and (max-width: 767.98px) {
+    .container__info{
+        width: 70%;
+        padding:24px 20px;
+    }
+    .payment__text, .form__text, .washes__header {
+        font-size: 18px;
+    }
+    .washes__text {
+        font-size: 14px;
+    }
+    .payment__btn, .form__btn, .btn {
+        font-size: 12px;
+        padding:18px 70px;
+    }
+    .form__input {
+        width:100%;
+    }
+}

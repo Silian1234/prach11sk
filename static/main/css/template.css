@@ -1,0 +1,164 @@
+body {
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: #2C2C2C;
+}
+
+.header__container {
+    align-items: center;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    width: 73px;
+    height: 73px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    justify-content: space-between;
+    width: 800px;
+}
+
+.Nav1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 11px;
+    gap: 10px;
+}
+
+.nav__link {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 135%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+    text-decoration-line: none;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.nav__link:hover {
+    color: rgba(255, 255, 255, 0.67);
+}
+
+.nav__btn {
+    padding: 10px 18px;
+    background: #F2F6FA;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #2C2C2C;
+    text-decoration: none;
+}
+
+.nav__btn:hover {
+    color: #ffffff;
+    background: rgba(242, 246, 250, 0.67);
+}
+
+.sidebar-left{
+    background: #2C2C2C;
+    display: block;
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding-top: 50px;
+    transform: translate(-100%, 0px);
+    transition: 0.5s;
+}
+.sidebar-left--show{
+    display: block;
+}
+.relatived{
+    display:none;
+}
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the nav on small screens */
+@media screen and (max-width: 767.98px) {
+    .nav a:not(:first-child) {display: none;}
+    .nav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+/* When the screen is less than 600px wide, this rule is applied. It makes the navigation links stack on top of each other, changes the padding, clears the float, and displays it as a block element */
+@media screen and (max-width: 600px) {
+    .nav.responsive {position: relative;}
+    .nav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .nav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .nav__link{
+        display:none!important;
+    }
+    .header__container a{
+        display: block;
+        width: fit-content;
+        height: fit-content;
+        position: absolute;
+        z-index: 111;
+        top: 20px;
+        right: 20px;
+    }
+    img{
+        width:45px;
+        height: 45px;
+    }
+    .template__btn{
+        display: none;
+    }
+    .header__container{
+        width:100%;
+
+    }
+    .header{
+        height: 45px;
+    }
+    .relatived{
+        display: block;
+        padding: 0;
+        border: 0;
+        outline: none;
+        z-index: 11;
+    }
+    .sidebar-left--show {
+        width: 100%;
+        transform: translate(0px, 0px);
+    }
+    .sidebar-left .nav__link{
+        display: block!important;
+        width: 100%;
+        margin: 15px;
+        position: relative;
+        padding: 10px;
+        padding-left: 20px;
+    }
+}
