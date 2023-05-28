@@ -10,7 +10,7 @@ import json
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-import zoneinfo
+from django.utils import timezone
 
 
 def is_wash_admin(user):
@@ -70,7 +70,7 @@ def login_page(request):
 @login_required
 def book_wash(request):
     if Washes.objects.all().count() == 0 or datetime.now(
-            tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) > Washes.objects.last().date_time:
+            tz=timezone.get_default_timezone()) > Washes.objects.last().date_time:
         Washes.objects.all().delete()
         for d in generate_wash_dates():
             wash = Washes.objects.create(date_time=d)
@@ -79,7 +79,7 @@ def book_wash(request):
         form = BookWashForm(request.POST)
         if form.is_valid():
             date_time = datetime.combine(form.cleaned_data['date'], form.cleaned_data['time'],
-                                         tzinfo=zoneinfo.ZoneInfo('Asia/Yekaterinburg'))
+                                         tzinfo=timezone.get_default_timezone())
             print(date_time)
             washes = form.cleaned_data['washes']
             powder = form.cleaned_data['powder'] == 1
@@ -113,13 +113,13 @@ def book_wash(request):
                 print('Недостаточно стирок на аккаунте')
                 return redirect('book-wash')
 
-    washes = Washes.objects.filter(date_time__gte=datetime.now(tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg'))).exclude(washes=0)
+    washes = Washes.objects.filter(date_time__gte=datetime.now(tz=timezone.get_default_timezone())).exclude(washes=0)
     date_and_time = {}
     ssk_group = request.user.groups.filter(name='ССК')
     for wash in washes:
         current_date = wash.date_time.strftime('%d.%m.%Y')
         day = wash.date_time.strftime('%a')
-        time = wash.date_time.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime('%H:%M')
+        time = wash.date_time.astimezone(timezone.get_default_timezone()).strftime('%H:%M')
         if not ssk_group and (day == 'Wed' or day == 'Sun'):
             continue
         wash_limit = 2 if request.user.profile.wash_limit > 2 else request.user.profile.wash_limit
@@ -201,7 +201,7 @@ def profile(request):
             user.profile.vk_id = json_data['user_id']
             user.save()
     washes = WashesHistory.objects.filter(date_time__gte=datetime.now(
-        tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2), user=request.user).order_by('date_time')
+        tz=timezone.get_default_timezone()) + timedelta(hours=-2), user=request.user).order_by('date_time')
     applications = Applications.objects.filter(user=request.user).filter(Q(status=0) | Q(status=1)).order_by(
         'created_at')
     study_room = StudyRoom.objects.filter(
@@ -221,7 +221,7 @@ def washes_admin(request):
             if form.is_valid():
                 text = form.cleaned_data['text']
                 post = Post.objects.create(text=text, date=datetime.now(
-                    tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')))
+                    tz=timezone.get_default_timezone()))
                 post.save()
         else:
             data = json.loads(request.body.decode('utf-8'))
@@ -236,7 +236,7 @@ def washes_admin(request):
     news_edit = False
     view = request.GET.get('view', None)
     limit_not_returned = WashesHistory.objects.filter(limit_returned=False, date_time__lt=datetime.now(
-        tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=+2))
+        tz=timezone.get_default_timezone()) + timedelta(hours=+2))
 
     for limit_return in limit_not_returned:
         limit_return.limit_returned = True
@@ -247,17 +247,17 @@ def washes_admin(request):
 
     if view == 'history':
         washes_history = WashesHistory.objects.filter(date_time__lt=datetime.now(
-            tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2)).order_by('-date_time')
+            tz=timezone.get_default_timezone()) + timedelta(hours=-2)).order_by('-date_time')
     elif view == 'settings':
         wash_settings = True
     elif view == 'news':
         news_edit = True
     else:
         washes_history = WashesHistory.objects.filter(date_time__gte=datetime.now(
-            tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2))
+            tz=timezone.get_default_timezone()) + timedelta(hours=-2))
 
     for wash in washes_history:
-        date_time = wash.date_time.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg'))
+        date_time = wash.date_time.astimezone(timezone.get_default_timezone())
         date = date_time.strftime('%d.%m.%Y')
         time = date_time.strftime('%H:%M')
         if date not in all_washes.keys():
@@ -283,7 +283,7 @@ def applications_admin(request):
             if form.is_valid():
                 text = form.cleaned_data['text']
                 post = Post.objects.create(text=text, date=datetime.now(
-                    tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')))
+                    tz=timezone.get_default_timezone()))
                 post.save()
         else:
             data = json.loads(request.body.decode('utf-8'))
@@ -311,7 +311,7 @@ def applications(request):
             descr = form.cleaned_data['description']
             application = Applications(room=room, full_name=f'{request.user.first_name} {request.user.last_name}',
                                        description=descr, user=request.user,
-                                       created_at=datetime.now(tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')), status=0)
+                                       created_at=datetime.now(tz=timezone.get_default_timezone()), status=0)
             application.save()
             return redirect('profile')
     else:
@@ -358,14 +358,14 @@ def menu(request):
 def history(request):
     history = []
     washes_history = WashesHistory.objects.filter(user=request.user).filter(date_time__lt=datetime.now(
-        tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2)).order_by('-date_time')
+        tz=timezone.get_default_timezone()) + timedelta(hours=-2)).order_by('-date_time')
     applications_history = Applications.objects.filter(user=request.user).filter(status=2).order_by('-created_at')
     study_room_history = StudyRoom.objects.filter(user=request.user).filter(
         Q(date=datetime.now().date()) & Q(end_time__lt=datetime.now().time()) | Q(date__lt=datetime.now().date()))
     for wash_history in washes_history:
         wash_date1 = wash_history.date_time.date().strftime('%d %B %Y г.').lower()
         wash_date2 = wash_history.date_time.date().strftime('%d.%m.%Y')
-        wash_time = wash_history.date_time.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).time().strftime("%H:%M")
+        wash_time = wash_history.date_time.astimezone(timezone.get_default_timezone()).time().strftime("%H:%M")
         washing_machine = format_washing_machines(wash_history.washes)
         history.append({
             'date': f'{wash_date1} {wash_time}',
@@ -383,8 +383,8 @@ def history(request):
             'description': f'{date2} на {start_time} - {end_time} {study_info.people} {format_people(study_info.people)}'})
 
     for application in applications_history:
-        date1 = application.created_at.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime('%d %B %Y г.').lower()
-        application_time = application.created_at.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime("%H:%M")
+        date1 = application.created_at.astimezone(timezone.get_default_timezone()).strftime('%d %B %Y г.').lower()
+        application_time = application.created_at.astimezone(timezone.get_default_timezone()).strftime("%H:%M")
         history.append({
             'date': f'{date1} {application_time}',
             'name': 'Журнал заявок', 'status': application.get_status_display().lower(),
@@ -400,7 +400,7 @@ def study_room_admin(request):
         if form.is_valid():
             text = form.cleaned_data['text']
             post = Post.objects.create(text=text, date=datetime.now(
-                tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')))
+                tz=timezone.get_default_timezone()))
             post.save()
     view = request.GET.get('view', None)
     study_info = {}
