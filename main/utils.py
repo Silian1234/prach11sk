@@ -50,7 +50,7 @@ def get_auth_url():
 def get_access_token(code):
     client_id = 51659704
     client_secret = 'IYAadzoAGaIxkmsEv14a'
-    redirect_uri = 'http://www.11student.site/profile'
+    redirect_uri = 'https://www.11student.site/profile'
     return requests.get('https://oauth.vk.com/access_token',
                         params={'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri,
                                 'code': code}).json()
