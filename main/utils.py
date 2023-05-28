@@ -2,8 +2,6 @@ import requests
 from datetime import datetime, date, time, timedelta
 from hashlib import sha256
 from django.utils import timezone
-import pytz
-import zoneinfo
 
 def check_code(unique_code):
     seller_id = 1115984
