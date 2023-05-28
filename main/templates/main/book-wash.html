@@ -33,7 +33,6 @@
 <script>
     const date_dict = JSON.parse('{{date_dict|escapejs}}');
     const dateSelect = document.getElementById('dateSelect');
-    console.log(date_dict)
     dateSelect.addEventListener('change', (event) => {
         const date = event.target.value;
         const timeSelect = document.getElementById('timeSelect');

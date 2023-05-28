@@ -35,7 +35,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 944px;
+    width: 944px;
     background: #F2F6FA;
     border-radius: 5px;
 }
@@ -75,4 +75,11 @@ h1 {
 
 .card__text:not(:last-child) {
     margin-bottom: 20px;
+}
+
+@media screen and (max-width: 767.98px) {
+    .card{
+        width: 80%;
+        padding: 26px 15px;
+    }
 }
