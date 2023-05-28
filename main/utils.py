@@ -41,7 +41,7 @@ def generate_wash_dates():
 def get_auth_url():
     client_id = 51584619
     client_secret = '0Xmd2fuaeybsFcGplK8y'
-    redirect_uri = 'http://127.0.0.1:8000/profile'
+    redirect_uri = 'https://www.11student.site/profile'
     response_type = 'code'
     auth = f'https://oauth.vk.com/authorize?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&response_type={response_type}&v=5.131'
     return auth
