@@ -39,8 +39,8 @@ def generate_wash_dates():
 
 
 def get_auth_url():
-    client_id = 51584619
-    client_secret = '0Xmd2fuaeybsFcGplK8y'
+    client_id = 51659704
+    client_secret = 'IYAadzoAGaIxkmsEv14a'
     redirect_uri = 'https://www.11student.site/profile'
     response_type = 'code'
     auth = f'https://oauth.vk.com/authorize?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&response_type={response_type}&v=5.131'
@@ -48,8 +48,8 @@ def get_auth_url():
 
 
 def get_access_token(code):
-    client_id = 51584619
-    client_secret = '0Xmd2fuaeybsFcGplK8y'
+    client_id = 51659704
+    client_secret = 'IYAadzoAGaIxkmsEv14a'
     redirect_uri = 'http://www.11student.site/profile'
     return requests.get('https://oauth.vk.com/access_token',
                         params={'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri,
