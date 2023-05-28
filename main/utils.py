@@ -2,7 +2,8 @@ import requests
 from datetime import datetime, date, time, timedelta
 from hashlib import sha256
 from django.utils import timezone
-
+import pytz
+import zoneinfo
 
 def check_code(unique_code):
     seller_id = 1115984
@@ -29,12 +30,12 @@ def generate_wash_dates():
             for start_hour in range(10, 23, 3):
                 dates.append(
                     datetime(year=current_date.year, month=current_date.month, day=current_date.day, hour=start_hour,
-                             minute=0, second=0, tzinfo=timezone.get_current_timezone()))
+                             minute=0, second=0, tzinfo=zoneinfo.ZoneInfo('Asia/Yekaterinburg')))
         else:
             for start_hour in range(12, 22, 3):
                 dates.append(
                     datetime(year=current_date.year, month=current_date.month, day=current_date.day, hour=start_hour,
-                             minute=0, second=0, tzinfo=timezone.get_current_timezone()))
+                             minute=0, second=0, tzinfo=zoneinfo.ZoneInfo('Asia/Yekaterinburg')))
     return dates
 
 
