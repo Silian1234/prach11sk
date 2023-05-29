@@ -164,3 +164,25 @@ body {
 .form__btn:hover {
     background-color: #E02420;
 }
+
+@media only screen and (max-width: 767.98px) {
+    .application{
+        width:80%;
+    }
+    .applications__settings{
+        width:80%;
+    }
+    .application__header {
+        fons-size:20px;
+
+    }
+    .applications__btn{
+        fons-size:32px;
+    }
+    .btn{
+        font-size:32px;
+    }
+    .application__text{
+        fons-size:17px;
+    }
+}
