@@ -168,6 +168,7 @@ body {
 @media only screen and (max-width: 767.98px) {
     .application{
         width:80%;
+        padding: 26px 26px;
     }
     .applications__settings{
         width:80%;
