@@ -113,7 +113,8 @@ def book_wash(request):
                 print('Недостаточно стирок на аккаунте')
                 return redirect('book-wash')
 
-    washes = Washes.objects.filter(date_time__gte=datetime.now(tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg'))).exclude(washes=0)
+    washes = Washes.objects.filter(date_time__gte=datetime.now(tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg'))).exclude(
+        washes=0)
     date_and_time = {}
     ssk_group = request.user.groups.filter(name='ССК')
     for wash in washes:
@@ -181,9 +182,14 @@ def profile(request):
         if info_type is not None:
             if info_type == 'wash':
                 wash_id = int(data.get('wash_id'))
+                powder = data.get('powder') == 'True'
                 user = User.objects.get(pk=request.user.id)
                 wash = WashesHistory.objects.get(pk=wash_id)
                 user.profile.wash_limit += wash.washes
+                if powder:
+                    user.profile.wash_with += 1
+                else:
+                    user.profile.wash_without += 1
                 user.save()
                 wash.delete()
             if info_type == 'application':
@@ -201,12 +207,12 @@ def profile(request):
             user.profile.vk_id = json_data['user_id']
             user.save()
     washes = WashesHistory.objects.filter(date_time__gte=datetime.now(
-        tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2), user=request.user).order_by('date_time')
+        tz=zoneinfo.ZoneInfo('Asia/Yekaterinburg')) + timedelta(hours=-2), user=request.user).order_by('-date_time')
     applications = Applications.objects.filter(user=request.user).filter(Q(status=0) | Q(status=1)).order_by(
-        'created_at')
+        '-created_at')
     study_room = StudyRoom.objects.filter(
         Q(date=datetime.now().date()) & Q(end_time__gte=datetime.now().time()) | Q(date__gt=datetime.now().date()),
-        user=request.user).order_by('date', 'start_time')
+        user=request.user).order_by('-date', '-start_time')
     return render(request, 'main/profile.html',
                   {'washes': washes, 'applications': applications, 'study_room': study_room})
 
@@ -299,7 +305,8 @@ def applications_admin(request):
         news_edit = True
     form = CreatePostForm()
     return render(request, 'main/applications-admin.html',
-                  {'applications': Applications.objects.all(), 'form': form, 'news_edit': news_edit})
+                  {'applications': Applications.objects.all().order_by('-created_at'), 'form': form,
+                   'news_edit': news_edit})
 
 
 @login_required
@@ -383,7 +390,8 @@ def history(request):
             'description': f'{date2} на {start_time} - {end_time} {study_info.people} {format_people(study_info.people)}'})
 
     for application in applications_history:
-        date1 = application.created_at.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime('%d %B %Y г.').lower()
+        date1 = application.created_at.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime(
+            '%d %B %Y г.').lower()
         application_time = application.created_at.astimezone(zoneinfo.ZoneInfo('Asia/Yekaterinburg')).strftime("%H:%M")
         history.append({
             'date': f'{date1} {application_time}',
