@@ -171,18 +171,23 @@ body {
     }
     .applications__settings{
         width:80%;
+        padding:24px 26px;
     }
     .application__header {
-        fons-size:20px;
+        font-size:14px;
 
     }
     .applications__btn{
-        fons-size:32px;
+        font-size:16px;
     }
     .btn{
-        font-size:32px;
+        font-size:18px;
     }
     .application__text{
-        fons-size:17px;
+        font-size:17px;
+    }
+    .form{
+        width:80%;
+        padding:17px 24px;
     }
 }
