@@ -37,6 +37,13 @@
                 <a href="{% url 'profile' %}" class="nav__link">Профиль</a>
                 <a href="{% url 'payment' %}" class="nav__link">Оплатить</a>
                 <a href="{% url 'menu' %}" class="nav__link">Записаться</a>
+                {% if user.groups|has_group:"Админ прачки" %}
+                <a href="{% url 'washes-admin' %}" class="nav__link">Для админов</a>
+                {% elif user.groups|has_group:"Админ журнала заявок" %}
+                <a href="{% url 'applications-admin' %}" class="nav__link">Для админов</a>
+                {% elif user.groups|has_group:"Админ учебной комнаты" %}
+                <a href="{% url 'study-room-admin' %}" class="nav__link">Для админов</a>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <a class="nav__link" href="{% url 'logout' %}">Выйти</a>
                 {% else %}

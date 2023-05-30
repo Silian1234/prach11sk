@@ -81,5 +81,6 @@ h1 {
     .card{
         width: 80%;
         padding: 26px 15px;
+        margin: 0 30px;
     }
 }
