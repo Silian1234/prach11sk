@@ -27,7 +27,7 @@
                 <p class="card__text">Описание: {{ wash.date_time | format_datetime }} {{wash.washes}} {% if wash.washes == 1 %}
                     машинка
                     {% else %} машинки {% endif %} {% if wash.powder %} с порошком {% else %} без порошка {%endif%}</p>
-                <button class="wash__btn" value="{{ wash.date_time | get_utc }};{{ wash.id }}">Отменить</button>
+                <button class="wash__btn" value="{{ wash.date_time | get_utc }};{{ wash.id }};{{ wash.powder }}">Отменить</button>
             </div>
             {% endfor %}
         </div>
@@ -66,11 +66,12 @@
     washBtns.forEach(btn => {
         const statusDate = new Date(parseInt(btn.value.split(';')[0]));
         const washId = btn.value.split(';')[1];
+        const powder = btn.value.split(';')[2];
         if ((statusDate - new Date()) / 1000 / 60 / 60 <= 12) btn.style.display = 'none';
         btn.addEventListener('click', async () => {
             await fetch('{% url "profile" %}', {
                 method: 'POST',
-                body: JSON.stringify({'type': 'wash', 'wash_id': washId})
+                body: JSON.stringify({'type': 'wash', 'wash_id': washId, 'powder': powder})
             });
             window.location.reload();
         });
